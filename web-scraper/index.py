@@ -16,13 +16,13 @@ teamsLinks = [
     'https://cod-esports.fandom.com/wiki/Toronto_Ultra'
 ]
 
-# populated programatically 
+# populated programatically
 playerLinks = []
 
 # scrape all team pages
 for url in teamsLinks:
     # populates playerLinks
-    scrapeTeams(url, playerLinks) 
+    scrapeTeams(url, playerLinks)
 
 # scrape all players
 # for url in playerLinks:

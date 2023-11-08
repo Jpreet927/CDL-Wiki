@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 
+
 def scrapePlayers(url):
     try:
         src = requests.get('https://cod-esports.fandom.com/wiki/Dashy')
