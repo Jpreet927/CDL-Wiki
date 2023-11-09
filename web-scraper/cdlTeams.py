@@ -50,7 +50,7 @@ def scrapeTeams(url, playerLinks):
                 playerLinks.append(
                     'https://cod-esports.fandom.com' + linkTag['href'])
 
-        return teamDetails
-
     except Exception as e:
         print(e)
+
+    return teamDetails

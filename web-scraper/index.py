@@ -25,5 +25,5 @@ for url in teamsLinks:
     scrapeTeams(url, playerLinks)
 
 # scrape all players
-# for url in playerLinks:
-#     scrapePlayers(url)
+for url in playerLinks:
+    print(scrapePlayers(url))
