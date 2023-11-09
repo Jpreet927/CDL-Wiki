@@ -30,8 +30,27 @@ def scrapeTeams(url, playerLinks):
             'a', {'class': 'to_hasTooltip'}).text if affiliatedRow else "N/A"
 
         # find head coach
+        coachRow = teamDataTable.find(
+            lambda tag: tag.name == "td" and "Head Coach" in tag.text)
+        # team may not have affiliated data, in which case N/A is returned
+        teamDetails['coach'] = coachRow.find_next(
+            'td').text if coachRow else "N/A"
 
         # find created date
+        teamDetails['created'] = teamDataTable.find(
+            'th', {'class': 'teamdate'}).find_next('td').text
+
+        # add player urls to playerLinks array
+        playerTableRows = soup.find(
+            'table', {'class': "team-members"}).find('tbody').find_all('tr')
+
+        for row in playerTableRows:
+            linkTag = row.find('a')
+            if linkTag:
+                playerLinks.append(
+                    'https://cod-esports.fandom.com' + linkTag['href'])
+
+        return teamDetails
 
     except Exception as e:
         print(e)
