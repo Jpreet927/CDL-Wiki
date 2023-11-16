@@ -1,10 +1,3 @@
-import psycopg2
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-
 def createTables(cursor):
     createTeamTableQuery = """
         CREATE TABLE IF NOT EXISTS team (
@@ -35,47 +28,17 @@ def createTables(cursor):
     cursor.execute(createPlayerTableQuery)
 
 
-def insertTeamRecord(team):
+def insertTeamRecord(cursor, team):
     pass
 
 
-def insertPlayerRecord(player):
+def insertPlayerRecord(cursor, player):
     pass
 
 
-def insertMultipleTeamRecords(teams):
+def insertMultipleTeamRecords(cursor, teams):
     pass
 
 
-def insertMultiplePlayerRecords(players):
+def insertMultiplePlayerRecords(cursor, players):
     pass
-
-
-def main():
-    # load environment variables
-    db = os.getenv("DB_NAME")
-    host = os.getenv("DB_HOST")
-    user = os.getenv("DB_USER")
-    password = os.getenv("DB_PASSWORD")
-    port = os.getenv("DB_PORT")
-
-    # connect to db
-    conn = psycopg2.connect(database=db,
-                            host=host,
-                            user=user,
-                            password=password,
-                            port=port)
-
-    cursor = conn.cursor()
-
-    # create team and player tables
-    createTables(cursor)
-
-    # close connection
-    cursor.close()
-
-    # commit changes
-    conn.commit()
-
-
-main()

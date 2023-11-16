@@ -1,5 +1,11 @@
+import psycopg2
+import os
+from dotenv import load_dotenv
 from cdlTeams import scrapeTeams
 from cdlPlayers import scrapePlayers
+from db import *
+
+load_dotenv()
 
 teamsLinks = [
     'https://cod-esports.fandom.com/wiki/Atlanta_FaZe',
@@ -18,12 +24,43 @@ teamsLinks = [
 
 # populated programatically
 playerLinks = []
+teamData = []
+playerData = []
 
-# scrape all team pages
-for url in teamsLinks:
-    # populates playerLinks
-    scrapeTeams(url, playerLinks)
 
-# scrape all players
-for url in playerLinks:
-    print(scrapePlayers(url))
+def scrapePages():
+    # scrape all team pages
+    for url in teamsLinks:
+        # populates playerLinks
+        teamData.append(scrapeTeams(url, playerLinks))
+
+    # scrape all players
+    for url in playerLinks:
+        playerData.append(scrapePlayers(url))
+
+
+def main():
+    # load environment variables
+    db = os.getenv("DB_NAME")
+    host = os.getenv("DB_HOST")
+    user = os.getenv("DB_USER")
+    password = os.getenv("DB_PASSWORD")
+    port = os.getenv("DB_PORT")
+
+    # connect to db
+    conn = psycopg2.connect(database=db,
+                            host=host,
+                            user=user,
+                            password=password,
+                            port=port)
+
+    cursor = conn.cursor()
+
+    # create team and player tables
+    createTables(cursor)
+
+    # close connection
+    cursor.close()
+
+    # commit changes
+    conn.commit()
