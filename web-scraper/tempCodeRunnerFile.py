@@ -1,11 +1,5 @@
-    'https://cod-esports.fandom.com/wiki/OpTic_Texas',
-    'https://cod-esports.fandom.com/wiki/Boston_Breach',
-    'https://cod-esports.fandom.com/wiki/Carolina_Royal_Ravens',
-    'https://cod-esports.fandom.com/wiki/Las_Vegas_Legion',
-    'https://cod-esports.fandom.com/wiki/Los_Angeles_Guerrillas',
-    'https://cod-esports.fandom.com/wiki/Los_Angeles_Thieves',
-    'https://cod-esports.fandom.com/wiki/Miami_Heretics',
-    'https://cod-esports.fandom.com/wiki/Minnesota_R%C3%98KKR',
-    'https://cod-esports.fandom.com/wiki/New_York_Subliners',
-    'https://cod-esports.fandom.com/wiki/Seattle_Surge',
-    'https://cod-esports.fandom.com/wiki/Toronto_Ultra'
+  # conn = psycopg2.connect(database=db,
+    #                         host=host,
+    #                         user=user,
+    #                         password=password,
+    #                         port=port)
