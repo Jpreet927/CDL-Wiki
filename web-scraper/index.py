@@ -9,7 +9,6 @@ load_dotenv()
 
 teamsLinks = [
     'https://cod-esports.fandom.com/wiki/Atlanta_FaZe',
-    'https://cod-esports.fandom.com/wiki/OpTic_Texas',
     'https://cod-esports.fandom.com/wiki/Boston_Breach',
     'https://cod-esports.fandom.com/wiki/Carolina_Royal_Ravens',
     'https://cod-esports.fandom.com/wiki/Las_Vegas_Legion',
@@ -18,6 +17,7 @@ teamsLinks = [
     'https://cod-esports.fandom.com/wiki/Miami_Heretics',
     'https://cod-esports.fandom.com/wiki/Minnesota_R%C3%98KKR',
     'https://cod-esports.fandom.com/wiki/New_York_Subliners',
+    'https://cod-esports.fandom.com/wiki/OpTic_Texas',
     'https://cod-esports.fandom.com/wiki/Seattle_Surge',
     'https://cod-esports.fandom.com/wiki/Toronto_Ultra'
 ]
@@ -33,13 +33,18 @@ def scrapePages():
     for url in teamsLinks:
         # populates playerLinks
         teamData.append(scrapeTeams(url, playerLinks))
+    print(teamData)
 
     # scrape all players
     for url in playerLinks:
         playerData.append(scrapePlayers(url))
+    print(playerData)
 
 
 def main():
+    # scrape web pages
+    scrapePages()
+
     # load environment variables
     db = os.getenv("DB_NAME")
     host = os.getenv("DB_HOST")
@@ -59,8 +64,24 @@ def main():
     # create team and player tables
     createTables(cursor)
 
+    # holds team ids to use as fk for players
+    teamIds = {}
+
+    # insert team records
+    for team in teamData:
+        id = insertTeamRecord(cursor, team)
+        teamIds[team["name"]] = id
+
+    # insert player records
+    for player in playerData:
+        player['team_id'] = teamIds[player['team_id']]
+        insertPlayerRecord(cursor, player)
+
     # close connection
     cursor.close()
 
     # commit changes
     conn.commit()
+
+
+main()

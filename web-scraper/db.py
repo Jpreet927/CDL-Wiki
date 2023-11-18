@@ -1,4 +1,7 @@
 def createTables(cursor):
+    cursor.execute("DROP TABLE player;")
+    cursor.execute("DROP TABLE team;")
+
     createTeamTableQuery = """
         CREATE TABLE IF NOT EXISTS team (
             id         INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -6,6 +9,7 @@ def createTables(cursor):
             location   VARCHAR(50),
             created    VARCHAR(50),
             affiliated VARCHAR(50),
+            coach      VARCHAR(100),
             points     INTEGER
         )
     """
@@ -29,11 +33,26 @@ def createTables(cursor):
 
 
 def insertTeamRecord(cursor, team):
-    pass
+    keys = list(team.keys())
+    values = list(team.values())
+
+    query = ("""INSERT INTO team({}) VALUES({{}}) RETURNING id"""
+             .format(','.join(x for x in keys))
+             .format(','.join('%s' for _ in values)))
+    cursor.execute(query, values)
+    id = cursor.fetchone()[0]
+
+    return id
 
 
 def insertPlayerRecord(cursor, player):
-    pass
+    keys = list(player.keys())
+    values = list(player.values())
+
+    query = ("""INSERT INTO player({}) VALUES({{}})"""
+             .format(','.join(x for x in keys))
+             .format(','.join('%s' for _ in values)))
+    cursor.execute(query, values)
 
 
 def insertMultipleTeamRecords(cursor, teams):
