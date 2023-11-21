@@ -1,18 +1,12 @@
-package com.jpreet.cdlwiki.model;
+package com.jpreet.cdlwiki.dto;
 
-import jakarta.persistence.*;
+import com.jpreet.cdlwiki.model.Team;
 import java.util.Date;
 
-@Entity
-@Table
-public class Player {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PlayerDTO {
     private Integer id;
     private String alias;
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "team_id")
     private Team team;
     private Date dob;
     private String nationality;

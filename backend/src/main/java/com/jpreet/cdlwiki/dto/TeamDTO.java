@@ -1,13 +1,8 @@
-package com.jpreet.cdlwiki.model;
+package com.jpreet.cdlwiki.dto;
 
-import jakarta.persistence.*;
 import java.util.Date;
 
-@Entity
-@Table
-public class Team {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TeamDTO {
     private Integer id;
     private String name;
     private String location;
@@ -72,5 +67,3 @@ public class Team {
         this.points = points;
     }
 }
-
-
