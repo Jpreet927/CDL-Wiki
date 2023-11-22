@@ -1,5 +1,7 @@
 package com.jpreet.cdlwiki.dto;
 
+import com.jpreet.cdlwiki.model.Team;
+
 import java.util.Date;
 
 public class TeamDTO {
@@ -10,6 +12,18 @@ public class TeamDTO {
     private String affiliated;
     private String coach;
     private Integer points;
+
+    public TeamDTO() {}
+
+    public TeamDTO(Integer id, String name, String location, Date created, String affiliated, String coach, Integer points) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.created = created;
+        this.affiliated = affiliated;
+        this.coach = coach;
+        this.points = points;
+    }
 
     public Integer getId() {
         return id;
@@ -65,5 +79,19 @@ public class TeamDTO {
 
     public void setPoints(Integer points) {
         this.points = points;
+    }
+
+    public static TeamDTO convertEntityToDTO(Team team) {
+        TeamDTO teamDTO = new TeamDTO();
+
+        teamDTO.setId(team.getId());
+        teamDTO.setAffiliated(team.getAffiliated());
+        teamDTO.setCoach(team.getCoach());
+        teamDTO.setName(team.getName());
+        teamDTO.setCreated(team.getCreated());
+        teamDTO.setLocation(team.getLocation());
+        teamDTO.setPoints(team.getPoints());
+
+        return teamDTO;
     }
 }

@@ -1,17 +1,31 @@
 package com.jpreet.cdlwiki.dto;
 
-import com.jpreet.cdlwiki.model.Team;
+import com.jpreet.cdlwiki.model.Player;
+
 import java.util.Date;
 
 public class PlayerDTO {
     private Integer id;
     private String alias;
     private String name;
-    private Team team;
+    private TeamDTO team;
     private Date dob;
     private String nationality;
     private String role;
     private String image;
+
+    public PlayerDTO() {}
+
+    public PlayerDTO(Integer id, String alias, String name, TeamDTO team, Date dob, String nationality, String role, String image) {
+        this.id = id;
+        this.alias = alias;
+        this.name = name;
+        this.team = team;
+        this.dob = dob;
+        this.nationality = nationality;
+        this.role = role;
+        this.image = image;
+    }
 
     public Integer getId() {
         return id;
@@ -37,11 +51,11 @@ public class PlayerDTO {
         this.name = name;
     }
 
-    public Team getTeam() {
+    public TeamDTO getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(TeamDTO team) {
         this.team = team;
     }
 
@@ -75,5 +89,20 @@ public class PlayerDTO {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public static PlayerDTO convertEntityToDTO(Player player) {
+        PlayerDTO playerDTO = new PlayerDTO();
+
+        playerDTO.setId(player.getId());
+        playerDTO.setAlias(player.getAlias());
+        playerDTO.setDob(player.getDob());
+        playerDTO.setImage(player.getImage());
+        playerDTO.setName(player.getName());
+        playerDTO.setRole(player.getRole());
+        playerDTO.setNationality(player.getNationality());
+        playerDTO.setTeam(TeamDTO.convertEntityToDTO(player.getTeam()));
+
+        return playerDTO;
     }
 }
