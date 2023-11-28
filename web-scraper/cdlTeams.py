@@ -36,6 +36,13 @@ def scrapeTeams(url, playerLinks):
         teamDetails['coach'] = coachRow.find_next(
             'td').text if coachRow else "N/A"
 
+        # find owner
+        ownerRow = teamDataTable.find(
+            lambda tag: tag.name == "td" and "Owner" in tag.text)
+        # team may not have affiliated data, in which case N/A is returned
+        teamDetails['owner'] = ownerRow.find_next(
+            'td').text if ownerRow else "N/A"
+
         # find created date
         teamDetails['created'] = teamDataTable.find(
             'th', {'class': 'teamdate'}).find_next('td').text

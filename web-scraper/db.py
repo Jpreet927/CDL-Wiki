@@ -4,13 +4,18 @@ def createTables(cursor):
 
     createTeamTableQuery = """
         CREATE TABLE IF NOT EXISTS team (
-            id         INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-            name       VARCHAR(100),
-            location   VARCHAR(50),
-            created    VARCHAR(50),
-            affiliated VARCHAR(50),
-            coach      VARCHAR(100),
-            points     INTEGER
+            id          INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+            name        VARCHAR(100),
+            location    VARCHAR(50),
+            created     DATE,
+            affiliated  VARCHAR(50),
+            coach       VARCHAR(100),
+            owner       VARCHAR(100),
+            points      INTEGER,
+            bg_coloured VARCHAR(255),
+            bg_dark     VARCHAR(255),
+            bg_light    VARCHAR(255),
+            logo        VARCHAR(255)
         )
     """
 
@@ -23,7 +28,7 @@ def createTables(cursor):
             dob         DATE,
             nationality VARCHAR(50),
             role        VARCHAR(50),
-            image       VARCHAR(255),
+            headshot    VARCHAR(255),
             FOREIGN KEY (team_id) REFERENCES team (id)
         )
     """
