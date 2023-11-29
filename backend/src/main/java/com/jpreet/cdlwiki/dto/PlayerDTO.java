@@ -12,11 +12,11 @@ public class PlayerDTO {
     private Date dob;
     private String nationality;
     private String role;
-    private String image;
+    private String headshot;
 
     public PlayerDTO() {}
 
-    public PlayerDTO(Integer id, String alias, String name, TeamDTO team, Date dob, String nationality, String role, String image) {
+    public PlayerDTO(Integer id, String alias, String name, TeamDTO team, Date dob, String nationality, String role, String headshot) {
         this.id = id;
         this.alias = alias;
         this.name = name;
@@ -24,7 +24,7 @@ public class PlayerDTO {
         this.dob = dob;
         this.nationality = nationality;
         this.role = role;
-        this.image = image;
+        this.headshot = headshot;
     }
 
     public Integer getId() {
@@ -83,12 +83,12 @@ public class PlayerDTO {
         this.role = role;
     }
 
-    public String getImage() {
-        return image;
+    public String getHeadshot() {
+        return headshot;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setHeadshot(String headshot) {
+        this.headshot = headshot;
     }
 
     public static PlayerDTO convertEntityToDTO(Player player) {
@@ -97,7 +97,7 @@ public class PlayerDTO {
         playerDTO.setId(player.getId());
         playerDTO.setAlias(player.getAlias());
         playerDTO.setDob(player.getDob());
-        playerDTO.setImage(player.getImage());
+        playerDTO.setHeadshot(player.getHeadshot());
         playerDTO.setName(player.getName());
         playerDTO.setRole(player.getRole());
         playerDTO.setNationality(player.getNationality());

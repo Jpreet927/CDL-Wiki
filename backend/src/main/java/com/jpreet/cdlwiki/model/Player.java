@@ -17,7 +17,7 @@ public class Player {
     private Date dob;
     private String nationality;
     private String role;
-    private String image;
+    private String headshot;
 
     public Integer getId() {
         return id;
@@ -75,11 +75,11 @@ public class Player {
         this.role = role;
     }
 
-    public String getImage() {
-        return image;
+    public String getHeadshot() {
+        return headshot;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setHeadshot(String headshot) {
+        this.headshot = headshot;
     }
 }

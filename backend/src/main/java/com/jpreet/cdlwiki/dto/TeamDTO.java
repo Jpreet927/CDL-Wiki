@@ -11,18 +11,27 @@ public class TeamDTO {
     private Date created;
     private String affiliated;
     private String coach;
+    private String owner;
     private Integer points;
+    private String bgColoured;
+    private String bgDark;
+    private String bgLight;
+    private String logo;
 
     public TeamDTO() {}
 
-    public TeamDTO(Integer id, String name, String location, Date created, String affiliated, String coach, Integer points) {
+    public TeamDTO(Integer id, String name, String location, Date created, String affiliated, String coach, Integer points, String owner, String bgColoured, String bgDark, String bgLight, String logo) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.created = created;
         this.affiliated = affiliated;
         this.coach = coach;
+        this.owner = owner;
         this.points = points;
+        this.bgColoured = bgColoured;
+        this.bgDark = bgDark;
+        this.bgLight = bgLight;
     }
 
     public Integer getId() {
@@ -81,6 +90,46 @@ public class TeamDTO {
         this.points = points;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getBgColoured() {
+        return bgColoured;
+    }
+
+    public void setBgColoured(String bgColoured) {
+        this.bgColoured = bgColoured;
+    }
+
+    public String getBgDark() {
+        return bgDark;
+    }
+
+    public void setBgDark(String bgDark) {
+        this.bgDark = bgDark;
+    }
+
+    public String getBgLight() {
+        return bgLight;
+    }
+
+    public void setBgLight(String bgLight) {
+        this.bgLight = bgLight;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
     public static TeamDTO convertEntityToDTO(Team team) {
         TeamDTO teamDTO = new TeamDTO();
 
@@ -91,6 +140,11 @@ public class TeamDTO {
         teamDTO.setCreated(team.getCreated());
         teamDTO.setLocation(team.getLocation());
         teamDTO.setPoints(team.getPoints());
+        teamDTO.setOwner(team.getOwner());
+        teamDTO.setBgColoured(team.getBgColoured());
+        teamDTO.setBgDark(team.getBgDark());
+        teamDTO.setBgLight(team.getBgLight());
+        teamDTO.setLogo(team.getLogo());
 
         return teamDTO;
     }
