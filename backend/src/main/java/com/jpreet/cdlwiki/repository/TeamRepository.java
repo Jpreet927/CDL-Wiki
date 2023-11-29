@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface TeamRepository extends CrudRepository<Team, Integer> {
-    public List<Team> getAllTeamsOrderByPointsDesc();
+    public List<Team> getAllTeamsByOrderByPointsDesc();
 }

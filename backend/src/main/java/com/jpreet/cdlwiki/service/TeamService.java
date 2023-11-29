@@ -25,7 +25,7 @@ public class TeamService {
         List<Team> teams = new ArrayList<>();
         teamRepo.findAll().forEach(teams::add);
 
-        if (teams.isEmpty()) throw new CDLWikiException("Teams not found.");
+        if (teams.isEmpty()) throw new CDLWikiException("Teams not found");
 
         List<TeamDTO> teamDTOs = new ArrayList<>();
         for (Team t : teams) {
@@ -38,8 +38,22 @@ public class TeamService {
 
     public TeamDTO getTeamById(Integer id) throws CDLWikiException {
         Optional<Team> optionalTeam = teamRepo.findById(id);
-        Team team = optionalTeam.orElseThrow(() -> new CDLWikiException("Team with id: " + id + " not found."));
+        Team team = optionalTeam.orElseThrow(() -> new CDLWikiException("Team with id: " + id + " not found"));
 
         return TeamDTO.convertEntityToDTO(team);
+    }
+
+    public List<TeamDTO> getAllTeamsOrderedByPoints() throws CDLWikiException {
+        List<Team> teams = teamRepo.getAllTeamsByOrderByPointsDesc();
+
+        if (teams.isEmpty()) throw new CDLWikiException("Teams not found");
+
+        List<TeamDTO> teamDTOs = new ArrayList<>();
+        for (Team t : teams) {
+            TeamDTO tDTO = TeamDTO.convertEntityToDTO(t);
+            teamDTOs.add(tDTO);
+        }
+
+        return teamDTOs;
     }
 }

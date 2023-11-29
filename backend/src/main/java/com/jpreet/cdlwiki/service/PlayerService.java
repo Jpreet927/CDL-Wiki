@@ -41,4 +41,46 @@ public class PlayerService {
 
         return PlayerDTO.convertEntityToDTO(player);
     }
+
+    public List<PlayerDTO> getPlayersByTeamId(Integer teamId) throws CDLWikiException {
+        List<Player> players = playerRepo.getPlayerByTeamId(teamId);
+
+        if (players.isEmpty()) throw new CDLWikiException("No players found with team id: " + teamId);
+
+        List<PlayerDTO> playerDTOs = new ArrayList<>();
+        for (Player p : players) {
+            PlayerDTO pDTO = PlayerDTO.convertEntityToDTO(p);
+            playerDTOs.add(pDTO);
+        }
+
+        return playerDTOs;
+    }
+
+    public List<PlayerDTO> getPlayersByRole(String role) throws CDLWikiException {
+        List<Player> players = playerRepo.getPlayerByRole(role);
+
+        if (players.isEmpty()) throw new CDLWikiException("No players found with " + role + " role");
+
+        List<PlayerDTO> playerDTOs = new ArrayList<>();
+        for (Player p : players) {
+            PlayerDTO pDTO = PlayerDTO.convertEntityToDTO(p);
+            playerDTOs.add(pDTO);
+        }
+
+        return playerDTOs;
+    }
+
+    public List<PlayerDTO> getPlayersByNationality(String nationality) throws CDLWikiException {
+        List<Player> players = playerRepo.getPlayerByNationality(nationality);
+
+        if (players.isEmpty()) throw new CDLWikiException("No players found with " + nationality + " nationality");
+
+        List<PlayerDTO> playerDTOs = new ArrayList<>();
+        for (Player p : players) {
+            PlayerDTO pDTO = PlayerDTO.convertEntityToDTO(p);
+            playerDTOs.add(pDTO);
+        }
+
+        return playerDTOs;
+    }
 }
