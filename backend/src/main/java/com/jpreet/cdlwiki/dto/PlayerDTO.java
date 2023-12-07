@@ -91,18 +91,22 @@ public class PlayerDTO {
         this.headshot = headshot;
     }
 
-    public static PlayerDTO convertEntityToDTO(Player player) {
-        PlayerDTO playerDTO = new PlayerDTO();
+    public static PlayerDTO mapEntityToDTO(Player entity) {
+        if (entity == null) {
+            return null;
+        }
+        
+        PlayerDTO dto = new PlayerDTO();
 
-        playerDTO.setId(player.getId());
-        playerDTO.setAlias(player.getAlias());
-        playerDTO.setDob(player.getDob());
-        playerDTO.setHeadshot(player.getHeadshot());
-        playerDTO.setName(player.getName());
-        playerDTO.setRole(player.getRole());
-        playerDTO.setNationality(player.getNationality());
-        playerDTO.setTeam(TeamDTO.convertEntityToDTO(player.getTeam()));
+        dto.setId(entity.getId());
+        dto.setAlias(entity.getAlias());
+        dto.setDob(entity.getDob());
+        dto.setHeadshot(entity.getHeadshot());
+        dto.setName(entity.getName());
+        dto.setRole(entity.getRole());
+        dto.setNationality(entity.getNationality());
+        dto.setTeam(TeamDTO.mapEntityToDTO(entity.getTeam()));
 
-        return playerDTO;
+        return dto;
     }
 }

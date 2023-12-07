@@ -28,7 +28,7 @@ public class PlayerService {
 
         List<PlayerDTO> playerDTOs = new ArrayList<>();
         for (Player p : players) {
-            PlayerDTO pDTO = PlayerDTO.convertEntityToDTO(p);
+            PlayerDTO pDTO = PlayerDTO.mapEntityToDTO(p);
             playerDTOs.add(pDTO);
         }
 
@@ -39,7 +39,7 @@ public class PlayerService {
         Optional<Player> optionalPlayer = playerRepo.findById(id);
         Player player = optionalPlayer.orElseThrow(() -> new CDLWikiException("Player with id: " + id + " not found"));
 
-        return PlayerDTO.convertEntityToDTO(player);
+        return PlayerDTO.mapEntityToDTO(player);
     }
 
     public List<PlayerDTO> getPlayersByTeamId(Integer teamId) throws CDLWikiException {
@@ -49,7 +49,7 @@ public class PlayerService {
 
         List<PlayerDTO> playerDTOs = new ArrayList<>();
         for (Player p : players) {
-            PlayerDTO pDTO = PlayerDTO.convertEntityToDTO(p);
+            PlayerDTO pDTO = PlayerDTO.mapEntityToDTO(p);
             playerDTOs.add(pDTO);
         }
 
@@ -63,7 +63,7 @@ public class PlayerService {
 
         List<PlayerDTO> playerDTOs = new ArrayList<>();
         for (Player p : players) {
-            PlayerDTO pDTO = PlayerDTO.convertEntityToDTO(p);
+            PlayerDTO pDTO = PlayerDTO.mapEntityToDTO(p);
             playerDTOs.add(pDTO);
         }
 
@@ -77,7 +77,7 @@ public class PlayerService {
 
         List<PlayerDTO> playerDTOs = new ArrayList<>();
         for (Player p : players) {
-            PlayerDTO pDTO = PlayerDTO.convertEntityToDTO(p);
+            PlayerDTO pDTO = PlayerDTO.mapEntityToDTO(p);
             playerDTOs.add(pDTO);
         }
 

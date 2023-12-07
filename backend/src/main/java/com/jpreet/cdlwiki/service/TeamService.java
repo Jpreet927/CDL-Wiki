@@ -29,7 +29,7 @@ public class TeamService {
 
         List<TeamDTO> teamDTOs = new ArrayList<>();
         for (Team t : teams) {
-            TeamDTO tDTO = TeamDTO.convertEntityToDTO(t);
+            TeamDTO tDTO = TeamDTO.mapEntityToDTO(t);
             teamDTOs.add(tDTO);
         }
 
@@ -40,7 +40,7 @@ public class TeamService {
         Optional<Team> optionalTeam = teamRepo.findById(id);
         Team team = optionalTeam.orElseThrow(() -> new CDLWikiException("Team with id: " + id + " not found"));
 
-        return TeamDTO.convertEntityToDTO(team);
+        return TeamDTO.mapEntityToDTO(team);
     }
 
     public List<TeamDTO> getAllTeamsOrderedByPoints() throws CDLWikiException {
@@ -50,7 +50,7 @@ public class TeamService {
 
         List<TeamDTO> teamDTOs = new ArrayList<>();
         for (Team t : teams) {
-            TeamDTO tDTO = TeamDTO.convertEntityToDTO(t);
+            TeamDTO tDTO = TeamDTO.mapEntityToDTO(t);
             teamDTOs.add(tDTO);
         }
 

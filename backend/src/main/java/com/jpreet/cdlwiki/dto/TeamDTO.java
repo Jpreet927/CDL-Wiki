@@ -130,22 +130,26 @@ public class TeamDTO {
         this.logo = logo;
     }
 
-    public static TeamDTO convertEntityToDTO(Team team) {
-        TeamDTO teamDTO = new TeamDTO();
+    public static TeamDTO mapEntityToDTO(Team entity) {
+        if (entity == null) {
+            return null;
+        }
 
-        teamDTO.setId(team.getId());
-        teamDTO.setAffiliated(team.getAffiliated());
-        teamDTO.setCoach(team.getCoach());
-        teamDTO.setName(team.getName());
-        teamDTO.setCreated(team.getCreated());
-        teamDTO.setLocation(team.getLocation());
-        teamDTO.setPoints(team.getPoints());
-        teamDTO.setOwner(team.getOwner());
-        teamDTO.setBgColoured(team.getBgColoured());
-        teamDTO.setBgDark(team.getBgDark());
-        teamDTO.setBgLight(team.getBgLight());
-        teamDTO.setLogo(team.getLogo());
+        TeamDTO dto = new TeamDTO();
 
-        return teamDTO;
+        dto.setId(entity.getId());
+        dto.setAffiliated(entity.getAffiliated());
+        dto.setCoach(entity.getCoach());
+        dto.setName(entity.getName());
+        dto.setCreated(entity.getCreated());
+        dto.setLocation(entity.getLocation());
+        dto.setPoints(entity.getPoints());
+        dto.setOwner(entity.getOwner());
+        dto.setBgColoured(entity.getBgColoured());
+        dto.setBgDark(entity.getBgDark());
+        dto.setBgLight(entity.getBgLight());
+        dto.setLogo(entity.getLogo());
+
+        return dto;
     }
 }
