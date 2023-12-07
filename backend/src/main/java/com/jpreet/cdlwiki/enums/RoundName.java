@@ -1,0 +1,5 @@
+package com.jpreet.cdlwiki.enums;
+
+public enum Round {
+    QUALIFIERS, WINNERS_1, ELIMINATION_1, WINNERS_2, ELIMINATION_2, ELIMINATION_3, WINNERS_FINAL, LOSERS_FINAL, GRAND_FINAL
+}
