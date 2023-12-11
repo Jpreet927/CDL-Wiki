@@ -18,24 +18,24 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/teams")
 public class TeamController {
     @Autowired
     TeamService teamService;
 
-    @GetMapping(value = "/teams")
+    @GetMapping(value = "/")
     public ResponseEntity<List<TeamDTO>> getAllTeams() throws CDLWikiException {
         List<TeamDTO> teams = teamService.getAllTeams();
         return new ResponseEntity<List<TeamDTO>>(teams, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/teams/{teamId}")
+    @GetMapping(value = "/{teamId}")
     public ResponseEntity<TeamDTO> getTeamById(@PathVariable Integer teamId) throws CDLWikiException {
         TeamDTO team = teamService.getTeamById(teamId);
         return new ResponseEntity<>(team, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/teams/points")
+    @GetMapping(value = "/points")
     public ResponseEntity<List<TeamDTO>> getAllTeamsOrderedByPoints() throws CDLWikiException {
         List<TeamDTO> teams = teamService.getAllTeamsOrderedByPoints();
         return new ResponseEntity<>(teams, HttpStatus.OK);
