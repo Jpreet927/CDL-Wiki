@@ -95,7 +95,7 @@ public class PlayerDTO {
         if (entity == null) {
             return null;
         }
-        
+
         PlayerDTO dto = new PlayerDTO();
 
         dto.setId(entity.getId());
