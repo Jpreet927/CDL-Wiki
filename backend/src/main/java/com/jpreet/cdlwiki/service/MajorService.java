@@ -75,28 +75,40 @@ public class MajorService {
         switch (placing) {
             case "first":
                 major.setFirst(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "second":
                 major.setSecond(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "third":
                 major.setThird(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "fourth":
                 major.setFourth(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "fifth":
                 major.setFifth(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "sixth":
                 major.setSixth(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "seventh":
                 major.setSeventh(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "eighth":
                 major.setEighth(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "ninth":
                 major.setNinth(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "tenth":
                 major.setTenth(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "eleventh":
                 major.setEleventh(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
             case "twelfth":
                 major.setTwelfth(teamRepo.findById(teamId).orElseThrow(() -> new CDLWikiException("Team with id: " + teamId + " not found")));
+                break;
         }
 
         return "Major with id: " + majorId + " updated with team: " + teamId + " placing at position" + placing;
