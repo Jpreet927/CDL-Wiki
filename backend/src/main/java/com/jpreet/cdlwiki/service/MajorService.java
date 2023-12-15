@@ -66,7 +66,7 @@ public class MajorService {
 
         Major newMajor = majorRepo.save(major);
 
-        return "Major with id: " + newMajor.getId() + " saved successfully";
+        return "Major with id: " + newMajor.getId() + " created successfully";
     }
 
     public String updateMajorPlacings(Integer majorId, String placing, Integer teamId) throws CDLWikiException {

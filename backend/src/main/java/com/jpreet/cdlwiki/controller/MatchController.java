@@ -1,16 +1,14 @@
 package com.jpreet.cdlwiki.controller;
 
 import com.jpreet.cdlwiki.dto.MatchDTO;
+import com.jpreet.cdlwiki.dto.MatchRequest;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.service.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,5 +44,9 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
-
+    @PostMapping("/")
+    public ResponseEntity<String> createMatch(@RequestBody MatchRequest matchRequest) throws CDLWikiException {
+        String message = matchService.createMatch(matchRequest);
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }
