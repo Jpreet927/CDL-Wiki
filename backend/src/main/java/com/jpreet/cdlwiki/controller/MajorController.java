@@ -33,7 +33,7 @@ public class MajorController {
         return new ResponseEntity<>(major, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/")
+    @PostMapping(value = "/")
     public ResponseEntity<String> createMajor(@RequestBody MajorRequest majorRequest) throws CDLWikiException {
         String message = majorService.createMajor(majorRequest);
         return new ResponseEntity<>(message, HttpStatus.OK);

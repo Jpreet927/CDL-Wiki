@@ -45,7 +45,7 @@ public class MatchService {
     }
 
     public List<MatchDTO> getMatchesByTeam(Integer teamId) throws CDLWikiException {
-        List<Match> matches = matchRepo.findByTeam1OrTeam2OrderByDateDesc(teamId);
+        List<Match> matches = matchRepo.findByTeam(teamId);
 
         if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
 
@@ -59,7 +59,7 @@ public class MatchService {
     }
 
     public List<MatchDTO> getLatest5MatchesByTeam(Integer teamId) throws CDLWikiException {
-        List<Match> matches = matchRepo.findFirst5ByTeam1OrTeam2OrderByDateDesc(teamId);
+        List<Match> matches = matchRepo.findFirst5ByTeam(teamId);
 
         if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
 
