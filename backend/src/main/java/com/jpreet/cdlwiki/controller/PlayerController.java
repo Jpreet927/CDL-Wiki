@@ -16,37 +16,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/players/")
 @Validated
-@RequestMapping(value = "/api/players")
 public class PlayerController {
     @Autowired
     PlayerService playerService;
 
-    @GetMapping(value = "/")
+    @GetMapping("/")
     public ResponseEntity<List<PlayerDTO>> getAllPlayers() throws CDLWikiException {
         List<PlayerDTO> players = playerService.getAllPlayers();
         return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{playerId}")
+    @GetMapping("/{playerId}")
     public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Integer playerId) throws CDLWikiException {
         PlayerDTO playerDTO = playerService.getPlayerById(playerId);
         return new ResponseEntity<>(playerDTO, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/team/{teamId}")
+    @GetMapping("/team/{teamId}")
     public ResponseEntity<List<PlayerDTO>> getPlayersByTeamId(@PathVariable Integer teamId) throws CDLWikiException {
         List<PlayerDTO> players = playerService.getPlayersByTeamId(teamId);
         return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/role/{role}")
+    @GetMapping("/role/{role}")
     public ResponseEntity<List<PlayerDTO>> getPlayersByRole(@PathVariable String role) throws CDLWikiException {
         List<PlayerDTO> players = playerService.getPlayersByRole(role);
         return new ResponseEntity<>(players, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/nationality/{nationality}")
+    @GetMapping("/nationality/{nationality}")
     public ResponseEntity<List<PlayerDTO>> getPlayersByNationality(@PathVariable String nationality) throws CDLWikiException {
         List<PlayerDTO> players = playerService.getPlayersByNationality(nationality);
         return new ResponseEntity<>(players, HttpStatus.OK);

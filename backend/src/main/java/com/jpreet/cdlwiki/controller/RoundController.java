@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/api/round/")
 @Validated
-@RequestMapping(value = "/api/round")
 public class RoundController {
 
     @Autowired

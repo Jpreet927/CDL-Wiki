@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/teams/")
 @Validated
-@RequestMapping(value = "/api/teams")
 public class TeamController {
     @Autowired
     TeamService teamService;
