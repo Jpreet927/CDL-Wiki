@@ -111,6 +111,6 @@ public class MajorService {
                 break;
         }
 
-        return "Major with id: " + majorId + " updated with team: " + teamId + " placing at position" + placing;
+        return "Major with id: " + majorId + " updated with team: " + teamId + " placing with position: " + placing;
     }
 }
