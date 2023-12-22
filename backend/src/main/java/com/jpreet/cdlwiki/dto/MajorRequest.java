@@ -1,5 +1,7 @@
 package com.jpreet.cdlwiki.dto;
 
+import jakarta.validation.constraints.Min;
+
 public class MajorRequest {
     private Integer hostId;
     private String location;

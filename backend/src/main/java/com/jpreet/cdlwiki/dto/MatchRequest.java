@@ -2,6 +2,8 @@ package com.jpreet.cdlwiki.dto;
 
 import com.jpreet.cdlwiki.model.Major;
 import com.jpreet.cdlwiki.model.Team;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 import java.util.Date;
 
@@ -9,7 +11,11 @@ public class MatchRequest {
     private Integer majorId;
     private Integer team1Id;
     private Integer team2Id;
+    @Min(value = 0, message = "Score cannot be less than 0")
+    @Max(value = 5, message = "Score cannot be greater than 5")
     private Integer team1Score;
+    @Min(value = 0, message = "Score cannot be less than 0")
+    @Max(value = 5, message = "Score cannot be greater than 5")
     private Integer team2Score;
     private Date date;
 

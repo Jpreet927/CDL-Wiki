@@ -4,6 +4,7 @@ import com.jpreet.cdlwiki.dto.MatchDTO;
 import com.jpreet.cdlwiki.dto.MatchRequest;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.service.MatchService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +58,7 @@ public class MatchController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<String> createMatch(@RequestBody MatchRequest matchRequest) throws CDLWikiException {
+    public ResponseEntity<String> createMatch(@Valid @RequestBody MatchRequest matchRequest) throws CDLWikiException {
         String message = matchService.createMatch(matchRequest);
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
