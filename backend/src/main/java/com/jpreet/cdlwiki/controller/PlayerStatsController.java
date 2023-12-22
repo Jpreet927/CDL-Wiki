@@ -1,16 +1,14 @@
 package com.jpreet.cdlwiki.controller;
 
 import com.jpreet.cdlwiki.dto.PlayerStatsDTO;
+import com.jpreet.cdlwiki.dto.PlayerStatsRequest;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.service.PlayerStatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,5 +42,11 @@ public class PlayerStatsController {
     public ResponseEntity<List<PlayerStatsDTO>> getStatsByMatch(@PathVariable Integer matchId) throws CDLWikiException {
         List<PlayerStatsDTO> playerStats = playerStatsService.getStatsByMatch(matchId);
         return new ResponseEntity<>(playerStats, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/")
+    public ResponseEntity<String> createStats(@RequestBody PlayerStatsRequest playerStatsRequest) throws CDLWikiException {
+        String message = playerStatsService.createStats(playerStatsRequest);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }
