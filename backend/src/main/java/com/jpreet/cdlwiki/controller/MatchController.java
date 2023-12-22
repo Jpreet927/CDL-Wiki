@@ -26,19 +26,31 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
-    @GetMapping("/{teamId}")
+    @GetMapping("/{matchId}")
+    public ResponseEntity<MatchDTO> getMatchById(@PathVariable Integer matchId) throws CDLWikiException {
+        MatchDTO match = matchService.getMatchById(matchId);
+        return new ResponseEntity<>(match, HttpStatus.OK);
+    }
+
+    @GetMapping("/team/{teamId}")
     public ResponseEntity<List<MatchDTO>> getMatchesByTeam(@PathVariable Integer teamId) throws CDLWikiException {
         List<MatchDTO> matches = matchService.getMatchesByTeam(teamId);
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
-    @GetMapping("/{teamId}/latest")
+    @GetMapping("/team/{teamId}/latest")
     public ResponseEntity<List<MatchDTO>> getLatest5MatchesByTeam(@PathVariable Integer teamId) throws CDLWikiException {
         List<MatchDTO> matches = matchService.getLatest5MatchesByTeam(teamId);
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
-    @GetMapping("/{majorId}")
+    @GetMapping("/team")
+    public ResponseEntity<List<MatchDTO>> getMatchesByTeamsPlaying(@RequestParam Integer team1Id, @RequestParam Integer team2Id) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getMatchesByTeamsPlaying(team1Id, team2Id);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @GetMapping("/major/{majorId}")
     public ResponseEntity<List<MatchDTO>> getMatchesByMajor(@PathVariable Integer majorId) throws CDLWikiException {
         List<MatchDTO> matches = matchService.getMatchesByMajor(majorId);
         return new ResponseEntity<>(matches, HttpStatus.OK);

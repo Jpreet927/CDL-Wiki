@@ -44,6 +44,11 @@ public class MatchService {
         return matchDTOs;
     }
 
+    public MatchDTO getMatchById(Integer matchId) throws CDLWikiException {
+        Match match = matchRepo.findById(matchId).orElseThrow(() -> new CDLWikiException("Match with id: " + matchId + " not found"));
+        return MatchDTO.mapEntityToDTO(match);
+    }
+
     public List<MatchDTO> getMatchesByTeam(Integer teamId) throws CDLWikiException {
         List<Match> matches = matchRepo.findByTeam(teamId);
 
@@ -60,6 +65,20 @@ public class MatchService {
 
     public List<MatchDTO> getLatest5MatchesByTeam(Integer teamId) throws CDLWikiException {
         List<Match> matches = matchRepo.findFirst5ByTeam(teamId);
+
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
+    public List<MatchDTO> getMatchesByTeamsPlaying(Integer team1Id, Integer team2Id) throws CDLWikiException {
+        List<Match> matches = matchRepo.findByTeamsPlaying(team1Id, team2Id);
 
         if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
 
