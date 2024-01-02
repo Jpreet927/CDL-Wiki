@@ -110,9 +110,8 @@ public class MatchService {
 
         Team team1 = teamRepo.findById(matchRequest.getTeam1Id()).orElseThrow(() -> new CDLWikiException("Team with id: " + matchRequest.getTeam1Id() + " not found"));
         Team team2 = teamRepo.findById(matchRequest.getTeam2Id()).orElseThrow(() -> new CDLWikiException("Team with id: " + matchRequest.getTeam2Id() + " not found"));
-        Major major = majorRepo.findById(matchRequest.getMajorId()).orElseThrow(() -> new CDLWikiException("Major with id: " + matchRequest.getMajorId() + " not found"));
 
-        match.setMajor(major);
+        match.setMajorId(matchRequest.getMajorId());
         match.setTeam1(team1);
         match.setTeam2(team2);
         match.setTeam1Score(matchRequest.getTeam1Score());

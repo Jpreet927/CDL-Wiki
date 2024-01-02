@@ -1,5 +1,6 @@
 package com.jpreet.cdlwiki.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -10,9 +11,8 @@ public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "major_id")
-    private Major major;
+    @Column(name = "major_id")
+    private Integer majorId;
     @ManyToOne
     @JoinColumn(name = "team_1_id")
     private Team team1;
@@ -26,9 +26,9 @@ public class Match {
     public Match() {
     }
 
-    public Match(Integer id, Major major, Team team1, Team team2, Integer team1Score, Integer team2Score, Date date) {
+    public Match(Integer id, Integer majorId, Team team1, Team team2, Integer team1Score, Integer team2Score, Date date) {
         this.id = id;
-        this.major = major;
+        this.majorId = majorId;
         this.team1 = team1;
         this.team2 = team2;
         this.team1Score = team1Score;
@@ -44,12 +44,12 @@ public class Match {
         this.id = id;
     }
 
-    public Major getMajor() {
-        return major;
+    public Integer getMajorId() {
+        return majorId;
     }
 
-    public void setMajor(Major major) {
-        this.major = major;
+    public void setMajorId(Integer majorId) {
+        this.majorId = majorId;
     }
 
     public Team getTeam1() {

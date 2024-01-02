@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class MatchDTO {
     private Integer id;
-    private Major major;
+    private Integer majorId;
     private Team team1;
     private Team team2;
     private Integer team1Score;
@@ -21,9 +21,9 @@ public class MatchDTO {
     public MatchDTO() {
     }
 
-    public MatchDTO(Integer id, Major major, Team team1, Team team2, Integer team1Score, Integer team2Score, Date date) {
+    public MatchDTO(Integer id, Integer majorId, Team team1, Team team2, Integer team1Score, Integer team2Score, Date date) {
         this.id = id;
-        this.major = major;
+        this.majorId = majorId;
         this.team1 = team1;
         this.team2 = team2;
         this.team1Score = team1Score;
@@ -39,12 +39,12 @@ public class MatchDTO {
         this.id = id;
     }
 
-    public Major getMajor() {
-        return major;
+    public Integer getMajorId() {
+        return majorId;
     }
 
-    public void setMajor(Major major) {
-        this.major = major;
+    public void setMajorId(Integer majorId) {
+        this.majorId = majorId;
     }
 
     public Team getTeam1() {
@@ -94,7 +94,7 @@ public class MatchDTO {
 
         MatchDTO dto = new MatchDTO();
         dto.setId(entity.getId());
-        dto.setMajor(entity.getMajor());
+        dto.setMajorId(entity.getMajorId());
         dto.setTeam1(entity.getTeam1());
         dto.setTeam2(entity.getTeam2());
         dto.setTeam1Score(entity.getTeam1Score());
