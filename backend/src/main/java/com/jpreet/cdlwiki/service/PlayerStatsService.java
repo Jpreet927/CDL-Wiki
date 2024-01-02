@@ -82,6 +82,8 @@ public class PlayerStatsService {
         PlayerStats stats = new PlayerStats();
         stats.setPlayer(player);
         stats.setMatch(match);
+        stats.setMode(playerStatsRequest.getMode());
+        stats.setMap(playerStatsRequest.getMap());
         stats.setKills(playerStatsRequest.getKills());
         stats.setDeaths(playerStatsRequest.getDeaths());
         stats.setAssists(playerStatsRequest.getAssists());

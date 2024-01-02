@@ -9,6 +9,8 @@ public class PlayerStatsDTO {
     private Integer id;
     private Player player;
     private Match match;
+    private String mode;
+    private String map;
     private Integer kills;
     private Integer deaths;
     private Integer assists;
@@ -17,10 +19,12 @@ public class PlayerStatsDTO {
     public PlayerStatsDTO() {
     }
 
-    public PlayerStatsDTO(Integer id, Player player, Match match, Integer kills, Integer deaths, Integer assists, Double damage) {
+    public PlayerStatsDTO(Integer id, Player player, Match match, String mode, String map, Integer kills, Integer deaths, Integer assists, Double damage) {
         this.id = id;
         this.player = player;
         this.match = match;
+        this.mode = mode;
+        this.map = map;
         this.kills = kills;
         this.deaths = deaths;
         this.assists = assists;
@@ -49,6 +53,22 @@ public class PlayerStatsDTO {
 
     public void setMatch(Match match) {
         this.match = match;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public String getMap() {
+        return map;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
     }
 
     public Integer getKills() {
