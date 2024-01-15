@@ -11,9 +11,8 @@ public class Round {
     private Integer id;
     @Enumerated(EnumType.STRING)
     private RoundName round;
-    @ManyToOne
-    @JoinColumn(name = "major_id")
-    private Major major;
+    @Column(name = "major_id")
+    private Integer majorId;
     @OneToOne
     @JoinColumn(name = "match_id")
     private Match match;
@@ -21,10 +20,10 @@ public class Round {
     public Round() {
     }
 
-    public Round(Integer id, RoundName round, Major major, Match match) {
+    public Round(Integer id, RoundName round, Integer majorId, Match match) {
         this.id = id;
         this.round = round;
-        this.major = major;
+        this.majorId = majorId;
         this.match = match;
     }
 
@@ -44,12 +43,12 @@ public class Round {
         this.round = round;
     }
 
-    public Major getMajor() {
-        return major;
+    public Integer getMajorId() {
+        return majorId;
     }
 
-    public void setMajor(Major major) {
-        this.major = major;
+    public void setMajorId(Integer majorId) {
+        this.majorId = majorId;
     }
 
     public Match getMatch() {

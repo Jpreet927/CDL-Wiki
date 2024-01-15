@@ -11,14 +11,16 @@ import jakarta.persistence.OneToOne;
 public class RoundDTO {
     private Integer id;
     private RoundName round;
-    private Match match;
+    private Integer majorId;
+    private MatchDTO match;
 
     public RoundDTO() {
     }
 
-    public RoundDTO(Integer id, RoundName round, Match match) {
+    public RoundDTO(Integer id, RoundName round, Integer majorId, MatchDTO match) {
         this.id = id;
         this.round = round;
+        this.majorId = majorId;
         this.match = match;
     }
 
@@ -38,11 +40,19 @@ public class RoundDTO {
         this.round = round;
     }
 
-    public Match getMatch() {
+    public Integer getMajorId() {
+        return majorId;
+    }
+
+    public void setMajorId(Integer majorId) {
+        this.majorId = majorId;
+    }
+
+    public MatchDTO getMatch() {
         return match;
     }
 
-    public void setMatch(Match match) {
+    public void setMatch(MatchDTO match) {
         this.match = match;
     }
 
@@ -53,8 +63,9 @@ public class RoundDTO {
 
         RoundDTO dto = new RoundDTO();
         dto.setId(entity.getId());
-        dto.setRound(entity.getRound()); // Assuming RoundName is an enum with a name() method
-        dto.setMatch(entity.getMatch());
+        dto.setRound(entity.getRound());
+        dto.setMajorId(entity.getMajorId());
+        dto.setMatch(MatchDTO.mapEntityToDTO(entity.getMatch()));
 
         return dto;
     }
