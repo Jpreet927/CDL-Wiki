@@ -1,6 +1,7 @@
 package com.jpreet.cdlwiki.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.jpreet.cdlwiki.enums.RoundName;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -21,18 +22,20 @@ public class Match {
     private Team team2;
     private Integer team1Score;
     private Integer team2Score;
+    private RoundName round;
     private Date date;
 
     public Match() {
     }
 
-    public Match(Integer id, Integer majorId, Team team1, Team team2, Integer team1Score, Integer team2Score, Date date) {
+    public Match(Integer id, Integer majorId, Team team1, Team team2, Integer team1Score, Integer team2Score, RoundName round, Date date) {
         this.id = id;
         this.majorId = majorId;
         this.team1 = team1;
         this.team2 = team2;
         this.team1Score = team1Score;
         this.team2Score = team2Score;
+        this.round = round;
         this.date = date;
     }
 
@@ -82,6 +85,14 @@ public class Match {
 
     public void setTeam2Score(Integer team2Score) {
         this.team2Score = team2Score;
+    }
+
+    public RoundName getRound() {
+        return round;
+    }
+
+    public void setRound(RoundName round) {
+        this.round = round;
     }
 
     public Date getDate() {

@@ -33,7 +33,7 @@ public class RoundController {
         return new ResponseEntity<>(round, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/name/{roundName}")
+    @GetMapping(value = "/name/{roundName}") // side note - ????
     public ResponseEntity<List<RoundDTO>> getRoundByRoundName(@PathVariable String roundName) throws CDLWikiException {
         List<RoundDTO> rounds = roundService.getRoundByRoundName(roundName);
         return new ResponseEntity<>(rounds, HttpStatus.OK);

@@ -1,5 +1,6 @@
 package com.jpreet.cdlwiki.dto;
 
+import com.jpreet.cdlwiki.enums.RoundName;
 import com.jpreet.cdlwiki.model.Major;
 import com.jpreet.cdlwiki.model.Match;
 import com.jpreet.cdlwiki.model.Team;
@@ -16,18 +17,20 @@ public class MatchDTO {
     private Team team2;
     private Integer team1Score;
     private Integer team2Score;
+    private RoundName round;
     private Date date;
 
     public MatchDTO() {
     }
 
-    public MatchDTO(Integer id, Integer majorId, Team team1, Team team2, Integer team1Score, Integer team2Score, Date date) {
+    public MatchDTO(Integer id, Integer majorId, Team team1, Team team2, Integer team1Score, Integer team2Score, RoundName round, Date date) {
         this.id = id;
         this.majorId = majorId;
         this.team1 = team1;
         this.team2 = team2;
         this.team1Score = team1Score;
         this.team2Score = team2Score;
+        this.round = round;
         this.date = date;
     }
 
@@ -79,6 +82,14 @@ public class MatchDTO {
         this.team2Score = team2Score;
     }
 
+    public RoundName getRound() {
+        return round;
+    }
+
+    public void setRound(RoundName round) {
+        this.round = round;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -99,6 +110,7 @@ public class MatchDTO {
         dto.setTeam2(entity.getTeam2());
         dto.setTeam1Score(entity.getTeam1Score());
         dto.setTeam2Score(entity.getTeam2Score());
+        dto.setRound(entity.getRound());
         dto.setDate(entity.getDate());
 
         return dto;

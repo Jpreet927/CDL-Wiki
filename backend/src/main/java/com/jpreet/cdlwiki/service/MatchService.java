@@ -2,6 +2,7 @@ package com.jpreet.cdlwiki.service;
 
 import com.jpreet.cdlwiki.dto.MatchDTO;
 import com.jpreet.cdlwiki.dto.MatchRequest;
+import com.jpreet.cdlwiki.enums.RoundName;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.model.Major;
 import com.jpreet.cdlwiki.model.Match;
@@ -105,6 +106,35 @@ public class MatchService {
         return matchDTOs;
     }
 
+    public List<MatchDTO> getMatchesByMajorAndRound(Integer majorId, RoundName round) throws CDLWikiException {
+        List<Match> matches = matchRepo.findByMajorAndRound(majorId, round);
+
+        if (!majorRepo.existsById(majorId)) throw new CDLWikiException("Major with id: " + majorId + " not found");
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
+    public List<MatchDTO> getMatchesByRound(RoundName round) throws CDLWikiException {
+        List<Match> matches = matchRepo.findByRound(round);
+
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
     public String createMatch(MatchRequest matchRequest) throws CDLWikiException {
         Match match = new Match();
 
@@ -116,6 +146,7 @@ public class MatchService {
         match.setTeam2(team2);
         match.setTeam1Score(matchRequest.getTeam1Score());
         match.setTeam2Score(matchRequest.getTeam2Score());
+        match.setRound(matchRequest.getRound());
         match.setDate(matchRequest.getDate());
 
         Match newMatch = matchRepo.save(match);

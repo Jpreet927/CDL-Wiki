@@ -1,7 +1,6 @@
 package com.jpreet.cdlwiki.dto;
 
-import com.jpreet.cdlwiki.model.Major;
-import com.jpreet.cdlwiki.model.Team;
+import com.jpreet.cdlwiki.enums.RoundName;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
@@ -17,17 +16,19 @@ public class MatchRequest {
     @Min(value = 0, message = "Score cannot be less than 0")
     @Max(value = 5, message = "Score cannot be greater than 5")
     private Integer team2Score;
+    private RoundName round;
     private Date date;
 
     public MatchRequest() {
     }
 
-    public MatchRequest(Integer majorId, Integer team1Id, Integer team2Id, Integer team1Score, Integer team2Score, Date date) {
+    public MatchRequest(Integer majorId, Integer team1Id, Integer team2Id, Integer team1Score, Integer team2Score, RoundName round, Date date) {
         this.majorId = majorId;
         this.team1Id = team1Id;
         this.team2Id = team2Id;
         this.team1Score = team1Score;
         this.team2Score = team2Score;
+        this.round = round;
         this.date = date;
     }
 
@@ -69,6 +70,14 @@ public class MatchRequest {
 
     public void setTeam2Score(Integer team2Score) {
         this.team2Score = team2Score;
+    }
+
+    public RoundName getRound() {
+        return round;
+    }
+
+    public void setRound(RoundName round) {
+        this.round = round;
     }
 
     public Date getDate() {
