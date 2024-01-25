@@ -9,7 +9,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
     return (
-        <div className="relative">
+        <div className="relative text-light-primary dark:text-dark-primary">
             <Navbar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
