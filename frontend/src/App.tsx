@@ -6,6 +6,7 @@ import PlayersPage from "./pages/PlayersPage";
 import MatchesPage from "./pages/MatchesPage";
 import AboutPage from "./pages/AboutPage";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/matches" element={<MatchesPage />} />
                 <Route path="/about" element={<AboutPage />} />
             </Routes>
+            <Footer />
         </div>
     );
 }
