@@ -61,8 +61,8 @@ const Footer = () => {
             <div className="flex justify-between px-72 mt-10 w-full">
                 <div className="flex gap-4 items-center">
                     <p className="font-bold">© 2023 JAIPREET SINGH</p>
-                    <div className="w-[1px] h-[20px] bg-light-secondary"></div>
-                    <div className="flex gap-2">
+                    <div className="w-[1px] h-[20px] bg-background-2"></div>
+                    <div className="flex gap-3">
                         <a href="https://github.com/Jpreet927" target="_blank">
                             <GitHubIcon />
                         </a>

@@ -8,7 +8,7 @@
 @layer base {
     :root {
         --background: 255 255 255;
-        --background-2: 217 217 217;
+        --background-2: 230 230 230;
         --primary: 7 7 7;
         --secondary: 65 65 65;
         --primary-dark: 255 255 255;
@@ -19,12 +19,22 @@
         --body: "Inter", sans-serif;
     }
 
-    .dark {
+    :root[data-theme="dark"] {
         --background: 7 7 7;
-        --background-2: 30 30 30;
+        --background-2: 40 40 40;
         --primary: 255 255 255;
         --secondary: 205 205 205;
         --accent: 228 208 135;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background: 7 7 7;
+            --background-2: 30 30 30;
+            --primary: 255 255 255;
+            --secondary: 205 205 205;
+            --accent: 228 208 135;
+        }
     }
 
     body {
