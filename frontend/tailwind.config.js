@@ -1,18 +1,24 @@
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+    darkMode: "class",
     theme: {
         extend: {
             colors: {
-                "light-primary": "var(--light-primary)",
-                "light-secondary": "var(--light-secondary)",
-                "light-background": "var(--light-background)",
-                "light-background-2": "var(--light-background-2)",
-                "dark-primary": "var(--dark-primary)",
-                "dark-secondary": "var(--dark-secondary)",
+                primary: "rgba(var(--primary))",
+                secondary: "rgba(var(--secondary))",
+                "primary-dark": "rgba(var(--primary-dark))",
+                "secondary-dark": "rgba(var(--secondary-dark))",
+                background: "rgba(var(--background))",
+                "background-2": "rgba(var(--background-2))",
+                accent: "rgba(var(--accent))",
             },
             backgroundImage: {
                 "hero-image": "url('./src/assets/images/CDL-Wiki-Hero.jpg')",
+            },
+            fontFamily: {
+                heading: "var(--heading)",
+                body: "var(--body)",
             },
         },
     },

@@ -7,14 +7,28 @@
 
 @layer base {
     :root {
-        --light-background: #ffffff;
-        --light-background-2: #d9d9d9;
-        --light-primary: #070707;
-        --light-secondary: #414141;
+        --background: 255 255 255;
+        --background-2: 217 217 217;
+        --primary: 7 7 7;
+        --secondary: 65 65 65;
+        --primary-dark: 255 255 255;
+        --secondary-dark: 205 205 205;
+        --accent: 228 208 135;
 
-        --dark-background: #070707;
-        --dark-primary: #ffffff;
-        --dark-secondary: #cdcdcd;
+        --heading: "IBM Plex Sans", sans-serif;
+        --body: "Inter", sans-serif;
+    }
+
+    .dark {
+        --background: 7 7 7;
+        --background-2: 30 30 30;
+        --primary: 255 255 255;
+        --secondary: 205 205 205;
+        --accent: 228 208 135;
+    }
+
+    body {
+        @apply font-body box-border m-0 p-0 max-w-full overflow-x-hidden;
     }
 
     div {
@@ -22,23 +36,10 @@
     }
 
     h1 {
-        @apply font-bold text-5xl text-light-primary dark:text-dark-primary;
+        @apply font-bold text-5xl text-primary font-heading;
     }
-}
 
-body {
-    font-family: "Inter", sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-h1 {
-    font-family: "IBM Plex Sans", sans-serif;
-}
-
-::selection {
-    background: #e4d087;
+    ::selection {
+        @apply bg-accent;
+    }
 }

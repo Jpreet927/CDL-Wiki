@@ -22,10 +22,10 @@ const Hero = () => {
             <div className="absolute bottom-0 left-0 bg-gradient-to-t from-black to-black/0 h-[50%] w-full"></div>
             <div className="absolute top-0 left-0 bg-gradient-to-b from-black to-black/0 h-[20%] w-full"></div>
             <div className="px-48 py-36 absolute bottom-0 left-0 w-full flex flex-col gap-4">
-                <h1 className="text-8xl font-bold text-dark-primary">
+                <h1 className="text-8xl font-bold text-primary-dark">
                     Call of Duty League
                 </h1>
-                <p className="text-dark-secondary text-xl mb-4">
+                <p className="text-secondary-dark text-xl mb-4">
                     2023/2024 Season
                 </p>
                 <div className="flex justify-between">
