@@ -11,7 +11,7 @@ const Footer = () => {
     return (
         <div className="flex flex-col gap-12">
             <div className="w-full px-72 flex flex-col gap-12">
-                <div className="h-[1px] w-full bg-light-background-2"></div>
+                <div className="h-[1px] w-full bg-background-2"></div>
                 <div className="flex justify-between items-center">
                     <h1>Call of Duty League</h1>
                     <img src={cdlDark} alt="CDL Logo" className="h-[30px]" />
@@ -40,7 +40,7 @@ const Footer = () => {
                             <li>
                                 <a
                                     href={team.href}
-                                    className="text-light-secondary hover:text-light-primary transition-colors ease-in-out duration-300"
+                                    className="text-secondary hover:text-primary transition-colors ease-in-out duration-300"
                                 >
                                     {team.team}
                                 </a>

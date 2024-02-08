@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import cdlWhite from "../assets/logos/CDL-logo-white.png";
 
 const Navbar = () => {
+    const location = useLocation();
     const [backgroundVisible, setBackgroundVisible] = useState(false);
 
     useEffect(() => {
@@ -26,22 +28,56 @@ const Navbar = () => {
         >
             <img src={cdlWhite} alt="CDL Logo" className="h-[30px]" />
             <ul className="flex items-center gap-24">
-                <li className="hover:text-primary-dark transition-colors ease-in-out duration-300">
+                <li
+                    className={`hover:text-secondary-dark transition-colors ease-in-out duration-300 ${
+                        location.pathname === "/" ? "text-primary-dark" : ""
+                    }`}
+                >
                     <Link to="/">Home</Link>
                 </li>
-                <li className="hover:text-primary-dark transition-colors ease-in-out duration-300">
+                <li
+                    className={`hover:text-secondary-dark transition-colors ease-in-out duration-300 ${
+                        location.pathname === "/standings"
+                            ? "text-primary-dark"
+                            : ""
+                    }`}
+                >
                     <Link to="/standings">Standings</Link>
                 </li>
-                <li className="hover:text-primary-dark transition-colors ease-in-out duration-300">
+                <li
+                    className={`hover:text-secondary-dark transition-colors ease-in-out duration-300 ${
+                        location.pathname === "/teams"
+                            ? "text-primary-dark"
+                            : ""
+                    }`}
+                >
                     <Link to="/teams">Teams</Link>
                 </li>
-                <li className="hover:text-primary-dark transition-colors ease-in-out duration-300">
+                <li
+                    className={`hover:text-secondary-dark transition-colors ease-in-out duration-300 ${
+                        location.pathname === "/players"
+                            ? "text-primary-dark"
+                            : ""
+                    }`}
+                >
                     <Link to="/players">Players</Link>
                 </li>
-                <li className="hover:text-primary-dark transition-colors ease-in-out duration-300">
+                <li
+                    className={`hover:text-secondary-dark transition-colors ease-in-out duration-300 ${
+                        location.pathname === "/matches"
+                            ? "text-primary-dark"
+                            : ""
+                    }`}
+                >
                     <Link to="/matches">Matches</Link>
                 </li>
-                <li className="hover:text-primary-dark transition-colors ease-in-out duration-300">
+                <li
+                    className={`hover:text-secondary-dark transition-colors ease-in-out duration-300 ${
+                        location.pathname === "/about"
+                            ? "text-primary-dark"
+                            : ""
+                    }`}
+                >
                     <Link to="/about">About</Link>
                 </li>
             </ul>
