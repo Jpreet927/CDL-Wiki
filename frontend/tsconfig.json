@@ -23,8 +23,7 @@
         /* path config */
         "baseUrl": ".",
         "paths": {
-            "@components/*": ["src/components/*"],
-            "@assets/*": ["src/assets/*"]
+            "@/*": ["src/*"]
         },
 
         "types": ["node"]

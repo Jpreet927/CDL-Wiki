@@ -21,7 +21,7 @@
 
     :root[data-theme="dark"] {
         --background: 7 7 7;
-        --background-2: 40 40 40;
+        --background-2: 20 20 20;
         --primary: 255 255 255;
         --secondary: 205 205 205;
         --accent: 228 208 135;
@@ -30,7 +30,7 @@
     @media (prefers-color-scheme: dark) {
         :root {
             --background: 7 7 7;
-            --background-2: 30 30 30;
+            --background-2: 20 20 20;
             --primary: 255 255 255;
             --secondary: 205 205 205;
             --accent: 228 208 135;

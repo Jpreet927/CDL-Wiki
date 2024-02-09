@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const ArticleCard = ({ article }: { article: Article }) => {
     return (
-        <Link to={article.link} target="_blank">
+        <Link to={article.link} target="_blank" className="flex flex-col gap-2">
             <div className="overflow-hidden aspect-video flex items-center justify-center">
                 <img
                     src={article.img || img}
