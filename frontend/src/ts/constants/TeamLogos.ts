@@ -14,13 +14,7 @@ import opticLight from "@/assets/logos/OpTic_Texas_Light.png";
 import opticDark from "@/assets/logos/OpTic_Texas_Dark.png";
 import surge from "@/assets/logos/Seattle_Surge.png";
 import ultra from "@/assets/logos/Toronto_Ultra.png";
-
-type TeamLogo = {
-    team: string;
-    srcLight: string;
-    srcDark: string;
-    alt: string;
-};
+import { TeamLogo } from "@/ts//types/TeamLogo";
 
 export const TEAM_LOGOS: TeamLogo[] = [
     {

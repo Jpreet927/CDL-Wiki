@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import MonitorOutlinedIcon from "@mui/icons-material/MonitorOutlined";
+import { ThemeContext } from "@/context/ThemeProvider";
 
 const DisplayToggle = () => {
+    const { setTheme } = useContext(ThemeContext);
+    // only used for toggle component
     const [activeMode, setActiveMode] = useState("system");
 
     useEffect(() => {
         let theme: string | null = localStorage.getItem("theme");
+
         if (theme) {
             document.documentElement.setAttribute("data-theme", theme);
             setActiveMode(theme);
@@ -15,9 +19,27 @@ const DisplayToggle = () => {
     }, []);
 
     const toggleTheme = (mode: string) => {
-        document.documentElement.setAttribute("data-theme", mode);
+        let theme: string = mode;
+
+        if (mode === "system") {
+            theme = handleSystemTheme();
+        }
+
+        document.documentElement.setAttribute("data-theme", theme);
+        setTheme(theme);
         localStorage.setItem("theme", mode);
         setActiveMode(mode);
+    };
+
+    const handleSystemTheme = () => {
+        if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+            return "dark";
+        } else {
+            return "light";
+        }
     };
 
     return (

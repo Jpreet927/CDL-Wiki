@@ -10,5 +10,6 @@ export type Team = {
     bgColoured: string;
     bgDark: string;
     bgLight: string;
-    logo: string;
+    logoLight: string;
+    logoDark: string;
 };

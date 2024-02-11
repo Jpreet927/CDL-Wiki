@@ -1,20 +1,28 @@
-import React from "react";
+import { useContext } from "react";
 import cdlDark from "@/assets/logos/CDL-logo-black.png";
+import cdlLight from "@/assets/logos/CDL-logo-white.png";
 import footerImage from "../assets/images/Footer-Image.webp";
 import { NAV_ITEMS, TEAMS_NAV_ITEMS } from "../config/NavItems";
-import { TEAM_LOGOS } from "../config/TeamLogos";
+import { TEAM_LOGOS } from "../ts/constants/TeamLogos";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import DisplayToggle from "./DisplayToggle";
+import { ThemeContext } from "@/context/ThemeProvider";
 
 const Footer = () => {
+    const { theme } = useContext(ThemeContext);
+
     return (
         <div className="flex flex-col gap-12">
             <div className="w-full px-72 flex flex-col gap-12">
                 <div className="h-[1px] w-full bg-background-2"></div>
                 <div className="flex justify-between items-center">
                     <h1>Call of Duty League</h1>
-                    <img src={cdlDark} alt="CDL Logo" className="h-[30px]" />
+                    <img
+                        src={theme === "dark" ? cdlLight : cdlDark}
+                        alt="CDL Logo"
+                        className="h-[30px]"
+                    />
                 </div>
             </div>
             <div className="w-full px-72 flex justify-between">
@@ -52,7 +60,7 @@ const Footer = () => {
             <div className="px-72 flex justify-between">
                 {TEAM_LOGOS.map((team) => (
                     <img
-                        src={team.srcDark}
+                        src={theme === "dark" ? team.srcLight : team.srcDark}
                         alt={team.alt}
                         className="h-[40px]"
                     />

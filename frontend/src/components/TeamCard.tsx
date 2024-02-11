@@ -1,14 +1,15 @@
+import { useEffect, useState, useContext } from "react";
 import { extractColors } from "extract-colors";
-import { FinalColor } from "extract-colors/lib/types/Color";
 import { Team } from "@/ts/types/Team";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { ThemeContext } from "@/context/ThemeProvider";
 
 const TeamCard = ({ team }: { team: Team }) => {
     const [color, setColor] = useState<string>("");
+    const { theme } = useContext(ThemeContext);
 
     useEffect(() => {
-        getColorsFromImage(team.logo);
+        getColorsFromImage(team.logoLight);
     }, []);
 
     const getColorsFromImage = async (src: string) => {
@@ -38,7 +39,7 @@ const TeamCard = ({ team }: { team: Team }) => {
                     <h2>{team.name}</h2>
                 </div>
                 <img
-                    src={team.logo}
+                    src={theme === "dark" ? team.logoLight : team.logoDark}
                     alt="Test Image"
                     className="h-[50px] z-10"
                 />

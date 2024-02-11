@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { heroImages, HeroImage } from "../../config/HeroImages";
-import { TEAM_LOGOS } from "../../config/TeamLogos";
+import { TEAM_LOGOS } from "../../ts/constants/TeamLogos";
 
 const Hero = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
