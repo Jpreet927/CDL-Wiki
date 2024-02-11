@@ -18,7 +18,7 @@ const defaultContext: Context = {
 export const ThemeContext = createContext(defaultContext);
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [theme, setTheme] = useState<string>("");
+    const [theme, setTheme] = useState<string>(defaultContext.theme);
 
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>

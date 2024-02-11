@@ -10,13 +10,13 @@ const TeamCard = ({ team }: { team: Team }) => {
 
     useEffect(() => {
         getColorsFromImage(team.logoLight);
+        console.log(theme);
     }, []);
 
     const getColorsFromImage = async (src: string) => {
         const res = await extractColors(src);
         let bgProperty: string = res[0].hex;
         setColor(bgProperty);
-        console.log(res);
     };
 
     return (
