@@ -1,5 +1,9 @@
 import { Team } from "../types/Team";
 import logo from "@/assets/logos/OpTic_Texas_Light.png";
+import faze from "@/assets/logos/Atlanta_FaZe_Light.png";
+import surge from "@/assets/logos/Seattle_Surge.png";
+import thieves from "@/assets/logos/LA-Thieves.png";
+import rokkr from "@/assets/logos/Minnesota_ROKKR.png";
 
 export const TEAM_DATA: Team[] = [
     {
@@ -28,7 +32,7 @@ export const TEAM_DATA: Team[] = [
         bgColoured: "",
         bgDark: "",
         bgLight: "",
-        logo: logo,
+        logo: faze,
     },
     {
         id: 1,
@@ -42,7 +46,7 @@ export const TEAM_DATA: Team[] = [
         bgColoured: "",
         bgDark: "",
         bgLight: "",
-        logo: logo,
+        logo: surge,
     },
     {
         id: 1,
@@ -56,7 +60,7 @@ export const TEAM_DATA: Team[] = [
         bgColoured: "",
         bgDark: "",
         bgLight: "",
-        logo: logo,
+        logo: thieves,
     },
     {
         id: 1,
@@ -70,7 +74,7 @@ export const TEAM_DATA: Team[] = [
         bgColoured: "",
         bgDark: "",
         bgLight: "",
-        logo: logo,
+        logo: rokkr,
     },
     {
         id: 1,
