@@ -43,7 +43,7 @@ const DisplayToggle = () => {
     };
 
     return (
-        <div className="border border-background-2 rounded-full p-1 flex gap-1 h-[45px]">
+        <div className="border border-background-2 rounded-full p-1 flex w-fit gap-1 h-[45px]">
             <div
                 className={`rounded-full aspect-square p-2 flex justify-center items-center cursor-pointer ${
                     activeMode === "light"

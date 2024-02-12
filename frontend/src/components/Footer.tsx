@@ -14,26 +14,26 @@ const Footer = () => {
 
     return (
         <div className="flex flex-col gap-12">
-            <div className="w-full px-72 flex flex-col gap-12">
+            <div className="w-full xl:px-64 lg:px-48 md:px-24 px-12 flex flex-col gap-12">
                 <div className="h-[1px] w-full bg-background-2"></div>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center gap-2">
                     <h1>Call of Duty League</h1>
                     <img
                         src={theme === "dark" ? cdlLight : cdlDark}
                         alt="CDL Logo"
-                        className="h-[30px]"
+                        className="sm:h-[30px] h-[20px]"
                     />
                 </div>
             </div>
-            <div className="w-full px-72 flex justify-between">
+            <div className="w-full xl:px-64 lg:px-48 md:px-24 px-12 flex md:flex-row flex-col justify-between gap-16">
                 <div className="flex flex-col gap-4">
                     <p className="font-bold">Menu</p>
-                    <ul className="grid grid-cols-2 gap-x-24">
+                    <ul className="grid md:grid-cols-2 sm:grid-cols-3 grid-cols-2 xl:gap-x-24 gap-x-2">
                         {NAV_ITEMS.map((item) => (
                             <li>
                                 <a
                                     href={item.href}
-                                    className="text-light-secondary hover:text-light-primary transition-colors ease-in-out duration-300"
+                                    className="text-secondary hover:text-primary transition-colors ease-in-out duration-300"
                                 >
                                     {item.title}
                                 </a>
@@ -43,7 +43,7 @@ const Footer = () => {
                 </div>
                 <div className="flex flex-col gap-4">
                     <p className="font-bold">Teams</p>
-                    <ul className="grid grid-cols-4 gap-x-24">
+                    <ul className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 xl:gap-x-24 gap-x-2">
                         {TEAMS_NAV_ITEMS.map((team) => (
                             <li>
                                 <a
@@ -57,19 +57,19 @@ const Footer = () => {
                     </ul>
                 </div>
             </div>
-            <div className="px-72 flex justify-between">
+            <div className="xl:px-64 lg:px-48 md:px-24 px-12 md:flex md:justify-between grid grid-cols-6 gap-4 items-center w-full">
                 {TEAM_LOGOS.map((team) => (
                     <img
                         src={theme === "dark" ? team.srcLight : team.srcDark}
                         alt={team.alt}
-                        className="h-[40px]"
+                        className="max-h-[40px]"
                     />
                 ))}
             </div>
-            <div className="flex justify-between px-72 mt-10 w-full">
-                <div className="flex gap-4 items-center">
+            <div className="flex md:flex-row flex-col md:justify-between xl:px-64 lg:px-48 md:px-24 px-12 gap-2 mt-10 w-full">
+                <div className="flex gap-4 items-center md:justify-normal justify-between">
                     <p className="font-bold">© 2023 JAIPREET SINGH</p>
-                    <div className="w-[1px] h-[20px] bg-background-2"></div>
+                    <div className="w-[1px] h-[20px] bg-background-2 md:block hidden"></div>
                     <div className="flex gap-3">
                         <a href="https://github.com/Jpreet927" target="_blank">
                             <GitHubIcon />

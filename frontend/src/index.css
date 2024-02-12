@@ -46,7 +46,7 @@
     }
 
     h1 {
-        @apply font-bold text-5xl text-primary font-heading;
+        @apply font-bold lg:text-5xl sm:text-4xl text-3xl text-primary font-heading;
     }
 
     h2 {
