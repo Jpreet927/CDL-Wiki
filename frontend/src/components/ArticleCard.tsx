@@ -13,7 +13,7 @@ const ArticleCard = ({ article }: { article: Article }) => {
                 />
             </div>
             <div>
-                <h2>{article.title}</h2>
+                <h3>{article.title}</h3>
                 <p className="text-secondary">{article.description}</p>
             </div>
         </Link>
