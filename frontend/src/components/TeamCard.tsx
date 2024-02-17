@@ -3,6 +3,7 @@ import { extractColors } from "extract-colors";
 import { Team } from "@/ts/types/Team";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "@/context/ThemeProvider";
+import Logo from "./templates/Logo";
 
 const TeamCard = ({ team }: { team: Team }) => {
     const [color, setColor] = useState<string>("");
@@ -36,13 +37,15 @@ const TeamCard = ({ team }: { team: Team }) => {
                 </div>
 
                 <div className="absolute bottom-0 left-0 w-full p-6 z-10">
-                    <h2>{team.name}</h2>
+                    <h3>{team.name}</h3>
                 </div>
-                <img
-                    src={theme === "dark" ? team.logoLight : team.logoDark}
-                    alt="Test Image"
-                    className="h-[50px] z-10"
-                />
+                <div className="h-[50px] z-10">
+                    <Logo
+                        srcDark={team.logoLight}
+                        srcLight={team.logoDark}
+                        alt={`${team.name} logo`}
+                    />
+                </div>
             </div>
         </Link>
     );

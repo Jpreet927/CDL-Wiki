@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import cdlDark from "@/assets/logos/CDL-logo-black.png";
 import cdlLight from "@/assets/logos/CDL-logo-white.png";
 import footerImage from "../assets/images/Footer-Image.webp";
@@ -7,22 +6,22 @@ import { TEAM_LOGOS } from "../ts/constants/TeamLogos";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import DisplayToggle from "./DisplayToggle";
-import { ThemeContext } from "@/context/ThemeProvider";
+import Logo from "./templates/Logo";
 
 const Footer = () => {
-    const { theme } = useContext(ThemeContext);
-
     return (
         <div className="flex flex-col gap-12">
             <div className="w-full xl:px-64 lg:px-48 md:px-24 px-12 flex flex-col gap-12">
                 <div className="h-[1px] w-full bg-background-2"></div>
                 <div className="flex justify-between items-center gap-2">
-                    <h1>Call of Duty League</h1>
-                    <img
-                        src={theme === "dark" ? cdlLight : cdlDark}
-                        alt="CDL Logo"
-                        className="sm:h-[30px] h-[20px]"
-                    />
+                    <h2>Call of Duty League</h2>
+                    <div className="sm:h-[30px] h-[20px]">
+                        <Logo
+                            srcDark={cdlLight}
+                            srcLight={cdlDark}
+                            alt="CDL Logo"
+                        />
+                    </div>
                 </div>
             </div>
             <div className="w-full xl:px-64 lg:px-48 md:px-24 px-12 flex md:flex-row flex-col justify-between gap-16">
@@ -59,16 +58,18 @@ const Footer = () => {
             </div>
             <div className="xl:px-64 lg:px-48 md:px-24 px-12 md:flex md:justify-between grid grid-cols-6 gap-4 items-center w-full">
                 {TEAM_LOGOS.map((team) => (
-                    <img
-                        src={theme === "dark" ? team.srcLight : team.srcDark}
-                        alt={team.alt}
-                        className="max-h-[40px]"
-                    />
+                    <div className="h-[40px]">
+                        <Logo
+                            srcDark={team.srcLight}
+                            srcLight={team.srcDark}
+                            alt={team.alt}
+                        />
+                    </div>
                 ))}
             </div>
             <div className="flex md:flex-row flex-col md:justify-between xl:px-64 lg:px-48 md:px-24 px-12 gap-2 mt-10 w-full">
                 <div className="flex gap-4 items-center md:justify-normal justify-between">
-                    <p className="font-bold">© 2023 JAIPREET SINGH</p>
+                    <p className="font-bold">© 2024 JAIPREET SINGH</p>
                     <div className="w-[1px] h-[20px] bg-background-2 md:block hidden"></div>
                     <div className="flex gap-3">
                         <a href="https://github.com/Jpreet927" target="_blank">

@@ -1,5 +1,6 @@
 import { Team } from "@/ts/types/Team";
 import { Link } from "react-router-dom";
+import Logo from "./templates/Logo";
 
 const TeamStandings = ({ team, idx }: { team: Team; idx: number }) => {
     return (
@@ -9,11 +10,11 @@ const TeamStandings = ({ team, idx }: { team: Team; idx: number }) => {
                 to={`/teams/${team.id}`}
                 className="flex gap-2 col-start-2 sm:col-end-5 col-end-4"
             >
-                <div className="w-[25%] flex justify-center items-center">
-                    <img
-                        src={team.logoLight}
+                <div className="w-[25%] flex justify-center items-center max-h-[30px]">
+                    <Logo
+                        srcDark={team.logoLight}
+                        srcLight={team.logoDark}
                         alt={team.name + "logo"}
-                        className="max-h-[30px]"
                     />
                 </div>
                 <p className="sm:block hidden">{team.name}</p>
