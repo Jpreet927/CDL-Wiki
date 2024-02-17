@@ -1,10 +1,11 @@
 import TeamStandings from "@/components/TeamStandings";
+import Page from "@/components/templates/Page";
 import Section from "@/components/templates/Section";
 import { TEAM_DATA } from "@/ts/constants/TeamData";
 
 const StandingsPage = () => {
     return (
-        <div className="py-12">
+        <Page title={"Standings"}>
             <Section title="League Standings">
                 <table>
                     <th className="grid sm:grid-cols-7 grid-cols-5 md:px-12 px-2 pt-8 pb-2 gap-2 w-full items-center [&>*]:font-bold text-left">
@@ -26,7 +27,7 @@ const StandingsPage = () => {
                     </tbody>
                 </table>
             </Section>
-        </div>
+        </Page>
     );
 };
 
