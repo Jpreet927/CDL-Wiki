@@ -27,7 +27,7 @@
         --accent: 228 208 135;
     }
 
-    @media (prefers-color-scheme: dark) {
+    /* @media (prefers-color-scheme: dark) {
         :root {
             --background: 7 7 7;
             --background-2: 20 20 20;
@@ -35,7 +35,7 @@
             --secondary: 205 205 205;
             --accent: 228 208 135;
         }
-    }
+    } */
 
     body {
         @apply font-body box-border m-0 p-0 max-w-full overflow-x-hidden;
