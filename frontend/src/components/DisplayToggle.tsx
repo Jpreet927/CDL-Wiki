@@ -7,14 +7,19 @@ import { ThemeContext } from "@/context/ThemeProvider";
 const DisplayToggle = () => {
     const { setTheme } = useContext(ThemeContext);
     // only used for toggle component
-    const [activeMode, setActiveMode] = useState("system");
+    const [activeMode, setActiveMode] = useState("");
 
     useEffect(() => {
         let theme: string | null = localStorage.getItem("theme");
 
         if (theme) {
-            document.documentElement.setAttribute("data-theme", theme);
             setActiveMode(theme);
+
+            if (theme === "system") {
+                theme = handleSystemTheme();
+            }
+
+            document.documentElement.setAttribute("data-theme", theme);
         }
     }, []);
 
