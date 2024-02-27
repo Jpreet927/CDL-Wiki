@@ -1,0 +1,30 @@
+name: CICD
+# on:
+#   push:
+#     branches:
+#       -main
+#     paths:
+#       - backend/**
+
+# jobs:
+#   build:
+#     runs-on: [ubuntu-latest]
+#     steps:
+#       - name: Checkout source
+#         uses: actions/checkout@v3
+#       - name: Setup Java
+#         uses: actions/setup-java@v3
+#         with:
+#           distribution: 'temurin'
+#           java-version: 17
+#       - name: Build Project
+#         run: mvn clean install
+#       - name: Login to Docker Hub
+#         run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+#       - name: Build Docker Image
+#         run: docker build -t jpreet/cdlwiki-backend .
+#       - name: Publish Image
+#         run: docker push jpreet/cdlwiki-backend:latest
+#   deploy:
+#     needs: build
+#     runs-on: []

@@ -33,4 +33,8 @@ build/
 .vscode/
 
 ### Credentials ###
+.env
 env.properties
+
+### Docker ###
+Dockerfile

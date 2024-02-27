@@ -1,0 +1,13 @@
+services:
+  backend:
+    image: jpreet/cdlwiki-backend
+    build:
+      context: .
+    ports:
+      - 8090:8090
+    environment:
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
