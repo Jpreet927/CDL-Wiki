@@ -1,10 +1,26 @@
 import { ReactNode } from "react";
 import Banner from "../Banner";
+import TeamBanner from "../TeamBanner";
+import { Team } from "@/ts/types/Team";
 
-const Page = ({ title, children }: { title: string; children: ReactNode }) => {
+const Page = ({
+    title,
+    bannerType,
+    team,
+    children,
+}: {
+    title: string;
+    bannerType: string;
+    team?: Team;
+    children: ReactNode;
+}) => {
     return (
         <div>
-            <Banner title={title} />
+            {bannerType === "team" ? (
+                <TeamBanner team={team!} />
+            ) : (
+                <Banner title={title} />
+            )}
             {children}
         </div>
     );
