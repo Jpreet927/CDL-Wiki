@@ -3,7 +3,9 @@ import Page from "@/components/templates/Page";
 import Section from "@/components/templates/Section";
 import { TEAM_DATA } from "@/ts/constants/TeamData";
 import { PLAYER_DATA } from "@/ts/constants/PlayerData";
+import { MATCH_DATA } from "@/ts/constants/MatchData";
 import PlayerCard from "@/components/PlayerCard";
+import RecentMatchTable from "@/components/RecentMatchTable";
 
 const TeamPage = () => {
     const team = TEAM_DATA[0];
@@ -11,49 +13,51 @@ const TeamPage = () => {
     return (
         <Page title={team.name} bannerType="team" team={team}>
             <Section title="Summary">
-                <div className="flex gap-24">
-                    <div className="w-[40%]">
+                <div className="flex gap-32">
+                    <div className="w-[30%]">
                         <TeamCard team={team} variant="square" />
                     </div>
                     <div className="h-[80%] grid grid-cols-2 gap-y-16 w-[60%]">
                         <div>
-                            <p className="text-secondary">Team Name</p>
-                            <p>{team.name}</p>
+                            <p className="text-secondary text-sm">Team Name</p>
+                            <p className="text-xl">{team.name}</p>
                         </div>
                         <div>
-                            <p className="text-secondary">Date Established</p>
-                            <p>{`${team.created}`}</p>
+                            <p className="text-secondary text-sm">
+                                Date Established
+                            </p>
+                            <p className="text-xl">{`${team.created}`}</p>
                         </div>
                         <div>
-                            <p className="text-secondary">
+                            <p className="text-secondary text-sm">
                                 Affiliated Organizations
                             </p>
-                            <p>{team.affiliated}</p>
+                            <p className="text-xl">{team.affiliated}</p>
                         </div>
                         <div>
-                            <p className="text-secondary">Head Coach</p>
-                            <p>{team.coach}</p>
+                            <p className="text-secondary text-sm">Head Coach</p>
+                            <p className="text-xl">{team.coach}</p>
                         </div>
                         <div>
-                            <p className="text-secondary">Owner</p>
-                            <p>{team.owner}</p>
+                            <p className="text-secondary text-sm">Owner</p>
+                            <p className="text-xl">{team.owner}</p>
                         </div>
                         <div>
-                            <p className="text-secondary">Location</p>
-                            <p>{team.location}</p>
+                            <p className="text-secondary text-sm">Location</p>
+                            <p className="text-xl">{team.location}</p>
                         </div>
                     </div>
                 </div>
             </Section>
             <Section title="Roster">
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
                     {PLAYER_DATA.map((player) => (
                         <PlayerCard player={player} key={player.id} />
                     ))}
                 </div>
             </Section>
             <Section title="Recent Matches">
-                <div></div>
+                <RecentMatchTable matches={MATCH_DATA} team={team} />
             </Section>
         </Page>
     );
