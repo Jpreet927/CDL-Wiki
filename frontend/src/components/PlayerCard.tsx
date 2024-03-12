@@ -22,23 +22,23 @@ const PlayerCard = ({ player }: { player: Player }) => {
     return (
         <Link to={`/player/${player.id}`} className="flex flex-col gap-4">
             <div className="flex items-end justify-center bg-background-2 relative group overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-[150%] flex justify-center items-end opacity-0 group-hover:opacity-100 ease-in-out duration-500 z-[1]">
+                <div className="absolute top-0 left-0 w-full h-[150%] flex justify-center items-end ease-in-out duration-500 z-[2]">
                     <div
-                        className={`w-[75%] aspect-square blur-2xl bg-white/40`}
+                        className={`w-[100%] aspect-square blur-3xl bg-white/80`}
                     ></div>
                 </div>
-                <div className="absolute top-0 left-0 w-full h-[130%] flex justify-center items-end opacity-0 group-hover:opacity-100 ease-in-out duration-500 z-[2]">
+                <div className="absolute top-0 left-0 w-full h-[130%] flex justify-center items-end ease-in-out duration-500 z-[1]">
                     <div
-                        className={`w-[80%] aspect-square blur-3xl`}
+                        className={`w-full h-full`}
                         style={{ backgroundColor: color }}
                     ></div>
-                    <div className="w-full h-full bg-gradient-to-b from-background to-black/0 absolute 0 top-0 left-0"></div>
+                    <div className="w-full h-full bg-gradient-to-b from-black/5 to-black/0 absolute 0 top-0 left-0"></div>
                 </div>
                 <div className="w-full h-full absolute top-0 left-0 flex justify-center items-center">
                     <img
                         src={player.team.logoDark}
                         alt=""
-                        className="max-h-[80%] max-w-[80%] grayscale brightness-0 opacity-25 z-[1]"
+                        className="max-h-[80%] max-w-[80%] grayscale brightness-0 opacity-[0.07] z-[1]"
                     />
                 </div>
                 <img
