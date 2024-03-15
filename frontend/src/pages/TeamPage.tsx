@@ -15,7 +15,7 @@ const TeamPage = () => {
             <Section title="Summary">
                 <div className="flex gap-32">
                     <div className="w-[30%]">
-                        <TeamCard team={team} variant="square" />
+                        <TeamCard team={team} variant="SQUARE" />
                     </div>
                     <div className="h-[80%] grid grid-cols-2 gap-y-16 w-[60%]">
                         <div>
@@ -51,9 +51,19 @@ const TeamPage = () => {
             </Section>
             <Section title="Roster">
                 <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
-                    {PLAYER_DATA.map((player) => (
-                        <PlayerCard player={player} key={player.id} />
-                    ))}
+                    {PLAYER_DATA.map((player) => {
+                        return (
+                            <div className="flex flex-col gap-4">
+                                <PlayerCard player={player} key={player.id} />
+                                <div>
+                                    <p className="font-bold">{player.alias}</p>
+                                    <p className="text-secondary">
+                                        {player.name}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </Section>
             <Section title="Recent Matches">

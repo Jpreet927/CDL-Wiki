@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import { ThemeContext } from "@/context/ThemeProvider";
 import Logo from "./templates/Logo";
 
-const TeamCard = ({ team, variant }: { team: Team; variant: string }) => {
+type Props = {
+    team: Team;
+    variant: "VIDEO" | "SQUARE";
+};
+
+const TeamCard = ({ team, variant }: Props) => {
     const [color, setColor] = useState<string>("");
     const { theme } = useContext(ThemeContext);
 
@@ -21,23 +26,29 @@ const TeamCard = ({ team, variant }: { team: Team; variant: string }) => {
     };
 
     return (
-        <Link to={`/teams/${team.id}`} target="_blank">
+        <Link to={`/teams/${team.id}`}>
             <div
                 className={`overflow-hidden ${
-                    variant === "video" ? "aspect-video" : "aspect-square"
+                    variant.toUpperCase() === "VIDEO"
+                        ? "aspect-video"
+                        : "aspect-square"
                 } flex items-center justify-center bg-background-2 relative group`}
             >
                 <div className="absolute top-0 left-0 w-full h-[150%] flex justify-center items-end opacity-0 group-hover:opacity-100 ease-in-out duration-500 z-[1]">
                     <div
                         className={`${
-                            variant === "video" ? "w-[37%]" : "w-[50%]"
+                            variant.toUpperCase() === "VIDEO"
+                                ? "w-[37%]"
+                                : "w-[50%]"
                         } aspect-square blur-2xl bg-white/40`}
                     ></div>
                 </div>
                 <div className="absolute top-0 left-0 w-full h-[150%] flex justify-center items-end opacity-0 group-hover:opacity-100 ease-in-out duration-500">
                     <div
                         className={`${
-                            variant === "video" ? "w-[50%]" : "w-[75%]"
+                            variant.toUpperCase() === "VIDEO"
+                                ? "w-[50%]"
+                                : "w-[75%]"
                         } aspect-square blur-3xl`}
                         style={{ backgroundColor: color }}
                     ></div>
@@ -45,14 +56,16 @@ const TeamCard = ({ team, variant }: { team: Team; variant: string }) => {
                 </div>
                 <div
                     className={`absolute bottom-0 left-0 w-full p-6 z-10 ${
-                        variant === "video" ? "block" : "hidden"
+                        variant.toUpperCase() === "VIDEO" ? "block" : "hidden"
                     }`}
                 >
                     <h3>{team.name}</h3>
                 </div>
                 <div
                     className={`${
-                        variant === "video" ? "h-[50px]" : "h-[33%]"
+                        variant.toUpperCase() === "VIDEO"
+                            ? "h-[50px]"
+                            : "h-[33%]"
                     } z-10`}
                 >
                     <Logo
