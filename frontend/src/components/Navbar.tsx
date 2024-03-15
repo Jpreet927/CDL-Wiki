@@ -47,13 +47,6 @@ const Navbar = () => {
                 </li>
                 <li
                     className={`hover:text-primary transition-colors ease-in-out duration-300 ${
-                        location.pathname === "/standings" ? "text-primary" : ""
-                    }`}
-                >
-                    <Link to="/standings">Standings</Link>
-                </li>
-                <li
-                    className={`hover:text-primary transition-colors ease-in-out duration-300 ${
                         location.pathname === "/teams" ? "text-primary" : ""
                     }`}
                 >
@@ -61,10 +54,10 @@ const Navbar = () => {
                 </li>
                 <li
                     className={`hover:text-primary transition-colors ease-in-out duration-300 ${
-                        location.pathname === "/players" ? "text-primary" : ""
+                        location.pathname === "/standings" ? "text-primary" : ""
                     }`}
                 >
-                    <Link to="/players">Players</Link>
+                    <Link to="/standings">Standings</Link>
                 </li>
                 <li
                     className={`hover:text-primary transition-colors ease-in-out duration-300 ${

@@ -43,17 +43,12 @@ const TeamBanner = ({ team }: { team: Team }) => {
                             : "rgb(255, 255, 255) 50%)"
                     }`,
                 }}
-            >
-                {/* <div
-                    className="w-[50%] h-[200%] blur-3xl"
-                    style={{ backgroundColor: color }}
-                ></div> */}
-            </div>
+            ></div>
             <div className="absolute top-0 left-0 w-full h-[150%] flex justify-center items-center">
                 <img
                     src={team.logoDark}
                     alt=""
-                    className="max-h-[300%] max-w-[300%] grayscale brightness-0 opacity-[2%] z-[1]"
+                    className="max-h-[300%] max-w-[300%] grayscale brightness-0 opacity-[2%] z-[1] select-none pointer-events-none"
                 />
             </div>
         </div>
