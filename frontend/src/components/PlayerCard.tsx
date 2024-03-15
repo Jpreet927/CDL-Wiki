@@ -20,8 +20,8 @@ const PlayerCard = ({ player }: { player: Player }) => {
     };
 
     return (
-        <Link to={`/player/${player.id}`} className="flex flex-col gap-4">
-            <div className="flex items-end justify-center bg-background-2 relative group overflow-hidden">
+        <Link to={`/teams/${player.team.id}/players/${player.id}`}>
+            <div className="flex items-end justify-center bg-background-2 relative group overflow-hidden aspect-square">
                 <div className="absolute top-0 left-0 w-full h-[150%] flex justify-center items-end ease-in-out duration-500 z-[2]">
                     <div
                         className={`w-[100%] aspect-square blur-3xl bg-white/80`}
@@ -46,10 +46,6 @@ const PlayerCard = ({ player }: { player: Player }) => {
                     alt={"Headshot image of " + player.alias}
                     className="object-cover h-[90%] z-10"
                 />
-            </div>
-            <div>
-                <p className="font-bold">{player.alias}</p>
-                <p className="text-secondary">{player.name}</p>
             </div>
         </Link>
     );

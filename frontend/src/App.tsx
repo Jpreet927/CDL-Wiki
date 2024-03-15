@@ -2,12 +2,12 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import StandingsPage from "./pages/StandingsPage";
 import TeamsPage from "./pages/TeamsPage";
-import PlayersPage from "./pages/PlayersPage";
 import MatchesPage from "./pages/MatchesPage";
 import AboutPage from "./pages/AboutPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import TeamPage from "./pages/TeamPage";
+import PlayerPage from "./pages/PlayerPage";
 
 function App() {
     return (
@@ -18,8 +18,10 @@ function App() {
                 <Route path="/standings" element={<StandingsPage />} />
                 <Route path="/teams" element={<TeamsPage />} />
                 <Route path="/teams/:id" element={<TeamPage />} />
-                <Route path="/players" element={<PlayersPage />} />
-                <Route path="/players/:id" element={<PlayersPage />} />
+                <Route
+                    path="/teams/:teamid/players/:playerid"
+                    element={<PlayerPage />}
+                />
                 <Route path="/matches" element={<MatchesPage />} />
                 <Route path="/about" element={<AboutPage />} />
             </Routes>
