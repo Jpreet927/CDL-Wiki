@@ -11,6 +11,8 @@ export default {
                 "secondary-dark": "rgba(var(--secondary-dark))",
                 background: "rgba(var(--background))",
                 "background-2": "rgba(var(--background-2))",
+                "stat-green": "rgba(var(--stat-green))",
+                "stat-red": "rgba(var(--stat-red))",
                 accent: "rgba(var(--accent))",
             },
             backgroundImage: {
