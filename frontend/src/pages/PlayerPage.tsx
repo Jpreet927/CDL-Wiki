@@ -18,75 +18,89 @@ const PlayerPage = () => {
             team={player1.team}
         >
             <Section title="Summary">
-                <div className="flex gap-16">
-                    <div className="w-[33%]">
+                <div className="flex md:gap-16 gap-6 md:flex-row flex-col md:items-start items-center">
+                    <div className="h-full aspect-square">
                         <PlayerCard player={player1} />
                     </div>
-                    <div className="flex flex-col gap-12">
+                    <div className="flex flex-col gap-12 w-full">
                         <div className="flex flex-col gap-2">
                             <h2>{player1.alias}</h2>
                             <p className="text-secondary">{player1.name}</p>
                         </div>
-                        <div className="grid grid-cols-4 gap-x-4 gap-y-6">
-                            <div>
-                                <p className="text-secondary text-sm">
-                                    Team Name
-                                </p>
-                                <p className="text-xl">{`${player1.team.name}`}</p>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2">
+                                <h3>Player Details</h3>
                             </div>
-                            <div>
-                                <p className="text-secondary text-sm">Role</p>
-                                <p className="text-xl">{`${player1.role}`}</p>
+                            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-4 gap-x-4 gap-y-6">
+                                <div>
+                                    <p className="text-secondary text-sm">
+                                        Team Name
+                                    </p>
+                                    <p className="lg:text-xl text-md">{`${player1.team.name}`}</p>
+                                </div>
+                                <div>
+                                    <p className="text-secondary text-sm">
+                                        Role
+                                    </p>
+                                    <p className="lg:text-xl text-md">{`${player1.role}`}</p>
+                                </div>
+                                <div>
+                                    <p className="text-secondary text-sm">
+                                        Nationality
+                                    </p>
+                                    <p className="lg:text-xl text-md">{`${player1.nationality}`}</p>
+                                </div>
+                                <div>
+                                    <p className="text-secondary text-sm">
+                                        Date of Birth
+                                    </p>
+                                    <p className="lg:text-xl text-md">{`${moment(
+                                        player1.dob
+                                    ).format("MMMM Do, YYYY")}`}</p>
+                                </div>
                             </div>
-                            <div>
-                                <p className="text-secondary text-sm">
-                                    Nationality
-                                </p>
-                                <p className="text-xl">{`${player1.nationality}`}</p>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2">
+                                <h3>Player Stats</h3>
                             </div>
-                            <div>
-                                <p className="text-secondary text-sm">
-                                    Date of Birth
-                                </p>
-                                <p className="text-xl">{`${moment(
-                                    player1.dob
-                                ).format("MMMM Do, YYYY")}`}</p>
-                            </div>
-                            <div>
-                                <p className="text-secondary text-sm">
-                                    Overall K/D
-                                </p>
-                                <Stat
-                                    stat={1.1}
-                                    extraClasses="text-xl font-bold"
-                                />
-                            </div>
-                            <div>
-                                <p className="text-secondary text-sm">
-                                    Hardpoint K/D
-                                </p>
-                                <Stat
-                                    stat={1.3}
-                                    extraClasses="text-xl font-bold"
-                                />
-                            </div>
-                            <div>
-                                <p className="text-secondary text-sm">
-                                    S&D K/D
-                                </p>
-                                <Stat
-                                    stat={0.98}
-                                    extraClasses="text-xl font-bold"
-                                />
-                            </div>
-                            <div>
-                                <p className="text-secondary text-sm">
-                                    Control K/D
-                                </p>
-                                <Stat
-                                    stat={1.2}
-                                    extraClasses="text-xl font-bold"
-                                />
+                            <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-4 gap-x-4 gap-y-6">
+                                <div>
+                                    <p className="text-secondary text-sm">
+                                        Overall K/D
+                                    </p>
+                                    <Stat
+                                        stat={1.1}
+                                        extraClasses="lg:text-xl text-md font-bold"
+                                    />
+                                </div>
+                                <div>
+                                    <p className="text-secondary text-sm">
+                                        Hardpoint K/D
+                                    </p>
+                                    <Stat
+                                        stat={1.3}
+                                        extraClasses="lg:text-xl text-md font-bold"
+                                    />
+                                </div>
+                                <div>
+                                    <p className="text-secondary text-sm">
+                                        S&D K/D
+                                    </p>
+                                    <Stat
+                                        stat={0.98}
+                                        extraClasses="lg:text-xl text-md font-bold"
+                                    />
+                                </div>
+                                <div>
+                                    <p className="text-secondary text-sm">
+                                        Control K/D
+                                    </p>
+                                    <Stat
+                                        stat={1.2}
+                                        extraClasses="lg:text-xl text-md font-bold"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,7 +110,7 @@ const PlayerPage = () => {
                 <IndividualStatsTable />
             </Section>
             <Section title="Team">
-                <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
+                <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-2 gap-4">
                     <TeamCard team={player1.team} variant="SQUARE" />
                     <PlayerCard player={PLAYER_DATA[1]} />
                     <PlayerCard player={PLAYER_DATA[2]} />
