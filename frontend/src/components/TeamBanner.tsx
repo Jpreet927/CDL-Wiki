@@ -20,7 +20,7 @@ const TeamBanner = ({ team }: { team: Team }) => {
     };
 
     return (
-        <div className="h-[33vh] w-full overflow-hidden relative flex items-center justify-center pt-12">
+        <div className="h-[33vh] w-full overflow-hidden relative flex items-center justify-center pt-12 px-24 text-center">
             <div className="flex gap-4 items-center h-[40px] z-[2]">
                 <Logo
                     srcDark={team.logoLight}

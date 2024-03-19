@@ -7,8 +7,8 @@
 
 @layer base {
     :root {
-        --background: 255 255 255;
-        --background-2: 230 230 230;
+        --background: 245 245 245;
+        --background-2: 225 225 225;
         --primary: 7 7 7;
         --secondary: 65 65 65;
         --primary-dark: 255 255 255;
@@ -28,6 +28,9 @@
         --primary: 255 255 255;
         --secondary: 205 205 205;
         --accent: 228 208 135;
+
+        --stat-green: 83 243 80;
+        --stat-red: 245 50 50;
     }
 
     body {
