@@ -44,11 +44,13 @@ const TeamBanner = ({ team }: { team: Team }) => {
                     }`,
                 }}
             ></div>
-            <div className="absolute top-0 left-0 w-full h-[150%] flex justify-center items-center">
+            <div className="absolute top-0 left-0 w-full h-[200%] flex justify-center items-center">
                 <img
                     src={team.logoDark}
                     alt=""
-                    className="max-h-[300%] max-w-[300%] grayscale brightness-0 opacity-[2%] z-[1] select-none pointer-events-none"
+                    className={`max-h-[200%] max-w-[200%] grayscale brightness-0 ${
+                        theme === "dark" ? "opacity-[20%]" : "opacity-[10%]"
+                    } z-[1] select-none pointer-events-none`}
                 />
             </div>
         </div>

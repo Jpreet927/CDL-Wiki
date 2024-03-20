@@ -16,7 +16,7 @@ const RecentMatchTable = ({ matches, team }: Props) => {
     }, []);
 
     const determineTeam1OrTeam2 = (match: Match) => {
-        if (match.team1.id !== team.id) {
+        if (match.team1.id === team.id) {
             [match["team1"], match["team2"]] = [match["team2"], match["team1"]];
             [match["team1Score"], match["team2Score"]] = [
                 match["team2Score"],
