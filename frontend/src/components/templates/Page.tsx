@@ -10,13 +10,13 @@ const Page = ({
     children,
 }: {
     title: string;
-    bannerType: string;
+    bannerType: "TEAM" | "DEFAULT";
     team?: Team;
     children: ReactNode;
 }) => {
     return (
         <div>
-            {bannerType === "team" ? (
+            {bannerType === "TEAM" ? (
                 <TeamBanner team={team!} />
             ) : (
                 <Banner title={title} />

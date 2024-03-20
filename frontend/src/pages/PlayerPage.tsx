@@ -14,7 +14,7 @@ const PlayerPage = () => {
     return (
         <Page
             title={`${player1.alias} - ${player1.team.name}`}
-            bannerType="team"
+            bannerType="TEAM"
             team={player1.team}
         >
             <Section title="Summary">

@@ -12,7 +12,7 @@ const TeamPage = () => {
     const team = TEAM_DATA[0];
 
     return (
-        <Page title={team.name} bannerType="team" team={team}>
+        <Page title={team.name} bannerType="TEAM" team={team}>
             <Section title="Summary">
                 <div className="flex md:gap-16 gap-6 md:flex-row flex-col md:items-start items-center">
                     <div className="h-full aspect-square">
