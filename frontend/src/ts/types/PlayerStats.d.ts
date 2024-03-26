@@ -1,5 +1,7 @@
+import { Player } from "./Player";
+
 export type PlayerStats = {
-    playerId: number;
+    player: Player;
     matchId: number;
     mode: string;
     map: string;
