@@ -2,18 +2,18 @@ const Stat = ({
     stat,
     extraClasses = "",
 }: {
-    stat: number;
+    stat: number | string;
     extraClasses?: string;
 }) => {
     return (
         <p
             className={
-                (stat > 1.0 ? "text-stat-green" : "text-stat-red") +
+                (Number(stat) > 1.0 ? "text-stat-green" : "text-stat-red") +
                 " " +
                 extraClasses
             }
         >
-            {stat.toFixed(2)}
+            {Number(stat).toFixed(2)}
         </p>
     );
 };
