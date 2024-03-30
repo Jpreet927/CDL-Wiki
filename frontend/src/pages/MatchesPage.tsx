@@ -6,9 +6,7 @@ import UpcomingMatch from "@/components/UpcomingMatch";
 import PastMatch from "@/components/PastMatch";
 import { FormattedMatches, formatMatches } from "@/config/FormatMatches";
 import { FUTURE_MATCHES } from "@/ts/constants/MatchData";
-import Dropdown from "@/components/templates/Dropdown";
 import { TEAM_LOGOS } from "@/ts/constants/TeamLogos";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Select } from "antd";
 
 const majors = [
@@ -29,7 +27,28 @@ const MatchesPage = () => {
         setMatches(formatMatches(FUTURE_MATCHES));
     }, []);
 
-    const handleSelect = (value: string) => {};
+    const handleSelect = (values: any) => {
+        const valuesSet = new Set(values);
+        if (valuesSet.size == 0 || valuesSet.has(-1)) {
+            setMatches(formatMatches(FUTURE_MATCHES));
+            return;
+        }
+
+        let filteredMatches: FormattedMatches = {};
+        Object.keys(matches!).forEach((key) => {
+            filteredMatches[key] = [];
+        });
+
+        Object.keys(matches!).forEach((key) => {
+            filteredMatches[key] = matches![key].filter(
+                (match) =>
+                    valuesSet.has(Number(match.team1.id)) ||
+                    valuesSet.has(Number(match.team2.id))
+            );
+        });
+
+        setMatches(filteredMatches);
+    };
 
     return (
         <Page title="Matches" bannerType="DEFAULT">
@@ -74,7 +93,7 @@ const MatchesPage = () => {
                             }}
                             onChange={handleSelect}
                             options={[
-                                { id: 0, team: "All" },
+                                { id: -1, team: "All" },
                                 ...TEAM_LOGOS,
                             ].map((team) => {
                                 return {
