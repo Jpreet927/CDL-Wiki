@@ -9,6 +9,7 @@ import { FUTURE_MATCHES } from "@/ts/constants/MatchData";
 import Dropdown from "@/components/templates/Dropdown";
 import { TEAM_LOGOS } from "@/ts/constants/TeamLogos";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Select } from "antd";
 
 const majors = [
     { title: "Season" },
@@ -28,6 +29,8 @@ const MatchesPage = () => {
         setMatches(formatMatches(FUTURE_MATCHES));
     }, []);
 
+    const handleSelect = (value: string) => {};
+
     return (
         <Page title="Matches" bannerType="DEFAULT">
             <Section title="Matches">
@@ -36,44 +39,51 @@ const MatchesPage = () => {
                     activeTab={activeTab}
                     setActiveTab={setActiveTab}
                 >
-                    <div className="flex mt-8">
-                        <button
-                            className={`${
-                                timeline === "Upcoming"
-                                    ? "font-bold border-[1px] border-secondary bg-gradient-to-t to-black/0"
-                                    : "bg-background"
-                            } px-12 py-4 w-[200px] text-center cursor-pointer hover:bg-background-2 rounded-full transition-colors duration-300 ease-in-out`}
-                            onClick={() => setTimeline("Upcoming")}
-                        >
-                            <p>Upcoming</p>
-                        </button>
-                        <button
-                            className={`${
-                                timeline === "Past"
-                                    ? "font-bold border-[1px] border-secondary bg-gradient-to-t to-black/0"
-                                    : "bg-background"
-                            } px-12 py-4 w-[200px] text-center cursor-pointer hover:bg-background-2 rounded-full transition-colors duration-300 ease-in-out`}
-                            onClick={() => setTimeline("Past")}
-                        >
-                            <p>Past</p>
-                        </button>
-                    </div>
-                    <select className="p-4 appearance-none bg-background border-[1px] border-secondary rounded-md">
-                        <option
-                            value="none"
-                            className="bg-background text-secondary"
-                        >
-                            All
-                        </option>
-                        {TEAM_LOGOS.map((item) => (
-                            <option
-                                value={item.id}
-                                className="bg-background text-secondary"
+                    <div className="flex justify-between items-center mt-8">
+                        <div className="flex gap-4 items-center">
+                            <button
+                                className={`${
+                                    timeline === "Upcoming"
+                                        ? "font-bold bg-background-2"
+                                        : "bg-background"
+                                } px-12 py-4 w-[200px] text-center cursor-pointer hover:bg-background-2 rounded-md transition-colors duration-300 ease-in-out`}
+                                onClick={() => setTimeline("Upcoming")}
                             >
-                                {item.team}
-                            </option>
-                        ))}
-                    </select>
+                                <p>Upcoming</p>
+                            </button>
+                            <div className="w-[1px] h-[50px] bg-background-2"></div>
+                            <button
+                                className={`${
+                                    timeline === "Past"
+                                        ? "font-bold bg-background-2"
+                                        : "bg-background"
+                                } px-12 py-4 w-[200px] text-center cursor-pointer hover:bg-background-2 rounded-md transition-colors duration-300 ease-in-out`}
+                                onClick={() => setTimeline("Past")}
+                            >
+                                <p>Past</p>
+                            </button>
+                        </div>
+                        <Select
+                            mode="multiple"
+                            allowClear
+                            placeholder="Select a team"
+                            className="w-[250px] bg-background [&>*]:!bg-background [&>*]:!text-primary [&>*]:!border-background-2 [&>*]:!placeholder-red-500"
+                            dropdownStyle={{
+                                background: "rgba(var(--background))",
+                                color: "white",
+                            }}
+                            onChange={handleSelect}
+                            options={[
+                                { id: 0, team: "All" },
+                                ...TEAM_LOGOS,
+                            ].map((team) => {
+                                return {
+                                    value: team.id,
+                                    label: team.team,
+                                };
+                            })}
+                        />
+                    </div>
                     <div className="flex flex-col gap-8 mt-12">
                         {matches &&
                             Object.keys(matches).map((key) => (
