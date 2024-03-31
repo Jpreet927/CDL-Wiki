@@ -74,8 +74,9 @@ def main():
 
     # insert player records
     for player in playerData:
-        player['team_id'] = teamIds[player['team_id']]
-        insertPlayerRecord(cursor, player)
+        if player:
+            player['team_id'] = teamIds[player['team_id']]
+            insertPlayerRecord(cursor, player)
 
     # close connection
     cursor.close()

@@ -1,6 +1,6 @@
 def createTables(cursor):
-    cursor.execute("DROP TABLE player;")
-    cursor.execute("DROP TABLE team;")
+    cursor.execute("DROP TABLE player CASCADE;")
+    cursor.execute("DROP TABLE team CASCADE;")
 
     createTeamTableQuery = """
         CREATE TABLE IF NOT EXISTS team (
@@ -12,10 +12,9 @@ def createTables(cursor):
             coach       VARCHAR(100),
             owner       VARCHAR(100),
             points      INTEGER,
-            bg_coloured VARCHAR(255),
-            bg_dark     VARCHAR(255),
-            bg_light    VARCHAR(255),
-            logo        VARCHAR(255)
+            ticker      VARCHAR(4),
+            logo_dark   VARCHAR(255),
+            logo_light  VARCHAR(255)
         )
     """
 
