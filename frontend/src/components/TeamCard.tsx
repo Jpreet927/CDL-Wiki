@@ -1,8 +1,7 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { extractColors } from "extract-colors";
 import { Team } from "@/ts/types/Team";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "@/context/ThemeProvider";
 import Logo from "./templates/Logo";
 
 type Props = {
@@ -12,11 +11,12 @@ type Props = {
 
 const TeamCard = ({ team, variant }: Props) => {
     const [color, setColor] = useState<string>("");
-    const { theme } = useContext(ThemeContext);
 
     useEffect(() => {
-        getColorsFromImage(team.logoLight);
-        console.log(theme);
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = team.logoLight;
+        getColorsFromImage(img.src);
     }, []);
 
     const getColorsFromImage = async (src: string) => {

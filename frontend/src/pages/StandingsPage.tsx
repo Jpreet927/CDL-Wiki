@@ -1,9 +1,17 @@
+import { getTeamsOrderedByPoints } from "@/api/Teams";
 import TeamStandings from "@/components/TeamStandings";
 import Page from "@/components/templates/Page";
 import Section from "@/components/templates/Section";
-import { TEAM_DATA } from "@/ts/constants/TeamData";
+import { Team } from "@/ts/types/Team";
+import { useEffect, useState } from "react";
 
 const StandingsPage = () => {
+    const [teams, setTeams] = useState<Team[] | null>();
+
+    useEffect(() => {
+        getTeamsOrderedByPoints().then((teams) => setTeams(teams));
+    }, []);
+
     return (
         <Page title={"Standings"}>
             <Section title="League Standings">
@@ -21,9 +29,14 @@ const StandingsPage = () => {
                         <p>Points</p>
                     </th>
                     <tbody>
-                        {TEAM_DATA.map((team, idx) => (
-                            <TeamStandings team={team} idx={idx} />
-                        ))}
+                        {teams &&
+                            teams.map((team, idx) => (
+                                <TeamStandings
+                                    team={team}
+                                    idx={idx}
+                                    key={team.id}
+                                />
+                            ))}
                     </tbody>
                 </table>
             </Section>
