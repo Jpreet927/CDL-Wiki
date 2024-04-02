@@ -22,8 +22,7 @@ public class TeamService {
 
     // need to define exception messages in separate file
     public List<TeamDTO> getAllTeams() throws CDLWikiException {
-        List<Team> teams = new ArrayList<>();
-        teamRepo.findAll().forEach(teams::add);
+        List<Team> teams = teamRepo.getAllTeamsByOrderByNameAsc();
 
         if (teams.isEmpty()) throw new CDLWikiException("Teams not found");
 
