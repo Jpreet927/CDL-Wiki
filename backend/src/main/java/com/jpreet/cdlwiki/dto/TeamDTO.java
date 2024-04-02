@@ -13,14 +13,13 @@ public class TeamDTO {
     private String coach;
     private String owner;
     private Integer points;
-    private String bgColoured;
-    private String bgDark;
-    private String bgLight;
-    private String logo;
+    private String ticker;
+    private String logoDark;
+    private String logoLight;
 
     public TeamDTO() {}
 
-    public TeamDTO(Integer id, String name, String location, Date created, String affiliated, String coach, Integer points, String owner, String bgColoured, String bgDark, String bgLight, String logo) {
+    public TeamDTO(Integer id, String name, String location, Date created, String affiliated, String coach, Integer points, String owner, String ticker, String logoDark, String logoLight) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -29,9 +28,9 @@ public class TeamDTO {
         this.coach = coach;
         this.owner = owner;
         this.points = points;
-        this.bgColoured = bgColoured;
-        this.bgDark = bgDark;
-        this.bgLight = bgLight;
+        this.ticker = ticker;
+        this.logoDark = logoDark;
+        this.logoLight = logoLight;
     }
 
     public Integer getId() {
@@ -98,36 +97,28 @@ public class TeamDTO {
         this.owner = owner;
     }
 
-    public String getBgColoured() {
-        return bgColoured;
+    public String getTicker() {
+        return ticker;
     }
 
-    public void setBgColoured(String bgColoured) {
-        this.bgColoured = bgColoured;
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
     }
 
-    public String getBgDark() {
-        return bgDark;
+    public String getLogoDark() {
+        return logoDark;
     }
 
-    public void setBgDark(String bgDark) {
-        this.bgDark = bgDark;
+    public void setLogoDark(String logoDark) {
+        this.logoDark = logoDark;
     }
 
-    public String getBgLight() {
-        return bgLight;
+    public String getLogoLight() {
+        return logoLight;
     }
 
-    public void setBgLight(String bgLight) {
-        this.bgLight = bgLight;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
+    public void setLogoLight(String logoLight) {
+        this.logoLight = logoLight;
     }
 
     public static TeamDTO mapEntityToDTO(Team entity) {
@@ -145,10 +136,9 @@ public class TeamDTO {
         dto.setLocation(entity.getLocation());
         dto.setPoints(entity.getPoints());
         dto.setOwner(entity.getOwner());
-        dto.setBgColoured(entity.getBgColoured());
-        dto.setBgDark(entity.getBgDark());
-        dto.setBgLight(entity.getBgLight());
-        dto.setLogo(entity.getLogo());
+        dto.setTicker(entity.getTicker());
+        dto.setLogoDark(entity.getLogoDark());
+        dto.setLogoLight(entity.getLogoLight());
 
         return dto;
     }

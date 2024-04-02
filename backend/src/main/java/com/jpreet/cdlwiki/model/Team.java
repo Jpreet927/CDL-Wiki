@@ -16,10 +16,9 @@ public class Team {
     private String coach;
     private String owner;
     private Integer points;
-    private String bgColoured;
-    private String bgDark;
-    private String bgLight;
-    private String logo;
+    private String ticker;
+    private String logoDark;
+    private String logoLight;
 
     public Integer getId() {
         return id;
@@ -85,36 +84,28 @@ public class Team {
         this.owner = owner;
     }
 
-    public String getBgColoured() {
-        return bgColoured;
+    public String getTicker() {
+        return ticker;
     }
 
-    public void setBgColoured(String bgColoured) {
-        this.bgColoured = bgColoured;
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
     }
 
-    public String getBgDark() {
-        return bgDark;
+    public String getLogoDark() {
+        return logoDark;
     }
 
-    public void setBgDark(String bgDark) {
-        this.bgDark = bgDark;
+    public void setLogoDark(String logoDark) {
+        this.logoDark = logoDark;
     }
 
-    public String getBgLight() {
-        return bgLight;
+    public String getLogoLight() {
+        return logoLight;
     }
 
-    public void setBgLight(String bgLight) {
-        this.bgLight = bgLight;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public void setLogo(String logo) {
-        this.logo = logo;
+    public void setLogoLight(String logoLight) {
+        this.logoLight = logoLight;
     }
 }
 
