@@ -5,12 +5,12 @@ import { Team } from "@/ts/types/Team";
 
 const Page = ({
     title,
-    bannerType,
+    bannerType = "DEFAULT",
     team,
     children,
 }: {
     title: string;
-    bannerType: "TEAM" | "DEFAULT";
+    bannerType?: "TEAM" | "DEFAULT";
     team?: Team;
     children: ReactNode;
 }) => {
