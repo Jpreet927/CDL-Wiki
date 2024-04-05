@@ -3,6 +3,7 @@ import { extractColors } from "extract-colors";
 import { Team } from "@/ts/types/Team";
 import { Link } from "react-router-dom";
 import Logo from "./templates/Logo";
+import { TEAM_LOGOS } from "@/ts/constants/TeamLogos";
 
 type Props = {
     team: Team;
@@ -13,11 +14,8 @@ const TeamCard = ({ team, variant }: Props) => {
     const [color, setColor] = useState<string>("");
 
     useEffect(() => {
-        const img = new Image();
-        img.crossOrigin = "anonymous";
-        img.src = team.logoLight;
-        getColorsFromImage(img.src);
-    }, []);
+        getColorsFromImage(TEAM_LOGOS[team.id - 1].srcLight);
+    }, [team]);
 
     const getColorsFromImage = async (src: string) => {
         const res = await extractColors(src);
