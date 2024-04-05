@@ -21,7 +21,7 @@ const HomePage = () => {
             <Section title="Teams">
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
                     {TEAM_DATA.map((team) => (
-                        <TeamCard team={team} variant="video" />
+                        <TeamCard team={team} variant="VIDEO" />
                     ))}
                 </div>
             </Section>

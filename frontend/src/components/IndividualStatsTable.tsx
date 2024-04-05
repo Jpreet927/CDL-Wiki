@@ -1,5 +1,3 @@
-import { PLAYER_STATS_DATA } from "@/ts/constants/PlayerStatsData";
-import { PlayerStats } from "@/ts/types/PlayerStats";
 import { MATCH_DATA } from "@/ts/constants/MatchData";
 import Logo from "./templates/Logo";
 import { Link } from "react-router-dom";

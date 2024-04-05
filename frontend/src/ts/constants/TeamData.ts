@@ -3,9 +3,7 @@ import fazeLight from "@/assets/logos/Atlanta_FaZe_Light.png";
 import fazeDark from "@/assets/logos/Atlanta_FaZe_Dark.png";
 import breachLight from "@/assets/logos/Boston_Breach_Light.png";
 import breachDark from "@/assets/logos/Boston_Breach_Dark.png";
-import ravens from "@/assets/logos/Carolina_Royal_Ravens.png";
 import thieves from "@/assets/logos/LA-Thieves.png";
-import legion from "@/assets/logos/Vegas_Legion.png";
 import lagLight from "@/assets/logos/LA_Guerillas_Light.png";
 import lagDark from "@/assets/logos/LA_Guerillas_Dark.png";
 import heretics from "@/assets/logos/Miami_Heretics.png";
@@ -14,7 +12,6 @@ import nysl from "@/assets/logos/NYSL.png";
 import opticLight from "@/assets/logos/OpTic_Texas_Light.png";
 import opticDark from "@/assets/logos/OpTic_Texas_Dark.png";
 import surge from "@/assets/logos/Seattle_Surge.png";
-import ultra from "@/assets/logos/Toronto_Ultra.png";
 
 export const TEAM_DATA: Team[] = [
     {
