@@ -3,14 +3,14 @@ import Logo from "./templates/Logo";
 import { extractColors } from "extract-colors";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "@/context/ThemeProvider";
+import { TEAM_LOGOS } from "@/ts/constants/TeamLogos";
 
 const TeamBanner = ({ team }: { team: Team }) => {
     const [color, setColor] = useState<string>("");
     const { theme } = useContext(ThemeContext);
 
     useEffect(() => {
-        getColorsFromImage(team.logoLight);
-        console.log(theme);
+        getColorsFromImage(TEAM_LOGOS[team.id - 1].srcLight);
     }, []);
 
     const getColorsFromImage = async (src: string) => {
@@ -37,7 +37,7 @@ const TeamBanner = ({ team }: { team: Team }) => {
             <div
                 className={`absolute top-0 right-0 w-[100%] h-full opacity-100 flex items-end justify-end`}
                 style={{
-                    backgroundImage: `linear-gradient(315deg, ${color} 0%, ${
+                    backgroundImage: `linear-gradient(315deg, ${color} 15%, ${
                         theme === "dark"
                             ? "rgb(7, 7, 7) 50%)"
                             : "rgb(255, 255, 255) 50%)"
