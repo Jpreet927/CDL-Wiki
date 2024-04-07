@@ -13,3 +13,10 @@ export async function getTeamsOrderedByPoints() {
 
     return teams;
 }
+
+export async function getTeamById(id: string) {
+    let response = await fetch(BASE_URL + "/api/teams/" + id);
+    let team = await response.json();
+
+    return team;
+}

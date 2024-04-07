@@ -2,12 +2,20 @@ import Section from "@/components/templates/Section";
 import Hero from "@/components/home/Hero";
 import ArticleCard from "@/components/ArticleCard";
 import { ARTICLE_DATA } from "@/ts/constants/ArticlesData";
-import { TEAM_DATA } from "@/ts/constants/TeamData";
 import { MATCH_DATA } from "@/ts/constants/MatchData";
 import TeamCard from "@/components/TeamCard";
 import UpcomingMatch from "@/components/UpcomingMatch";
+import { useEffect, useState } from "react";
+import { Team } from "@/ts/types/Team";
+import { getTeams } from "@/api/Teams";
 
 const HomePage = () => {
+    const [teams, setTeams] = useState<Team[] | null>(null);
+
+    useEffect(() => {
+        getTeams().then((teams) => setTeams(teams));
+    }, []);
+
     return (
         <div>
             <Hero />
@@ -20,9 +28,10 @@ const HomePage = () => {
             </Section>
             <Section title="Teams">
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-                    {TEAM_DATA.map((team) => (
-                        <TeamCard team={team} variant="VIDEO" />
-                    ))}
+                    {teams &&
+                        teams.map((team) => (
+                            <TeamCard team={team} variant="VIDEO" />
+                        ))}
                 </div>
             </Section>
             <Section title="Latest News">
