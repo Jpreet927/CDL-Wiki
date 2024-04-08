@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,18 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<MatchDTO>> getAllMatchesAfterDate(@RequestParam("date") Date date) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getAllMatchesAfterDate(date);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<MatchDTO>> getAllMatchesBeforeDate(@RequestParam("date") Date date) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getAllMatchesBeforeDate(date);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
     @GetMapping("/{matchId}")
     public ResponseEntity<MatchDTO> getMatchById(@PathVariable Integer matchId) throws CDLWikiException {
         MatchDTO match = matchService.getMatchById(matchId);
@@ -36,14 +49,26 @@ public class MatchController {
     }
 
     @GetMapping("/team/{teamId}")
-    public ResponseEntity<List<MatchDTO>> getMatchesByTeam(@PathVariable Integer teamId) throws CDLWikiException {
-        List<MatchDTO> matches = matchService.getMatchesByTeam(teamId);
+    public ResponseEntity<List<MatchDTO>> getMatchesByTeamAfterDate(@PathVariable Integer teamId, @RequestParam("date") Date date) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getMatchesByTeamAfterDate(teamId, date);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @GetMapping("/team/{teamId}")
+    public ResponseEntity<List<MatchDTO>> getMatchesByTeamBeforeDate(@PathVariable Integer teamId, @RequestParam("date") Date date) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getMatchesByTeamBeforeDate(teamId, date);
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
     @GetMapping("/team/{teamId}/latest")
-    public ResponseEntity<List<MatchDTO>> getLatest5MatchesByTeam(@PathVariable Integer teamId) throws CDLWikiException {
-        List<MatchDTO> matches = matchService.getLatest5MatchesByTeam(teamId);
+    public ResponseEntity<List<MatchDTO>> getNext5ByTeam(@PathVariable Integer teamId, @RequestParam("date") Date date) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getNext5ByTeam(teamId, date);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @GetMapping("/team/{teamId}/latest")
+    public ResponseEntity<List<MatchDTO>> getPrevious5ByTeam(@PathVariable Integer teamId, @RequestParam("date") Date date) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getPrevious5ByTeam(teamId, date);
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
@@ -54,8 +79,14 @@ public class MatchController {
     }
 
     @GetMapping("/major/{majorId}")
-    public ResponseEntity<List<MatchDTO>> getMatchesByMajor(@PathVariable Integer majorId) throws CDLWikiException {
-        List<MatchDTO> matches = matchService.getMatchesByMajor(majorId);
+    public ResponseEntity<List<MatchDTO>> getMatchesByMajorAfterDate(@PathVariable Integer majorId, @RequestParam("date") Date date) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getMatchesByMajorAfterDate(majorId, date);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @GetMapping("/major/{majorId}")
+    public ResponseEntity<List<MatchDTO>> getMatchesByMajorBeforeDate(@PathVariable Integer majorId, @RequestParam("date") Date date) throws CDLWikiException {
+        List<MatchDTO> matches = matchService.getMatchesByMajorBeforeDate(majorId, date);
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 

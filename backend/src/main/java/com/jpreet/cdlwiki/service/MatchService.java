@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service(value = "matchService")
@@ -45,13 +46,8 @@ public class MatchService {
         return matchDTOs;
     }
 
-    public MatchDTO getMatchById(Integer matchId) throws CDLWikiException {
-        Match match = matchRepo.findById(matchId).orElseThrow(() -> new CDLWikiException("Match with id: " + matchId + " not found"));
-        return MatchDTO.mapEntityToDTO(match);
-    }
-
-    public List<MatchDTO> getMatchesByTeam(Integer teamId) throws CDLWikiException {
-        List<Match> matches = matchRepo.findByTeam(teamId);
+    public List<MatchDTO> getAllMatchesAfterDate(Date date) throws CDLWikiException {
+        List<Match> matches = matchRepo.findAllMatchesAfterDate(date);
 
         if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
 
@@ -64,8 +60,69 @@ public class MatchService {
         return matchDTOs;
     }
 
-    public List<MatchDTO> getLatest5MatchesByTeam(Integer teamId) throws CDLWikiException {
-        List<Match> matches = matchRepo.findFirst5ByTeam(teamId);
+    public List<MatchDTO> getAllMatchesBeforeDate(Date date) throws CDLWikiException {
+        List<Match> matches = matchRepo.findAllMatchesBeforeDate(date);
+
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
+    public MatchDTO getMatchById(Integer matchId) throws CDLWikiException {
+        Match match = matchRepo.findById(matchId).orElseThrow(() -> new CDLWikiException("Match with id: " + matchId + " not found"));
+        return MatchDTO.mapEntityToDTO(match);
+    }
+
+    public List<MatchDTO> getMatchesByTeamAfterDate(Integer teamId, Date date) throws CDLWikiException {
+        List<Match> matches = matchRepo.findByTeamAfterDate(teamId, date);
+
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
+    public List<MatchDTO> getMatchesByTeamBeforeDate(Integer teamId, Date date) throws CDLWikiException {
+        List<Match> matches = matchRepo.findByTeamBeforeDate(teamId, date);
+
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
+    public List<MatchDTO> getNext5ByTeam(Integer teamId, Date date) throws CDLWikiException {
+        List<Match> matches = matchRepo.findNext5ByTeam(teamId, date);
+
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
+    public List<MatchDTO> getPrevious5ByTeam(Integer teamId, Date date) throws CDLWikiException {
+        List<Match> matches = matchRepo.findPrevious5ByTeam(teamId, date);
 
         if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
 
@@ -92,8 +149,22 @@ public class MatchService {
         return matchDTOs;
     }
 
-    public List<MatchDTO> getMatchesByMajor(Integer majorId) throws CDLWikiException {
-        List<Match> matches = matchRepo.findByMajorOrderByDateDesc(majorId);
+    public List<MatchDTO> getMatchesByMajorAfterDate(Integer majorId, Date date) throws CDLWikiException {
+        List<Match> matches = matchRepo.findByMajorAfterDate(majorId, date);
+
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
+    public List<MatchDTO> getMatchesByMajorBeforeDate(Integer majorId, Date date) throws CDLWikiException {
+        List<Match> matches = matchRepo.findByMajorBeforeDate(majorId, date);
 
         if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
 
