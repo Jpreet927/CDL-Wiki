@@ -11,7 +11,7 @@ const TeamBanner = ({ team }: { team: Team }) => {
 
     useEffect(() => {
         getColorsFromImage(TEAM_LOGOS[team.id - 1].srcLight);
-    }, []);
+    }, [team]);
 
     const getColorsFromImage = async (src: string) => {
         const res = await extractColors(src);
