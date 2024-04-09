@@ -25,6 +25,9 @@ public interface MatchRepository extends CrudRepository<Match, Integer> {
     @Query("SELECT m FROM Match m WHERE (m.team1.id = ?1 OR m.team2.id = ?1) AND (m.team1.id = ?2 OR m.team2.id = ?2) ORDER BY date DESC")
     public List<Match> findByTeamsPlaying(Integer team1Id, Integer team2Id);
 
+    @Query("SELECT m FROM Match m WHERE m.majorId = ?1 ORDER BY date ASC")
+    public List<Match> findByMajor(Integer majorId);
+
     @Query("SELECT m FROM Match m WHERE m.majorId = ?1 AND m.date >= ?2 ORDER BY date ASC")
     public List<Match> findByMajorAfterDate(Integer majorId, Date date);
 
