@@ -1,7 +1,6 @@
 import TeamCard from "@/components/TeamCard";
 import Page from "@/components/templates/Page";
 import Section from "@/components/templates/Section";
-import { MATCH_DATA } from "@/ts/constants/MatchData";
 import PlayerCard from "@/components/PlayerCard";
 import RecentMatchTable from "@/components/RecentMatchTable";
 import moment from "moment";
@@ -11,16 +10,22 @@ import { useParams } from "react-router-dom";
 import { getTeamById } from "@/api/Teams";
 import { Player } from "@/ts/types/Player";
 import { getPlayersByTeamId } from "@/api/Players";
+import { Match } from "@/ts/types/Match";
+import { getRecentMatchesByTeamId } from "@/api/Matches";
 
 const TeamPage = () => {
     const [team, setTeam] = useState<Team | null>(null);
     const [players, setPlayers] = useState<Player[]>([]);
+    const [matches, setMatches] = useState<Match[]>([]);
     const { id } = useParams();
 
     useEffect(() => {
         if (id) {
             getTeamById(id).then((team) => setTeam(team));
             getPlayersByTeamId(id).then((players) => setPlayers(players));
+            getRecentMatchesByTeamId(id, new Date(Date.now())).then((matches) =>
+                setMatches(matches)
+            );
         }
     }, [id]);
 
@@ -103,7 +108,9 @@ const TeamPage = () => {
                     </div>
                 </Section>
                 <Section title="Recent Matches">
-                    <RecentMatchTable matches={MATCH_DATA} team={team} />
+                    {matches && (
+                        <RecentMatchTable matches={matches} team={team} />
+                    )}
                 </Section>
             </Page>
         )

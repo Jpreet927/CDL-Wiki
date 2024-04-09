@@ -1,7 +1,7 @@
 import { Match } from "@/ts/types/Match";
 import { Team } from "@/ts/types/Team";
 import Logo from "./templates/Logo";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
@@ -11,18 +11,22 @@ type Props = {
 };
 
 const RecentMatchTable = ({ matches, team }: Props) => {
+    const [recentMatches, setRecentMatches] = useState<Match[]>([]);
+
     useEffect(() => {
-        matches.forEach((match) => determineTeam1OrTeam2(match));
-    }, []);
+        setRecentMatches(matches.map((match) => determineTeam1OrTeam2(match)));
+    }, [matches]);
 
     const determineTeam1OrTeam2 = (match: Match) => {
-        if (match.team1.id === team.id) {
+        if (match.team2.id === team.id) {
             [match["team1"], match["team2"]] = [match["team2"], match["team1"]];
             [match["team1Score"], match["team2Score"]] = [
                 match["team2Score"],
                 match["team1Score"],
             ];
         }
+
+        return match;
     };
 
     return (
@@ -35,14 +39,14 @@ const RecentMatchTable = ({ matches, team }: Props) => {
                 <th>Date</th>
             </thead>
             <tbody>
-                {matches.map((match) => (
+                {recentMatches.map((match) => (
                     <tr className="grid sm:grid-cols-7 grid-cols-5 md:px-12 px-2 py-6 gap-2 w-full bg-background hover:bg-background-2 transition-colors ease-in-out duration-100 border-b-background-2 border-b items-center">
                         <td className="col-start-1 sm:col-end-4 col-end-2">
                             <Link
                                 to={`/teams/${match.team2.id}`}
                                 className="flex gap-4"
                             >
-                                <div className="flex justify-center items-center h-[30px]">
+                                <div className="w-[15%] flex justify-center items-center max-h-[30px]">
                                     <Logo
                                         srcDark={match.team2.logoLight}
                                         srcLight={match.team2.logoDark}
