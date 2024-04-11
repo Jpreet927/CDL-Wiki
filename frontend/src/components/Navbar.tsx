@@ -26,7 +26,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 w-full flex justify-between items-center py-8 px-24 z-[998] text-secondary transition-all ease-in-out duration-300 ${
+            className={`fixed top-0 left-0 w-full flex justify-between items-center py-8 px-24 z-[998] text-primary transition-all ease-in-out duration-300 ${
                 backgroundVisible
                     ? `${
                           theme === "dark" ? "bg-black/80" : "bg-white/80"
@@ -39,36 +39,46 @@ const Navbar = () => {
             </div>
             <ul className="flex items-center gap-24">
                 <li
-                    className={`hover:text-primary transition-colors ease-in-out duration-300 ${
-                        location.pathname === "/" ? "text-primary" : ""
+                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 ${
+                        location.pathname === "/"
+                            ? "opacity-100 underline underline-offset-8"
+                            : "opacity-75"
                     }`}
                 >
                     <Link to="/">Home</Link>
                 </li>
                 <li
-                    className={`hover:text-primary transition-colors ease-in-out duration-300 ${
-                        location.pathname === "/teams" ? "text-primary" : ""
+                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 ${
+                        location.pathname.includes("/teams")
+                            ? "opacity-100 underline underline-offset-8"
+                            : "opacity-75"
                     }`}
                 >
                     <Link to="/teams">Teams</Link>
                 </li>
                 <li
-                    className={`hover:text-primary transition-colors ease-in-out duration-300 ${
-                        location.pathname === "/standings" ? "text-primary" : ""
+                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 ${
+                        location.pathname.includes("/standings")
+                            ? "opacity-100 underline underline-offset-8"
+                            : "opacity-75"
                     }`}
                 >
                     <Link to="/standings">Standings</Link>
                 </li>
                 <li
-                    className={`hover:text-primary transition-colors ease-in-out duration-300 ${
-                        location.pathname === "/matches" ? "text-primary" : ""
+                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 ${
+                        location.pathname.includes("/matches")
+                            ? "opacity-100 underline underline-offset-8"
+                            : "opacity-75"
                     }`}
                 >
                     <Link to="/matches">Matches</Link>
                 </li>
                 <li
-                    className={`hover:text-primary transition-colors ease-in-out duration-300 ${
-                        location.pathname === "/about" ? "text-primary" : ""
+                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 ${
+                        location.pathname.includes("/about")
+                            ? "opacity-100 underline underline-offset-8"
+                            : "opacity-75"
                     }`}
                 >
                     <Link to="/about">About</Link>

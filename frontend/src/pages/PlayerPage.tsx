@@ -134,9 +134,27 @@ const PlayerPage = () => {
                 </Section>
                 <Section title="Team">
                     <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-2 gap-4">
-                        <TeamCard team={player.team} variant="SQUARE" />
+                        <div className="flex flex-col gap-4">
+                            <TeamCard team={player.team} variant="SQUARE" />
+                            <div>
+                                <p className="font-bold">{player.team.name}</p>
+                            </div>
+                        </div>
                         {teammates.map((teammate) => (
-                            <PlayerCard player={teammate} key={teammate.id} />
+                            <div className="flex flex-col gap-4">
+                                <PlayerCard
+                                    player={teammate}
+                                    key={teammate.id}
+                                />
+                                <div>
+                                    <p className="font-bold">
+                                        {teammate.alias}
+                                    </p>
+                                    <p className="text-secondary">
+                                        {teammate.name}
+                                    </p>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </Section>
