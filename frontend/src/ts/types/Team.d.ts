@@ -7,9 +7,7 @@ export type Team = {
     coach: string;
     owner: string;
     points: number;
-    bgColoured: string;
-    bgDark: string;
-    bgLight: string;
+    ticker: string;
     logoLight: string;
     logoDark: string;
 };
