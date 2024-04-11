@@ -9,7 +9,29 @@ export async function getRecentMatchesByTeamId(id: string, date: Date) {
                 formatDate(date)
             )}`
     );
+
     let matches = await response.json();
+
+    if ("errorMessage" in matches) {
+        throw new Error("No past matches available.");
+    }
+
+    return matches;
+}
+
+export async function getUpcomingMatchesByTeamId(id: string, date: Date) {
+    let response = await fetch(
+        BASE_URL +
+            `/api/match/team/${id}/latest/future?date=${encodeURIComponent(
+                formatDate(date)
+            )}`
+    );
+
+    let matches = await response.json();
+
+    if ("errorMessage" in matches) {
+        throw new Error("No upcoming matches available.");
+    }
 
     return matches;
 }

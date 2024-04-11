@@ -10,7 +10,7 @@ const UpcomingMatch = ({ match }: { match: Match }) => {
             )}`}</p>
             <div className="flex gap-2 items-center justify-between">
                 <div className="flex gap-4 items-center w-[45%]">
-                    <div className="h-[40px]">
+                    <div className="w-[27%] max-h-[40px]">
                         <Logo
                             srcDark={match.team1.logoLight}
                             srcLight={match.team1.logoDark}
@@ -18,15 +18,15 @@ const UpcomingMatch = ({ match }: { match: Match }) => {
                         />
                     </div>
                     <p className="text-sm font-bold">
-                        {match.team1.name.toUpperCase()}
+                        {match.team1.ticker.toUpperCase()}
                     </p>
                 </div>
                 <p className="w-[10%] text-secondary">VS</p>
                 <div className="flex gap-4 items-center w-[45%] justify-end">
                     <p className="text-sm font-bold">
-                        {match.team2.name.toUpperCase()}
+                        {match.team2.ticker.toUpperCase()}
                     </p>
-                    <div className="h-[40px]">
+                    <div className="w-[27%] max-h-[40px]">
                         <Logo
                             srcDark={match.team2.logoLight}
                             srcLight={match.team2.logoDark}

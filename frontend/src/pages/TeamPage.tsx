@@ -11,21 +11,32 @@ import { getTeamById } from "@/api/Teams";
 import { Player } from "@/ts/types/Player";
 import { getPlayersByTeamId } from "@/api/Players";
 import { Match } from "@/ts/types/Match";
-import { getRecentMatchesByTeamId } from "@/api/Matches";
+import {
+    getRecentMatchesByTeamId,
+    getUpcomingMatchesByTeamId,
+} from "@/api/Matches";
+import UpcomingMatch from "@/components/UpcomingMatch";
 
 const TeamPage = () => {
     const [team, setTeam] = useState<Team | null>(null);
     const [players, setPlayers] = useState<Player[]>([]);
-    const [matches, setMatches] = useState<Match[]>([]);
+    const [recentMatches, setRecentMatches] = useState<Match[]>([]);
+    const [recemtMatchesError, setRecentMatchesError] = useState<string>("");
+    const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
+    const [upcomingMatchesError, setUpcomingMatchesError] =
+        useState<string>("");
     const { id } = useParams();
 
     useEffect(() => {
         if (id) {
             getTeamById(id).then((team) => setTeam(team));
             getPlayersByTeamId(id).then((players) => setPlayers(players));
-            getRecentMatchesByTeamId(id, new Date(Date.now())).then((matches) =>
-                setMatches(matches)
-            );
+            getRecentMatchesByTeamId(id, new Date(Date.now()))
+                .then((matches) => setRecentMatches(matches))
+                .catch((err) => setRecentMatchesError(err.message));
+            getUpcomingMatchesByTeamId(id, new Date("2024-01-01"))
+                .then((matches) => setUpcomingMatches(matches))
+                .catch((err) => setUpcomingMatchesError(err.message));
         }
     }, [id]);
 
@@ -107,9 +118,29 @@ const TeamPage = () => {
                             })}
                     </div>
                 </Section>
+                <Section title="Upcoming Matches">
+                    {upcomingMatches && (
+                        <>
+                            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+                                {upcomingMatches.map((match) => (
+                                    <UpcomingMatch match={match} />
+                                ))}
+                            </div>
+                            {upcomingMatchesError && (
+                                <p className="text-secondary text-center">
+                                    {upcomingMatchesError}
+                                </p>
+                            )}
+                        </>
+                    )}
+                </Section>
                 <Section title="Recent Matches">
-                    {matches && (
-                        <RecentMatchTable matches={matches} team={team} />
+                    {recentMatches && (
+                        <RecentMatchTable
+                            matches={recentMatches}
+                            team={team}
+                            errorMessage={recemtMatchesError}
+                        />
                     )}
                 </Section>
             </Page>
