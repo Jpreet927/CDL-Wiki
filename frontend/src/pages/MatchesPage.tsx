@@ -13,6 +13,7 @@ import {
     getMatchesByMajorAfterDate,
     getMatchesByMajorBeforeDate,
 } from "@/api/Matches";
+import Button from "@/components/templates/Button";
 
 const majors = [
     { title: "Season" },
@@ -30,6 +31,7 @@ const MatchesPage = () => {
     const [unfilteredMatches, setUnfilteredMatches] =
         useState<FormattedMatches | null>({});
     const [matchesError, setMatchesError] = useState<string>("");
+    const [page, setPage] = useState<number>(0);
 
     useEffect(() => {
         setMatches(null);
@@ -96,6 +98,10 @@ const MatchesPage = () => {
         });
 
         setMatches(filteredMatches);
+    };
+
+    const handleLoadMore = () => {
+        setPage((prev) => prev + 1);
     };
 
     return (
@@ -173,6 +179,9 @@ const MatchesPage = () => {
                                 {matchesError}
                             </p>
                         )}
+                    </div>
+                    <div className="w-full flex justify-center mt-8">
+                        <Button onClick={handleLoadMore}>Load More</Button>
                     </div>
                 </TabPanel>
             </Section>

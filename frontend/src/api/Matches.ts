@@ -26,7 +26,7 @@ export async function getMatchesAfterDate(date: Date) {
     let matches = await response.json();
 
     if ("errorMessage" in matches) {
-        throw new Error("No past matches available.");
+        throw new Error("No upcoming matches available.");
     }
 
     return matches;
@@ -60,7 +60,7 @@ export async function getMatchesByMajorAfterDate(id: string, date: Date) {
     let matches = await response.json();
 
     if ("errorMessage" in matches) {
-        throw new Error("No past matches available.");
+        throw new Error("No upcoming matches available.");
     }
 
     return matches;
