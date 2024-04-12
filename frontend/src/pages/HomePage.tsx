@@ -8,6 +8,7 @@ import UpcomingMatch from "@/components/UpcomingMatch";
 import { useEffect, useState } from "react";
 import { Team } from "@/ts/types/Team";
 import { getTeams } from "@/api/Teams";
+import Alert from "@/components/Alert";
 
 const HomePage = () => {
     const [teams, setTeams] = useState<Team[] | null>(null);
@@ -20,6 +21,22 @@ const HomePage = () => {
         <div>
             <Hero />
             <Section title="Upcoming Matches">
+                {new Date(Date.now()) > new Date(MATCH_DATA[0].date) &&
+                    new Date(Date.now()) <
+                        new Date(MATCH_DATA[MATCH_DATA.length - 1].date) && (
+                        <Alert>
+                            <p>
+                                The Call of Duty League is live now on{" "}
+                                <a
+                                    href="https://www.youtube.com/@CODLeague"
+                                    className="underline underline-offset-4"
+                                >
+                                    YouTube
+                                </a>
+                                !
+                            </p>
+                        </Alert>
+                    )}
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
                     {MATCH_DATA.map((match) => (
                         <UpcomingMatch match={match} />
