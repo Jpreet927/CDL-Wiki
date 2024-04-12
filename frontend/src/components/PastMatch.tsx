@@ -29,7 +29,7 @@ const PastMatch = ({ match }: { match: Match }) => {
                         <p className="text-4xl font-bold mr-4">
                             {match.team1Score}
                         </p>
-                        <div className="h-[40px]">
+                        <div className="max-w-[40px] max-h-[40px] flex items-center justify-center">
                             <Logo
                                 srcDark={match.team1.logoLight}
                                 srcLight={match.team1.logoDark}
@@ -37,15 +37,15 @@ const PastMatch = ({ match }: { match: Match }) => {
                             />
                         </div>
                         <p className="text-sm font-bold">
-                            {match.team1.name.toUpperCase()}
+                            {match.team1.ticker}
                         </p>
                     </div>
                     <p className="w-[10%] text-secondary">VS</p>
                     <div className="flex gap-4 items-center w-[45%] justify-end">
                         <p className="text-sm font-bold">
-                            {match.team2.name.toUpperCase()}
+                            {match.team2.ticker}
                         </p>
-                        <div className="h-[40px]">
+                        <div className="max-w-[40px] max-h-[40px] flex items-center justify-center">
                             <Logo
                                 srcDark={match.team2.logoLight}
                                 srcLight={match.team2.logoDark}
@@ -53,7 +53,7 @@ const PastMatch = ({ match }: { match: Match }) => {
                             />
                         </div>
                         <p className="text-4xl font-bold ml-4">
-                            {match.team1Score}
+                            {match.team2Score}
                         </p>
                     </div>
                 </div>

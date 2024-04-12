@@ -34,7 +34,7 @@ const TeamPage = () => {
             getRecentMatchesByTeamId(id, new Date(Date.now()))
                 .then((matches) => setRecentMatches(matches))
                 .catch((err) => setRecentMatchesError(err.message));
-            getUpcomingMatchesByTeamId(id, new Date("2024-01-01"))
+            getUpcomingMatchesByTeamId(id, new Date(Date.now()))
                 .then((matches) => setUpcomingMatches(matches))
                 .catch((err) => setUpcomingMatchesError(err.message));
         }

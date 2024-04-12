@@ -5,9 +5,14 @@ import TabPanel from "@/components/templates/TabPanel";
 import UpcomingMatch from "@/components/UpcomingMatch";
 import PastMatch from "@/components/PastMatch";
 import { FormattedMatches, formatMatches } from "@/config/FormatMatches";
-import { FUTURE_MATCHES } from "@/ts/constants/MatchData";
 import { TEAM_LOGOS } from "@/ts/constants/TeamLogos";
 import { Select } from "antd";
+import {
+    getMatchesAfterDate,
+    getMatchesBeforeDate,
+    getMatchesByMajorAfterDate,
+    getMatchesByMajorBeforeDate,
+} from "@/api/Matches";
 
 const majors = [
     { title: "Season" },
@@ -22,15 +27,56 @@ const MatchesPage = () => {
     const [activeTab, setActiveTab] = useState(0);
     const [timeline, setTimeline] = useState<string>("Upcoming");
     const [matches, setMatches] = useState<FormattedMatches | null>({});
+    const [unfilteredMatches, setUnfilteredMatches] =
+        useState<FormattedMatches | null>({});
+    const [matchesError, setMatchesError] = useState<string>("");
 
     useEffect(() => {
-        setMatches(formatMatches(FUTURE_MATCHES));
-    }, []);
+        setMatches(null);
+        setMatchesError("");
+
+        if (activeTab === 0) {
+            if (timeline === "Past") {
+                getMatchesBeforeDate(new Date(Date.now()))
+                    .then((matches) => {
+                        setMatches(formatMatches(matches));
+                        setUnfilteredMatches(formatMatches(matches));
+                    })
+                    .catch((err) => setMatchesError(err.message));
+            } else {
+                getMatchesAfterDate(new Date(Date.now()))
+                    .then((matches) => {
+                        setMatches(formatMatches(matches));
+                        setUnfilteredMatches(formatMatches(matches));
+                    })
+                    .catch((err) => setMatchesError(err.message));
+            }
+        } else {
+            if (timeline === "Past") {
+                getMatchesByMajorBeforeDate(
+                    activeTab + "",
+                    new Date(Date.now())
+                )
+                    .then((matches) => {
+                        setMatches(formatMatches(matches));
+                        setUnfilteredMatches(formatMatches(matches));
+                    })
+                    .catch((err) => setMatchesError(err.message));
+            } else {
+                getMatchesByMajorAfterDate(activeTab + "", new Date(Date.now()))
+                    .then((matches) => {
+                        setMatches(formatMatches(matches));
+                        setUnfilteredMatches(formatMatches(matches));
+                    })
+                    .catch((err) => setMatchesError(err.message));
+            }
+        }
+    }, [activeTab, timeline]);
 
     const handleSelect = (values: any) => {
         const valuesSet = new Set(values);
         if (valuesSet.size == 0 || valuesSet.has(-1)) {
-            setMatches(formatMatches(FUTURE_MATCHES));
+            setMatches(unfilteredMatches);
             return;
         }
 
@@ -45,6 +91,8 @@ const MatchesPage = () => {
                     valuesSet.has(Number(match.team1.id)) ||
                     valuesSet.has(Number(match.team2.id))
             );
+
+            if (filteredMatches[key].length === 0) delete filteredMatches[key];
         });
 
         setMatches(filteredMatches);
@@ -120,6 +168,11 @@ const MatchesPage = () => {
                                     <div className="w-full h-[1px] bg-background-2 mt-4"></div>
                                 </div>
                             ))}
+                        {matchesError && (
+                            <p className="text-secondary text-center">
+                                {matchesError}
+                            </p>
+                        )}
                     </div>
                 </TabPanel>
             </Section>
