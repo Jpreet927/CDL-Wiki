@@ -12,6 +12,8 @@ import com.jpreet.cdlwiki.repository.MatchRepository;
 import com.jpreet.cdlwiki.repository.TeamRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,6 +62,13 @@ public class MatchService {
         return matchDTOs;
     }
 
+    public Page<MatchDTO> getAllMatchesAfterDatePaginated(Pageable pageable, Date date) throws CDLWikiException {
+        Page<Match> matches = matchRepo.findAllMatchesAfterDatePaginated(pageable, date);
+        if (matches.getContent().isEmpty()) throw new CDLWikiException("Matches not found");
+
+        return matches.map(MatchDTO::mapEntityToDTO);
+    }
+
     public List<MatchDTO> getAllMatchesBeforeDate(Date date) throws CDLWikiException {
         List<Match> matches = matchRepo.findAllMatchesBeforeDate(date);
 
@@ -72,6 +81,13 @@ public class MatchService {
         }
 
         return matchDTOs;
+    }
+
+    public Page<MatchDTO> getAllMatchesBeforeDatePaginated(Pageable pageable, Date date) throws CDLWikiException {
+        Page<Match> matches = matchRepo.findAllMatchesBeforeDatePaginated(pageable, date);
+        if (matches.getContent().isEmpty()) throw new CDLWikiException("Matches not found");
+
+        return matches.map(MatchDTO::mapEntityToDTO);
     }
 
     public MatchDTO getMatchById(Integer matchId) throws CDLWikiException {
@@ -177,6 +193,13 @@ public class MatchService {
         return matchDTOs;
     }
 
+    public Page<MatchDTO> getMatchesByMajorAfterDatePaginated(Pageable pageable, Integer majorId, Date date) throws CDLWikiException {
+        Page<Match> matches = matchRepo.findByMajorAfterDatePaginated(pageable, majorId, date);
+        if (matches.getContent().isEmpty()) throw new CDLWikiException("Matches not found");
+
+        return matches.map(MatchDTO::mapEntityToDTO);
+    }
+
     public List<MatchDTO> getMatchesByMajorBeforeDate(Integer majorId, Date date) throws CDLWikiException {
         List<Match> matches = matchRepo.findByMajorBeforeDate(majorId, date);
 
@@ -189,6 +212,13 @@ public class MatchService {
         }
 
         return matchDTOs;
+    }
+
+    public Page<MatchDTO> getMatchesByMajorBeforeDatePaginated(Pageable pageable, Integer majorId, Date date) throws CDLWikiException {
+        Page<Match> matches = matchRepo.findByMajorBeforeDatePaginated(pageable, majorId, date);
+        if (matches.getContent().isEmpty()) throw new CDLWikiException("Matches not found");
+
+        return matches.map(MatchDTO::mapEntityToDTO);
     }
 
     public List<MatchDTO> getMatchesByMajorAndRound(Integer majorId, RoundName round) throws CDLWikiException {

@@ -3,13 +3,16 @@ package com.jpreet.cdlwiki.repository;
 import com.jpreet.cdlwiki.enums.RoundName;
 import com.jpreet.cdlwiki.model.Match;
 import com.jpreet.cdlwiki.model.Team;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Date;
 import java.util.List;
 
-public interface MatchRepository extends CrudRepository<Match, Integer> {
+public interface MatchRepository extends JpaRepository<Match, Integer> {
     @Query("SELECT m FROM Match m WHERE (m.team1.id = ?1 or m.team2.id = ?1) AND (m.date >= ?2) ORDER BY date ASC")
     public List<Match> findByTeamAfterDate(Integer teamId, Date date);
 
@@ -45,4 +48,16 @@ public interface MatchRepository extends CrudRepository<Match, Integer> {
 
     @Query("SELECT m FROM Match m WHERE m.date <= ?1 ORDER BY date DESC")
     public List<Match> findAllMatchesBeforeDate(Date date);
+
+    @Query("SELECT m FROM Match m WHERE m.date >= ?1 ORDER BY date ASC")
+    public Page<Match> findAllMatchesAfterDatePaginated(Pageable pageable, Date date);
+
+    @Query("SELECT m FROM Match m WHERE m.date <= ?1 ORDER BY date DESC")
+    public Page<Match> findAllMatchesBeforeDatePaginated(Pageable pageable, Date date);
+
+    @Query("SELECT m FROM Match m WHERE m.majorId = ?2 AND m.date >= ?3 ORDER BY date ASC")
+    public Page<Match> findByMajorAfterDatePaginated(Pageable pageable, Integer majorId, Date date);
+
+    @Query("SELECT m FROM Match m WHERE m.majorId = ?2 AND m.date <= ?3 ORDER BY date DESC")
+    public Page<Match> findByMajorBeforeDatePaginated(Pageable pageable, Integer majorId, Date date);
 }

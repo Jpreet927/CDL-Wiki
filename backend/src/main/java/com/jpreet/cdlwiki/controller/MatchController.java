@@ -7,6 +7,9 @@ import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.service.MatchService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +42,26 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/past", params = { "date", "offset", "size" })
+    public ResponseEntity<Page<MatchDTO>> getAllMatchesBeforeDatePaginated(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date, @RequestParam(name = "offset", defaultValue = "0") Integer offset, @RequestParam(name = "size", defaultValue = "10") Integer size) throws CDLWikiException {
+        Pageable pageable = PageRequest.of(offset, size);
+        Page<MatchDTO> matches = matchService.getAllMatchesBeforeDatePaginated(pageable, date);
+
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/future", params = {"date"})
     public ResponseEntity<List<MatchDTO>> getAllMatchesAfterDate(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date) throws CDLWikiException {
         List<MatchDTO> matches;
         matches = matchService.getAllMatchesAfterDate(date);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/future", params = { "date", "offset", "size" })
+    public ResponseEntity<Page<MatchDTO>> getAllMatchesAfterDatePaginated(@RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date, @RequestParam(name = "offset", defaultValue = "0") Integer offset, @RequestParam(name = "size", defaultValue = "10") Integer size) throws CDLWikiException {
+        Pageable pageable = PageRequest.of(offset, size);
+        Page<MatchDTO> matches = matchService.getAllMatchesAfterDatePaginated(pageable, date);
+
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
@@ -100,10 +119,26 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/major/{majorId}/past", params = { "date", "offset", "size" })
+    public ResponseEntity<Page<MatchDTO>> getMatchesByMajorBeforeDatePaginated(@PathVariable Integer majorId, @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date, @RequestParam(name = "offset", defaultValue = "0") Integer offset, @RequestParam(name = "size", defaultValue = "10") Integer size) throws CDLWikiException {
+        Pageable pageable = PageRequest.of(offset, size);
+        Page<MatchDTO> matches = matchService.getMatchesByMajorBeforeDatePaginated(pageable, majorId, date);
+
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/major/{majorId}/future", params = "date")
     public ResponseEntity<List<MatchDTO>> getMatchesByMajorAfterDate(@PathVariable Integer majorId, @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date) throws CDLWikiException {
         List<MatchDTO> matches;
         matches = matchService.getMatchesByMajorAfterDate(majorId, date);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/major/{majorId}/future", params = { "date", "offset", "size" })
+    public ResponseEntity<Page<MatchDTO>> getMatchesByMajorAfterDatePaginated(@PathVariable Integer majorId, @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date, @RequestParam(name = "offset", defaultValue = "0") Integer offset, @RequestParam(name = "size", defaultValue = "10") Integer size) throws CDLWikiException {
+        Pageable pageable = PageRequest.of(offset, size);
+        Page<MatchDTO> matches = matchService.getMatchesByMajorAfterDatePaginated(pageable, majorId, date);
+
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
