@@ -17,6 +17,29 @@ export async function getMatchesBeforeDate(date: Date) {
     return matches;
 }
 
+export async function getMatchesBeforeDatePaginated(
+    date: Date,
+    size: number,
+    offset: number
+) {
+    let response = await fetch(
+        BASE_URL +
+            `/api/match/past?date=${encodeURIComponent(
+                formatDate(date)
+            )}&offset=${encodeURIComponent(offset)}&size=${encodeURIComponent(
+                size
+            )}`
+    );
+
+    let matches = await response.json();
+
+    if ("errorMessage" in matches) {
+        throw new Error("No past matches available.");
+    }
+
+    return { content: matches.content, isLast: matches.last };
+}
+
 export async function getMatchesAfterDate(date: Date) {
     let response = await fetch(
         BASE_URL +
@@ -30,6 +53,29 @@ export async function getMatchesAfterDate(date: Date) {
     }
 
     return matches;
+}
+
+export async function getMatchesAfterDatePaginated(
+    date: Date,
+    size: number,
+    offset: number
+) {
+    let response = await fetch(
+        BASE_URL +
+            `/api/match/future?date=${encodeURIComponent(
+                formatDate(date)
+            )}&offset=${encodeURIComponent(offset)}&size=${encodeURIComponent(
+                size
+            )}`
+    );
+
+    let matches = await response.json();
+
+    if ("errorMessage" in matches) {
+        throw new Error("No upcoming matches available.");
+    }
+
+    return { content: matches.content, isLast: matches.last };
 }
 
 export async function getMatchesByMajorBeforeDate(id: string, date: Date) {
@@ -49,6 +95,30 @@ export async function getMatchesByMajorBeforeDate(id: string, date: Date) {
     return matches;
 }
 
+export async function getMatchesByMajorBeforeDatePaginated(
+    id: string,
+    date: Date,
+    size: number,
+    offset: number
+) {
+    let response = await fetch(
+        BASE_URL +
+            `/api/match/major/${id}/past?date=${encodeURIComponent(
+                formatDate(date)
+            )}&offset=${encodeURIComponent(offset)}&size=${encodeURIComponent(
+                size
+            )}`
+    );
+
+    let matches = await response.json();
+
+    if ("errorMessage" in matches) {
+        throw new Error("No past matches available.");
+    }
+
+    return { content: matches.content, isLast: matches.last };
+}
+
 export async function getMatchesByMajorAfterDate(id: string, date: Date) {
     let response = await fetch(
         BASE_URL +
@@ -64,6 +134,30 @@ export async function getMatchesByMajorAfterDate(id: string, date: Date) {
     }
 
     return matches;
+}
+
+export async function getMatchesByMajorAfterDatePaginated(
+    id: string,
+    date: Date,
+    size: number,
+    offset: number
+) {
+    let response = await fetch(
+        BASE_URL +
+            `/api/match/major/${id}/future?date=${encodeURIComponent(
+                formatDate(date)
+            )}&offset=${encodeURIComponent(offset)}&size=${encodeURIComponent(
+                size
+            )}`
+    );
+
+    let matches = await response.json();
+
+    if ("errorMessage" in matches) {
+        throw new Error("No past matches available.");
+    }
+
+    return { content: matches.content, isLast: matches.last };
 }
 
 export async function getRecentMatchesByTeamId(id: string, date: Date) {

@@ -2,18 +2,22 @@ import { ReactNode } from "react";
 
 type Props = {
     children: ReactNode;
+    active: boolean;
     style?: string;
     onClick: any;
 };
 
-const Button = ({ children, style, onClick }: Props) => {
+const Button = ({ children, style, active, onClick }: Props) => {
     return (
-        <div
-            className={`px-12 py-4 w-[200px] text-center cursor-pointer bg-background-2 rounded-md transition-colors duration-300 ease-in-out ${style}`}
+        <button
+            className={`px-12 py-4 w-[200px] text-center bg-background-2 rounded-md transition-colors duration-300 ease-in-out disabled:bg-gray-300 ${
+                active ? "cursor-pointer" : "cursor-not-allowed"
+            } ${style}`}
             onClick={(e) => onClick(e)}
+            disabled={!active}
         >
             {children}
-        </div>
+        </button>
     );
 };
 

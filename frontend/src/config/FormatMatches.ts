@@ -19,3 +19,21 @@ export const formatMatches = (matches: Match[]): FormattedMatches => {
 
     return formattedMatches;
 };
+
+export const mergeMatches = (
+    currentMatches: FormattedMatches,
+    newMatches: Match[]
+): FormattedMatches => {
+    let newFormattedMatches: FormattedMatches = formatMatches(newMatches);
+    let merged = {};
+
+    Object.keys(currentMatches).forEach((key) => {
+        if (key in newFormattedMatches) {
+            currentMatches[key].push(...newFormattedMatches[key]);
+            delete newFormattedMatches[key];
+        }
+    });
+
+    merged = { ...currentMatches, ...newFormattedMatches };
+    return merged;
+};

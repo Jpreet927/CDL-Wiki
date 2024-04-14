@@ -4,14 +4,19 @@ import Section from "@/components/templates/Section";
 import TabPanel from "@/components/templates/TabPanel";
 import UpcomingMatch from "@/components/UpcomingMatch";
 import PastMatch from "@/components/PastMatch";
-import { FormattedMatches, formatMatches } from "@/config/FormatMatches";
+import {
+    FormattedMatches,
+    formatMatches,
+    mergeMatches,
+} from "@/config/FormatMatches";
 import { TEAM_LOGOS } from "@/ts/constants/TeamLogos";
 import { Select } from "antd";
 import {
-    getMatchesAfterDate,
-    getMatchesBeforeDate,
+    getMatchesAfterDatePaginated,
+    getMatchesBeforeDatePaginated,
     getMatchesByMajorAfterDate,
-    getMatchesByMajorBeforeDate,
+    getMatchesByMajorAfterDatePaginated,
+    getMatchesByMajorBeforeDatePaginated,
 } from "@/api/Matches";
 import Button from "@/components/templates/Button";
 
@@ -32,48 +37,134 @@ const MatchesPage = () => {
         useState<FormattedMatches | null>({});
     const [matchesError, setMatchesError] = useState<string>("");
     const [page, setPage] = useState<number>(0);
+    const [isLastPage, setIsLastPage] = useState<boolean>(false);
+    const [buttonActive, setButtonActive] = useState<boolean>(true);
+    const PAGE_SIZE = 10;
 
     useEffect(() => {
         setMatches(null);
         setMatchesError("");
+        setPage(0);
 
         if (activeTab === 0) {
             if (timeline === "Past") {
-                getMatchesBeforeDate(new Date(Date.now()))
+                getMatchesBeforeDatePaginated(
+                    new Date(Date.now()),
+                    PAGE_SIZE,
+                    0
+                )
                     .then((matches) => {
-                        setMatches(formatMatches(matches));
-                        setUnfilteredMatches(formatMatches(matches));
+                        setMatches(formatMatches(matches.content));
+                        setUnfilteredMatches(formatMatches(matches.content));
+                        setIsLastPage(matches.isLast);
                     })
                     .catch((err) => setMatchesError(err.message));
             } else {
-                getMatchesAfterDate(new Date(Date.now()))
+                getMatchesAfterDatePaginated(new Date(Date.now()), PAGE_SIZE, 0)
                     .then((matches) => {
-                        setMatches(formatMatches(matches));
-                        setUnfilteredMatches(formatMatches(matches));
+                        setMatches(formatMatches(matches.content));
+                        setUnfilteredMatches(formatMatches(matches.content));
+                        setIsLastPage(matches.isLast);
                     })
                     .catch((err) => setMatchesError(err.message));
             }
         } else {
             if (timeline === "Past") {
-                getMatchesByMajorBeforeDate(
+                getMatchesByMajorBeforeDatePaginated(
                     activeTab + "",
-                    new Date(Date.now())
+                    new Date(Date.now()),
+                    PAGE_SIZE,
+                    0
                 )
                     .then((matches) => {
-                        setMatches(formatMatches(matches));
-                        setUnfilteredMatches(formatMatches(matches));
+                        setMatches(formatMatches(matches.content));
+                        setUnfilteredMatches(formatMatches(matches.content));
+                        setIsLastPage(matches.isLast);
                     })
                     .catch((err) => setMatchesError(err.message));
             } else {
-                getMatchesByMajorAfterDate(activeTab + "", new Date(Date.now()))
+                getMatchesByMajorAfterDatePaginated(
+                    activeTab + "",
+                    new Date(Date.now()),
+                    PAGE_SIZE,
+                    0
+                )
                     .then((matches) => {
-                        setMatches(formatMatches(matches));
-                        setUnfilteredMatches(formatMatches(matches));
+                        setMatches(formatMatches(matches.content));
+                        setUnfilteredMatches(formatMatches(matches.content));
+                        setIsLastPage(matches.isLast);
                     })
                     .catch((err) => setMatchesError(err.message));
             }
         }
     }, [activeTab, timeline]);
+
+    useEffect(() => {
+        setButtonActive(false);
+
+        if (activeTab === 0) {
+            if (timeline === "Past") {
+                getMatchesBeforeDatePaginated(
+                    new Date(Date.now()),
+                    PAGE_SIZE,
+                    page
+                )
+                    .then((newMatches) => {
+                        let merged = mergeMatches(matches!, newMatches.content);
+                        setMatches(merged);
+                        setUnfilteredMatches(merged);
+                        setIsLastPage(newMatches.isLast);
+                    })
+                    .catch((err) => setMatchesError(err.message));
+            } else {
+                getMatchesAfterDatePaginated(
+                    new Date(Date.now()),
+                    PAGE_SIZE,
+                    page
+                )
+                    .then((newMatches) => {
+                        let merged = mergeMatches(matches!, newMatches.content);
+                        setMatches(merged);
+                        setUnfilteredMatches(merged);
+                        setIsLastPage(newMatches.isLast);
+                    })
+                    .catch((err) => setMatchesError(err.message));
+            }
+        } else {
+            if (timeline === "Past") {
+                getMatchesByMajorBeforeDatePaginated(
+                    activeTab + "",
+                    new Date(Date.now()),
+                    PAGE_SIZE,
+                    page
+                )
+                    .then((newMatches) => {
+                        let merged = {
+                            ...matches,
+                            ...formatMatches(newMatches.content),
+                        };
+                        setMatches(merged);
+                        setUnfilteredMatches(merged);
+                        setIsLastPage(newMatches.isLast);
+                    })
+                    .catch((err) => setMatchesError(err.message));
+            } else {
+                getMatchesByMajorAfterDate(activeTab + "", new Date(Date.now()))
+                    .then((newMatches) => {
+                        let merged = {
+                            ...matches,
+                            ...formatMatches(newMatches.content),
+                        };
+                        setMatches(merged);
+                        setUnfilteredMatches(merged);
+                        setIsLastPage(newMatches.isLast);
+                    })
+                    .catch((err) => setMatchesError(err.message));
+            }
+        }
+
+        setButtonActive(true);
+    }, [page]);
 
     const handleSelect = (values: any) => {
         const valuesSet = new Set(values);
@@ -180,9 +271,16 @@ const MatchesPage = () => {
                             </p>
                         )}
                     </div>
-                    <div className="w-full flex justify-center mt-8">
-                        <Button onClick={handleLoadMore}>Load More</Button>
-                    </div>
+                    {!isLastPage && (
+                        <div className="w-full flex justify-center mt-8">
+                            <Button
+                                onClick={handleLoadMore}
+                                active={buttonActive}
+                            >
+                                Load More
+                            </Button>
+                        </div>
+                    )}
                 </TabPanel>
             </Section>
         </Page>
