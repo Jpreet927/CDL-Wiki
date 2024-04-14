@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -55,9 +56,9 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
     @Query("SELECT m FROM Match m WHERE m.date <= ?1 ORDER BY date DESC")
     public Page<Match> findAllMatchesBeforeDatePaginated(Pageable pageable, Date date);
 
-    @Query("SELECT m FROM Match m WHERE m.majorId = ?2 AND m.date >= ?3 ORDER BY date ASC")
-    public Page<Match> findByMajorAfterDatePaginated(Pageable pageable, Integer majorId, Date date);
+    @Query("SELECT m FROM Match m WHERE m.majorId = :majorId AND m.date >= :date ORDER BY date ASC")
+    public Page<Match> findByMajorAfterDatePaginated(Pageable pageable, @Param("majorId") Integer majorId, @Param("date") Date date);
 
-    @Query("SELECT m FROM Match m WHERE m.majorId = ?2 AND m.date <= ?3 ORDER BY date DESC")
-    public Page<Match> findByMajorBeforeDatePaginated(Pageable pageable, Integer majorId, Date date);
+    @Query("SELECT m FROM Match m WHERE m.majorId = :majorId AND m.date <= :date ORDER BY date DESC")
+    public Page<Match> findByMajorBeforeDatePaginated(Pageable pageable, @Param("majorId") Integer majorId, @Param("date") Date date);
 }
