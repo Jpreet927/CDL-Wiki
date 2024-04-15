@@ -58,7 +58,10 @@ const MatchesPage = () => {
                         setUnfilteredMatches(formatMatches(matches.content));
                         setIsLastPage(matches.isLast);
                     })
-                    .catch((err) => setMatchesError(err.message));
+                    .catch((err) => {
+                        setMatchesError(err.message);
+                        setIsLastPage(true);
+                    });
             } else {
                 getMatchesAfterDatePaginated(new Date(Date.now()), PAGE_SIZE, 0)
                     .then((matches) => {
@@ -66,7 +69,10 @@ const MatchesPage = () => {
                         setUnfilteredMatches(formatMatches(matches.content));
                         setIsLastPage(matches.isLast);
                     })
-                    .catch((err) => setMatchesError(err.message));
+                    .catch((err) => {
+                        setMatchesError(err.message);
+                        setIsLastPage(true);
+                    });
             }
         } else {
             if (timeline === "Past") {
@@ -81,7 +87,10 @@ const MatchesPage = () => {
                         setUnfilteredMatches(formatMatches(matches.content));
                         setIsLastPage(matches.isLast);
                     })
-                    .catch((err) => setMatchesError(err.message));
+                    .catch((err) => {
+                        setMatchesError(err.message);
+                        setIsLastPage(true);
+                    });
             } else {
                 getMatchesByMajorAfterDatePaginated(
                     activeTab + "",
@@ -94,7 +103,10 @@ const MatchesPage = () => {
                         setUnfilteredMatches(formatMatches(matches.content));
                         setIsLastPage(matches.isLast);
                     })
-                    .catch((err) => setMatchesError(err.message));
+                    .catch((err) => {
+                        setMatchesError(err.message);
+                        setIsLastPage(true);
+                    });
             }
         }
     }, [activeTab, timeline]);

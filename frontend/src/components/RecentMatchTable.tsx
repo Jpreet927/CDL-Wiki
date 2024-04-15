@@ -15,7 +15,6 @@ const RecentMatchTable = ({ matches, team, errorMessage }: Props) => {
     const [recentMatches, setRecentMatches] = useState<Match[]>([]);
 
     useEffect(() => {
-        console.log(matches);
         if (matches) {
             setRecentMatches(
                 matches.map((match) => determineTeam1OrTeam2(match))

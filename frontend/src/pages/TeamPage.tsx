@@ -12,6 +12,8 @@ import { Player } from "@/ts/types/Player";
 import { getPlayersByTeamId } from "@/api/Players";
 import { Match } from "@/ts/types/Match";
 import {
+    getMatchesAfterDatePaginated,
+    getMatchesByTeamAfterDatePaginated,
     getRecentMatchesByTeamId,
     getUpcomingMatchesByTeamId,
 } from "@/api/Matches";
@@ -34,8 +36,15 @@ const TeamPage = () => {
             getRecentMatchesByTeamId(id, new Date(Date.now()))
                 .then((matches) => setRecentMatches(matches))
                 .catch((err) => setRecentMatchesError(err.message));
-            getUpcomingMatchesByTeamId(id, new Date(Date.now()))
-                .then((matches) => setUpcomingMatches(matches))
+            getMatchesByTeamAfterDatePaginated(
+                id,
+                new Date("2024-01-01 00:00:00"),
+                6,
+                0
+            )
+                .then((matches) => {
+                    setUpcomingMatches(matches.content);
+                })
                 .catch((err) => setUpcomingMatchesError(err.message));
         }
     }, [id]);

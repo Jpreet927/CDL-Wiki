@@ -40,7 +40,7 @@ const PastMatch = ({ match }: { match: Match }) => {
                             {match.team1.ticker}
                         </p>
                     </div>
-                    <p className="w-[10%] text-secondary">VS</p>
+                    <p className="w-[10%] text-secondary text-center">VS</p>
                     <div className="flex gap-4 items-center w-[45%] justify-end">
                         <p className="text-sm font-bold">
                             {match.team2.ticker}

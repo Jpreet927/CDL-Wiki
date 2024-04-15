@@ -21,12 +21,12 @@ const UpcomingMatch = ({ match }: { match: Match }) => {
                         {match.team1.ticker.toUpperCase()}
                     </p>
                 </div>
-                <p className="w-[10%] text-secondary">VS</p>
+                <p className="w-[10%] text-secondary text-center">VS</p>
                 <div className="flex gap-4 items-center w-[45%] justify-end">
                     <p className="text-md font-bold">
                         {match.team2.ticker.toUpperCase()}
                     </p>
-                    <div className="max-w-[40px] max-h-[40px]">
+                    <div className="h-[40px]">
                         <Logo
                             srcDark={match.team2.logoLight}
                             srcLight={match.team2.logoDark}
