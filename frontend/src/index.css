@@ -9,6 +9,7 @@
     :root {
         --background: 255 255 255;
         --background-2: 221 225 231;
+        --background-3: 240 225 231;
         --primary: 7 7 7;
         --secondary: 105 105 105;
         --primary-dark: 255 255 255;
@@ -25,6 +26,7 @@
     :root[data-theme="dark"] {
         --background: 7 7 7;
         --background-2: 20 20 20;
+        --background-3: 35 35 35;
         --primary: 255 255 255;
         --secondary: 150 150 150;
         --accent: 228 208 135;
