@@ -109,6 +109,13 @@ public class MatchService {
         return matchDTOs;
     }
 
+    public Page<MatchDTO> getMatchesByTeamAfterDatePaginated(Pageable pageable, Integer teamId, Date date) throws CDLWikiException {
+        Page<Match> matches = matchRepo.findByTeamAfterDatePaginated(pageable, teamId, date);
+        if (matches.getContent().isEmpty()) throw new CDLWikiException("Matches not found");
+
+        return matches.map(MatchDTO::mapEntityToDTO);
+    }
+
     public List<MatchDTO> getMatchesByTeamBeforeDate(Integer teamId, Date date) throws CDLWikiException {
         List<Match> matches = matchRepo.findByTeamBeforeDate(teamId, date);
 
@@ -121,6 +128,13 @@ public class MatchService {
         }
 
         return matchDTOs;
+    }
+
+    public Page<MatchDTO> getMatchesByTeamBeforeDatePaginated(Pageable pageable, Integer teamId, Date date) throws CDLWikiException {
+        Page<Match> matches = matchRepo.findByTeamBeforeDatePaginated(pageable, teamId, date);
+        if (matches.getContent().isEmpty()) throw new CDLWikiException("Matches not found");
+
+        return matches.map(MatchDTO::mapEntityToDTO);
     }
 
     public List<MatchDTO> getNext5ByTeam(Integer teamId, Date date) throws CDLWikiException {

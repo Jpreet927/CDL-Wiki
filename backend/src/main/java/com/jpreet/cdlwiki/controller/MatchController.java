@@ -78,10 +78,26 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/team/{teamId}/past", params = { "date", "offset", "size" })
+    public ResponseEntity<Page<MatchDTO>> getMatchesByTeamBeforeDatePaginated(@PathVariable Integer teamId, @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date, @RequestParam(name = "offset", defaultValue = "0") Integer offset, @RequestParam(name = "size", defaultValue = "10") Integer size) throws CDLWikiException {
+        Pageable pageable = PageRequest.of(offset, size);
+        Page<MatchDTO> matches = matchService.getMatchesByTeamBeforeDatePaginated(pageable, teamId, date);
+
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/team/{teamId}/future", params = "date")
     public ResponseEntity<List<MatchDTO>> getMatchesByTeamAfterDate(@PathVariable Integer teamId, @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date) throws CDLWikiException {
         List<MatchDTO> matches;
         matches = matchService.getMatchesByTeamAfterDate(teamId, date);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/team/{teamId}/future", params = { "date", "offset", "size" })
+    public ResponseEntity<Page<MatchDTO>> getMatchesByTeamAfterDatePaginated(@PathVariable Integer teamId, @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date, @RequestParam(name = "offset", defaultValue = "0") Integer offset, @RequestParam(name = "size", defaultValue = "10") Integer size) throws CDLWikiException {
+        Pageable pageable = PageRequest.of(offset, size);
+        Page<MatchDTO> matches = matchService.getMatchesByTeamAfterDatePaginated(pageable, teamId, date);
+
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 

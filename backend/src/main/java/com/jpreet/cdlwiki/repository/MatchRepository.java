@@ -61,4 +61,10 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
 
     @Query("SELECT m FROM Match m WHERE m.majorId = :majorId AND m.date <= :date ORDER BY date DESC")
     public Page<Match> findByMajorBeforeDatePaginated(Pageable pageable, @Param("majorId") Integer majorId, @Param("date") Date date);
+
+    @Query("SELECT m FROM Match m WHERE (m.team1.id = :teamId OR m.team2.id = :teamId) AND (m.date >= :date) ORDER BY date ASC")
+    public Page<Match> findByTeamAfterDatePaginated(Pageable pageable, @Param("teamId") Integer majorId, @Param("date") Date date);
+
+    @Query("SELECT m FROM Match m WHERE (m.team1.id = :teamId OR m.team2.id = :teamId) AND (m.date <= :date) ORDER BY date DESC")
+    public Page<Match> findByTeamBeforeDatePaginated(Pageable pageable, @Param("teamId") Integer teamId, @Param("date") Date date);
 }

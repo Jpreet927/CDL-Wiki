@@ -193,3 +193,51 @@ export async function getUpcomingMatchesByTeamId(id: string, date: Date) {
 
     return matches;
 }
+
+export async function getMatchesByTeamBeforeDatePaginated(
+    id: string,
+    date: Date,
+    size: number,
+    offset: number
+) {
+    let response = await fetch(
+        BASE_URL +
+            `/api/match/team/${id}/past?date=${encodeURIComponent(
+                formatDate(date)
+            )}&offset=${encodeURIComponent(offset)}&size=${encodeURIComponent(
+                size
+            )}`
+    );
+
+    let matches = await response.json();
+
+    if ("errorMessage" in matches) {
+        throw new Error("No past matches available.");
+    }
+
+    return { content: matches.content, isLast: matches.last };
+}
+
+export async function getMatchesByTeamAfterDatePaginated(
+    id: string,
+    date: Date,
+    size: number,
+    offset: number
+) {
+    let response = await fetch(
+        BASE_URL +
+            `/api/match/team/${id}/future?date=${encodeURIComponent(
+                formatDate(date)
+            )}&offset=${encodeURIComponent(offset)}&size=${encodeURIComponent(
+                size
+            )}`
+    );
+
+    let matches = await response.json();
+
+    if ("errorMessage" in matches) {
+        throw new Error("No past matches available.");
+    }
+
+    return { content: matches.content, isLast: matches.last };
+}
