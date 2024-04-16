@@ -151,10 +151,7 @@ const MatchesPage = () => {
                     page
                 )
                     .then((newMatches) => {
-                        let merged = {
-                            ...matches,
-                            ...formatMatches(newMatches.content),
-                        };
+                        let merged = mergeMatches(matches!, newMatches.content);
                         setMatches(merged);
                         setUnfilteredMatches(merged);
                         setIsLastPage(newMatches.isLast);
@@ -163,10 +160,7 @@ const MatchesPage = () => {
             } else {
                 getMatchesByMajorAfterDate(activeTab + "", new Date(Date.now()))
                     .then((newMatches) => {
-                        let merged = {
-                            ...matches,
-                            ...formatMatches(newMatches.content),
-                        };
+                        let merged = mergeMatches(matches!, newMatches.content);
                         setMatches(merged);
                         setUnfilteredMatches(merged);
                         setIsLastPage(newMatches.isLast);
