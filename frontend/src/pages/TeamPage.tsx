@@ -12,10 +12,8 @@ import { Player } from "@/ts/types/Player";
 import { getPlayersByTeamId } from "@/api/Players";
 import { Match } from "@/ts/types/Match";
 import {
-    getMatchesAfterDatePaginated,
     getMatchesByTeamAfterDatePaginated,
     getRecentMatchesByTeamId,
-    getUpcomingMatchesByTeamId,
 } from "@/api/Matches";
 import UpcomingMatch from "@/components/UpcomingMatch";
 

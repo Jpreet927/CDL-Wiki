@@ -2,7 +2,6 @@ import Section from "@/components/templates/Section";
 import Hero from "@/components/home/Hero";
 import ArticleCard from "@/components/ArticleCard";
 import { ARTICLE_DATA } from "@/ts/constants/ArticlesData";
-import { MATCH_DATA } from "@/ts/constants/MatchData";
 import TeamCard from "@/components/TeamCard";
 import UpcomingMatch from "@/components/UpcomingMatch";
 import { useEffect, useState } from "react";
@@ -11,7 +10,6 @@ import { getTeams } from "@/api/Teams";
 import Alert from "@/components/Alert";
 import { Match } from "@/ts/types/Match";
 import { getMatchesAfterDatePaginated } from "@/api/Matches";
-import { formatMatches } from "@/config/FormatMatches";
 import Button from "@/components/templates/Button";
 import { useNavigate } from "react-router-dom";
 
