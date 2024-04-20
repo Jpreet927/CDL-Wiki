@@ -37,3 +37,28 @@ export const mergeMatches = (
     merged = { ...currentMatches, ...newFormattedMatches };
     return merged;
 };
+
+export const filterMatches = (
+    teams: Set<any>,
+    unfiltered: FormattedMatches
+) => {
+    if (teams.size == 0 || teams.has(-1)) {
+        return unfiltered;
+    }
+
+    let filteredMatches: FormattedMatches = {};
+    Object.keys(unfiltered!).forEach((key) => {
+        filteredMatches[key] = [];
+    });
+
+    Object.keys(unfiltered).forEach((key: string) => {
+        filteredMatches[key] = unfiltered[key].filter((match: Match) => {
+            return teams.has(match.team1.id) || teams.has(match.team2.id);
+        });
+
+        if (filteredMatches[key].length === 0) delete filteredMatches[key];
+    });
+    console.log(filteredMatches);
+
+    return filteredMatches;
+};

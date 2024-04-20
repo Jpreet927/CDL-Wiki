@@ -6,6 +6,7 @@ import UpcomingMatch from "@/components/UpcomingMatch";
 import PastMatch from "@/components/PastMatch";
 import {
     FormattedMatches,
+    filterMatches,
     formatMatches,
     mergeMatches,
 } from "@/config/FormatMatches";
@@ -39,6 +40,7 @@ const MatchesPage = () => {
     const [page, setPage] = useState<number>(0);
     const [isLastPage, setIsLastPage] = useState<boolean>(false);
     const [buttonActive, setButtonActive] = useState<boolean>(true);
+    const [filteredTeams, setFilteredTeams] = useState<Set<any>>(new Set());
     const PAGE_SIZE = 10;
 
     useEffect(() => {
@@ -122,10 +124,18 @@ const MatchesPage = () => {
                     page
                 )
                     .then((newMatches) => {
-                        let merged = mergeMatches(matches!, newMatches.content);
-                        setMatches(merged);
-                        setUnfilteredMatches(merged);
-                        setIsLastPage(newMatches.isLast);
+                        let filtered = filterMatches(
+                            filteredTeams!,
+                            unfilteredMatches!
+                        );
+                        let unfiltered = mergeMatches(
+                            unfilteredMatches!,
+                            newMatches.content
+                        );
+                        let isLast = newMatches.isLast;
+                        setMatches(filtered);
+                        setUnfilteredMatches(unfiltered);
+                        setIsLastPage(isLast);
                     })
                     .catch((err) => setMatchesError(err.message));
             } else {
@@ -135,10 +145,18 @@ const MatchesPage = () => {
                     page
                 )
                     .then((newMatches) => {
-                        let merged = mergeMatches(matches!, newMatches.content);
-                        setMatches(merged);
-                        setUnfilteredMatches(merged);
-                        setIsLastPage(newMatches.isLast);
+                        let filtered = filterMatches(
+                            filteredTeams!,
+                            unfilteredMatches!
+                        );
+                        let unfiltered = mergeMatches(
+                            unfilteredMatches!,
+                            newMatches.content
+                        );
+                        let isLast = newMatches.isLast;
+                        setMatches(filtered);
+                        setUnfilteredMatches(unfiltered);
+                        setIsLastPage(isLast);
                     })
                     .catch((err) => setMatchesError(err.message));
             }
@@ -151,19 +169,35 @@ const MatchesPage = () => {
                     page
                 )
                     .then((newMatches) => {
-                        let merged = mergeMatches(matches!, newMatches.content);
-                        setMatches(merged);
-                        setUnfilteredMatches(merged);
-                        setIsLastPage(newMatches.isLast);
+                        let filtered = filterMatches(
+                            filteredTeams!,
+                            unfilteredMatches!
+                        );
+                        let unfiltered = mergeMatches(
+                            unfilteredMatches!,
+                            newMatches.content
+                        );
+                        let isLast = newMatches.isLast;
+                        setMatches(filtered);
+                        setUnfilteredMatches(unfiltered);
+                        setIsLastPage(isLast);
                     })
                     .catch((err) => setMatchesError(err.message));
             } else {
                 getMatchesByMajorAfterDate(activeTab + "", new Date(Date.now()))
                     .then((newMatches) => {
-                        let merged = mergeMatches(matches!, newMatches.content);
-                        setMatches(merged);
-                        setUnfilteredMatches(merged);
-                        setIsLastPage(newMatches.isLast);
+                        let filtered = filterMatches(
+                            filteredTeams!,
+                            unfilteredMatches!
+                        );
+                        let unfiltered = mergeMatches(
+                            unfilteredMatches!,
+                            newMatches.content
+                        );
+                        let isLast = newMatches.isLast;
+                        setMatches(filtered);
+                        setUnfilteredMatches(unfiltered);
+                        setIsLastPage(isLast);
                     })
                     .catch((err) => setMatchesError(err.message));
             }
@@ -174,26 +208,9 @@ const MatchesPage = () => {
 
     const handleSelect = (values: any) => {
         const valuesSet = new Set(values);
-        if (valuesSet.size == 0 || valuesSet.has(-1)) {
-            setMatches(unfilteredMatches);
-            return;
-        }
+        setFilteredTeams(valuesSet);
 
-        let filteredMatches: FormattedMatches = {};
-        Object.keys(matches!).forEach((key) => {
-            filteredMatches[key] = [];
-        });
-
-        Object.keys(matches!).forEach((key) => {
-            filteredMatches[key] = matches![key].filter(
-                (match) =>
-                    valuesSet.has(Number(match.team1.id)) ||
-                    valuesSet.has(Number(match.team2.id))
-            );
-
-            if (filteredMatches[key].length === 0) delete filteredMatches[key];
-        });
-
+        const filteredMatches = filterMatches(valuesSet, unfilteredMatches!);
         setMatches(filteredMatches);
     };
 
@@ -244,7 +261,7 @@ const MatchesPage = () => {
                             }}
                             onChange={handleSelect}
                             options={[
-                                { id: -1, team: "All" },
+                                { id: "-1", team: "All" },
                                 ...TEAM_LOGOS,
                             ].map((team) => {
                                 return {
