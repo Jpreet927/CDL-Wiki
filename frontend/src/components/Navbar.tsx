@@ -7,6 +7,7 @@ import { ThemeContext } from "@/context/ThemeProvider";
 import Logo from "./templates/Logo";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { NAV_ITEMS } from "@/config/NavItems";
 
 const Navbar = () => {
     const location = useLocation();
@@ -71,56 +72,20 @@ const Navbar = () => {
                     mobileNavOpen ? "flex" : "hidden"
                 } lg:gap-24 gap-12`}
             >
-                <li
-                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 md:text-base text-2xl ${
-                        location.pathname === "/"
-                            ? "opacity-100 underline underline-offset-8"
-                            : "opacity-75"
-                    }`}
-                    onClick={() => setMobileNavOpen(false)}
-                >
-                    <Link to="/">Home</Link>
-                </li>
-                <li
-                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 md:text-base text-2xl ${
-                        location.pathname.includes("/teams")
-                            ? "opacity-100 underline underline-offset-8"
-                            : "opacity-75"
-                    }`}
-                    onClick={() => setMobileNavOpen(false)}
-                >
-                    <Link to="/teams">Teams</Link>
-                </li>
-                <li
-                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 md:text-base text-2xl ${
-                        location.pathname.includes("/standings")
-                            ? "opacity-100 underline underline-offset-8"
-                            : "opacity-75"
-                    }`}
-                    onClick={() => setMobileNavOpen(false)}
-                >
-                    <Link to="/standings">Standings</Link>
-                </li>
-                <li
-                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 md:text-base text-2xl ${
-                        location.pathname.includes("/matches")
-                            ? "opacity-100 underline underline-offset-8"
-                            : "opacity-75"
-                    }`}
-                    onClick={() => setMobileNavOpen(false)}
-                >
-                    <Link to="/matches">Matches</Link>
-                </li>
-                <li
-                    className={`hover:opacity-100 transition-opacity ease-in-out duration-300 md:text-base text-2xl ${
-                        location.pathname.includes("/about")
-                            ? "opacity-100 underline underline-offset-8"
-                            : "opacity-75"
-                    }`}
-                    onClick={() => setMobileNavOpen(false)}
-                >
-                    <Link to="/about">About</Link>
-                </li>
+                {NAV_ITEMS.map((item) => (
+                    <li
+                        className={`hover:opacity-100 transition-opacity ease-in-out duration-300 md:text-base text-2xl ${
+                            location.pathname === item.href ||
+                            (item.href !== "/" &&
+                                location.pathname.startsWith(item.href))
+                                ? "opacity-100 underline underline-offset-8"
+                                : "opacity-75"
+                        }`}
+                        onClick={() => setMobileNavOpen(false)}
+                    >
+                        <Link to={item.href}>{item.title}</Link>
+                    </li>
+                ))}
             </ul>
         </nav>
     );

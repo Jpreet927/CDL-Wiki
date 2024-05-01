@@ -11,10 +11,10 @@ export const NAV_ITEMS = [
         title: "Teams",
         href: "/teams",
     },
-    {
-        title: "Players",
-        href: "/players",
-    },
+    // {
+    //     title: "Players",
+    //     href: "/players",
+    // },
     {
         title: "Matches",
         href: "/matches",
