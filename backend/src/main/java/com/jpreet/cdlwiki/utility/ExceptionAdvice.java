@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -56,5 +57,16 @@ public class ExceptionAdvice {
         error.setErrorMessage(errorMessage);
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({ AuthenticationException.class })
+    public ResponseEntity<ErrorInfo> authenticationExceptionHandler(Exception exception) {
+        LOGGER.error(exception.getMessage(), exception);
+
+        ErrorInfo error = new ErrorInfo();
+        error.setErrorCode(HttpStatus.UNAUTHORIZED.value());
+        error.setErrorMessage(exception.getMessage());
+
+        return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 }
