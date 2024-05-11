@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface AuthRepository extends CrudRepository<Auth, Integer> {
     public Optional<Auth> findByApiKey(String apiKey);
+    public Optional<Auth> findByEmail(String email);
+    public Optional<Auth> findByUsername(String username);
 }
