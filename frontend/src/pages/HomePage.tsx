@@ -24,7 +24,7 @@ const HomePage = () => {
 
     useEffect(() => {
         getTeams().then((teams) => setTeams(teams));
-        getMatchesAfterDatePaginated(new Date("2024-01-01 00:00:00"), 9, 0)
+        getMatchesAfterDatePaginated(new Date(), 9, 0)
             .then((matches) => {
                 setUpcomingMatches(matches.content);
             })
