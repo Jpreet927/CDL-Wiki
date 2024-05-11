@@ -28,6 +28,7 @@ public class ApiKeyFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String apiKey = request.getHeader(AUTH_TOKEN_HEADER_NAME);
+        System.out.println(AUTH_TOKEN_HEADER_NAME + " " + apiKey);
 
         try {
             var authenticationToken = new UsernamePasswordAuthenticationToken(apiKey,
