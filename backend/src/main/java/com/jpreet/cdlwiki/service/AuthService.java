@@ -3,6 +3,7 @@ package com.jpreet.cdlwiki.service;
 import com.jpreet.cdlwiki.dto.AuthDTO;
 import com.jpreet.cdlwiki.dto.AuthRequest;
 import com.jpreet.cdlwiki.dto.MatchDTO;
+import com.jpreet.cdlwiki.enums.Role;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.model.Auth;
 import com.jpreet.cdlwiki.model.Match;
@@ -10,14 +11,19 @@ import com.jpreet.cdlwiki.repository.AuthRepository;
 import com.jpreet.cdlwiki.utility.AuthHelper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service(value = "authService")
-public class AuthService {
+public class AuthService implements UserDetailsService {
 
     @Autowired
     private AuthRepository authRepo;
@@ -25,13 +31,41 @@ public class AuthService {
     public AuthService() {
     }
 
-    public Auth getAuthentication(String apiKey) throws CDLWikiException {
+    @Override
+    public UserDetails loadUserByUsername(String apiKey) throws UsernameNotFoundException {
+        Auth user = this.getAuthentication(apiKey);
+
+        if (user != null) {
+            return User.builder()
+                    .username(user.getUsername())
+                    .password("")
+                    .roles(user.getRole().toString().split(" "))
+                    .build();
+        } else {
+            throw new UsernameNotFoundException(apiKey);
+        }
+    }
+
+    public Auth getAuthentication(String apiKey) throws UsernameNotFoundException {
         if (apiKey == null) {
-            throw new CDLWikiException("Invalid API Key");
+            throw new UsernameNotFoundException("Invalid API Key");
         }
 
         Optional<Auth> optionalAuth = authRepo.findByApiKey(apiKey);
-        return optionalAuth.orElseThrow(() -> new CDLWikiException("Invalid API Key"));
+        Auth auth = optionalAuth.orElseThrow(() -> new UsernameNotFoundException("Invalid API Key"));
+
+        return auth;
+    }
+
+    public Set<GrantedAuthority> getAuthorities(Role role) {
+        String[] roles = role.toString().split(",");
+        Set<GrantedAuthority> authorities = new HashSet<>();
+
+        for (int i = 0; i < roles.length; i++) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+        }
+
+        return authorities;
     }
 
     public List<AuthDTO> getAuthenticatedUsers() throws CDLWikiException {
