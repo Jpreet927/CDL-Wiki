@@ -2,14 +2,11 @@ package com.jpreet.cdlwiki.service;
 
 import com.jpreet.cdlwiki.dto.AuthDTO;
 import com.jpreet.cdlwiki.dto.AuthRequest;
-import com.jpreet.cdlwiki.dto.MatchDTO;
 import com.jpreet.cdlwiki.enums.Role;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.model.Auth;
-import com.jpreet.cdlwiki.model.Match;
 import com.jpreet.cdlwiki.repository.AuthRepository;
 import com.jpreet.cdlwiki.utility.AuthHelper;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +17,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service(value = "authService")
 public class AuthService implements UserDetailsService {

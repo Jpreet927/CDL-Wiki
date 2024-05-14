@@ -1,9 +1,7 @@
 package com.jpreet.cdlwiki.service;
 
-import com.jpreet.cdlwiki.dto.PlayerDTO;
 import com.jpreet.cdlwiki.dto.TeamDTO;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
-import com.jpreet.cdlwiki.model.Player;
 import com.jpreet.cdlwiki.model.Team;
 import com.jpreet.cdlwiki.repository.TeamRepository;
 import jakarta.transaction.Transactional;

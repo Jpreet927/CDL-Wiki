@@ -4,7 +4,6 @@ import com.jpreet.cdlwiki.dto.MatchDTO;
 import com.jpreet.cdlwiki.dto.MatchRequest;
 import com.jpreet.cdlwiki.enums.RoundName;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
-import com.jpreet.cdlwiki.model.Major;
 import com.jpreet.cdlwiki.model.Match;
 import com.jpreet.cdlwiki.model.Team;
 import com.jpreet.cdlwiki.repository.MajorRepository;
@@ -14,9 +13,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.Date;

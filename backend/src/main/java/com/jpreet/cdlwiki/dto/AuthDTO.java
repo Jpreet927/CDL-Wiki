@@ -2,8 +2,6 @@ package com.jpreet.cdlwiki.dto;
 
 import com.jpreet.cdlwiki.enums.Role;
 import com.jpreet.cdlwiki.model.Auth;
-import com.jpreet.cdlwiki.model.Player;
-import jakarta.persistence.Column;
 
 public class AuthDTO {
     private Integer id;

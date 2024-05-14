@@ -2,7 +2,6 @@ package com.jpreet.cdlwiki.controller;
 
 import com.jpreet.cdlwiki.dto.AuthDTO;
 import com.jpreet.cdlwiki.dto.AuthRequest;
-import com.jpreet.cdlwiki.dto.MajorRequest;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;

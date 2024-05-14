@@ -2,8 +2,6 @@ package com.jpreet.cdlwiki.dto;
 
 import com.jpreet.cdlwiki.model.Major;
 import com.jpreet.cdlwiki.model.Team;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 public class MajorDTO {
     private Integer id;

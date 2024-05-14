@@ -1,12 +1,8 @@
 package com.jpreet.cdlwiki.dto;
 
 import com.jpreet.cdlwiki.enums.RoundName;
-import com.jpreet.cdlwiki.model.Major;
 import com.jpreet.cdlwiki.model.Match;
 import com.jpreet.cdlwiki.model.Team;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 import java.util.Date;
 

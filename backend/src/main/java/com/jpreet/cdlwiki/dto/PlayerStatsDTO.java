@@ -3,7 +3,6 @@ package com.jpreet.cdlwiki.dto;
 import com.jpreet.cdlwiki.model.Match;
 import com.jpreet.cdlwiki.model.Player;
 import com.jpreet.cdlwiki.model.PlayerStats;
-import jakarta.persistence.*;
 
 public class PlayerStatsDTO {
     private Integer id;

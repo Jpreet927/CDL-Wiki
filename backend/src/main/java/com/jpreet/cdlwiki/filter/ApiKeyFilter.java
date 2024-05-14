@@ -1,6 +1,5 @@
 package com.jpreet.cdlwiki.filter;
 
-import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.model.Auth;
 import com.jpreet.cdlwiki.service.AuthService;
 import jakarta.servlet.FilterChain;
@@ -8,19 +7,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
 
 @Component
 public class ApiKeyFilter extends OncePerRequestFilter {

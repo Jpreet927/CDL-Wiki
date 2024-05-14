@@ -1,7 +1,6 @@
 package com.jpreet.cdlwiki.repository;
 
 import com.jpreet.cdlwiki.model.Auth;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

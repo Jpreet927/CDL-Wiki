@@ -4,7 +4,6 @@ import com.jpreet.cdlwiki.dto.MajorDTO;
 import com.jpreet.cdlwiki.dto.MajorRequest;
 import com.jpreet.cdlwiki.exception.CDLWikiException;
 import com.jpreet.cdlwiki.model.Major;
-import com.jpreet.cdlwiki.model.Team;
 import com.jpreet.cdlwiki.repository.MajorRepository;
 import com.jpreet.cdlwiki.repository.TeamRepository;
 import jakarta.transaction.Transactional;

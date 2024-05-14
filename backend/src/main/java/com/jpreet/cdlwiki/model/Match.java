@@ -1,6 +1,5 @@
 package com.jpreet.cdlwiki.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.jpreet.cdlwiki.enums.RoundName;
 import jakarta.persistence.*;
 

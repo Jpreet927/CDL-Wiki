@@ -1,7 +1,5 @@
 package com.jpreet.cdlwiki.dto;
 
-import com.jpreet.cdlwiki.model.Match;
-import com.jpreet.cdlwiki.model.Player;
 
 public class PlayerStatsRequest {
     private Integer playerId;

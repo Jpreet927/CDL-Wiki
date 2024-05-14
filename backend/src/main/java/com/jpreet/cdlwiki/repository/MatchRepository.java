@@ -2,12 +2,10 @@ package com.jpreet.cdlwiki.repository;
 
 import com.jpreet.cdlwiki.enums.RoundName;
 import com.jpreet.cdlwiki.model.Match;
-import com.jpreet.cdlwiki.model.Team;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
