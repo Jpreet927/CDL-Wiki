@@ -68,7 +68,7 @@ public class AuthService implements UserDetailsService {
         return authorities;
     }
 
-    public List<AuthDTO> getAuthenticatedUsers() throws CDLWikiException {
+    public List<AuthDTO> getAllAuthenticatedUsers() throws CDLWikiException {
         List<Auth> users = new ArrayList<>();
         authRepo.findAll().forEach(users::add);
 

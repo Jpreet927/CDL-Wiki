@@ -7,6 +7,7 @@ import com.jpreet.cdlwiki.service.PlayerStatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +47,7 @@ public class PlayerStatsController {
     }
 
     @PostMapping(value = "/")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> createStats(@RequestBody PlayerStatsRequest playerStatsRequest) throws CDLWikiException {
         String message = playerStatsService.createStats(playerStatsRequest);
         return new ResponseEntity<>(message, HttpStatus.OK);

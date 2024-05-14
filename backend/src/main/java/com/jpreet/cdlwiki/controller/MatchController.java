@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -171,6 +172,7 @@ public class MatchController {
     }
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> createMatch(@Valid @RequestBody MatchRequest matchRequest) throws CDLWikiException {
         String message = matchService.createMatch(matchRequest);
         return new ResponseEntity<>(message, HttpStatus.OK);
