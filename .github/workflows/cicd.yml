@@ -1,0 +1,38 @@
+name: CICD
+
+on:
+    push:
+        branches:
+            - [main]
+        paths:
+            - [backend/**]
+
+jobs:
+    build:
+        runs-on: [ubuntu-latest]
+        steps:
+            - name: Checkout source
+              uses: actions/checkout@v3
+            - name: Setup Java
+              uses: actions/setup-java@v3
+              with:
+                  distribution: "temurin"
+                  java-version: 17
+            - name: Build Project
+              run: mvn clean install
+            - name: Login to Docker Hub
+              run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+            - name: Build Docker Image
+              run: docker build -t jpreet/cdlwiki-backend .
+            - name: Publish Image
+              run: docker push jpreet/cdlwiki-backend:latest
+    deploy:
+        needs: build
+        runs-on: [aws-ec2]
+        steps:
+            - name: Pull from Docker Hub
+              run: docker pull jpreet/cdlwiki-backend:latest
+            - name: Delete old container
+              run: docker rm -f cdl-backend-container
+            - name: Run docker container
+              run: docker run -d docker run -e DB_DATABASE=${{secrets.DB_DATABASE}} -e DB_PORT=${{secrets.DB_PORT}} -e DB_NAME=${{secrets.DB_NAME}} -e DB_USER=${{secrets.DB_USER}} -e DB_PASSWORD=${{secrets.DB_PASSWORD}} -p 1234:8090 --name cdl-backend-container jpreet/cdlwiki-backend
