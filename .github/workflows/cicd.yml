@@ -20,6 +20,7 @@ jobs:
                   distribution: "temurin"
                   java-version: 17
             - name: Build Project
+              working-directory: ./backend
               run: mvn clean install
             - name: Login to Docker Hub
               run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
