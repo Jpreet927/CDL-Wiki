@@ -12,6 +12,7 @@ import { Match } from "@/ts/types/Match";
 import { getMatchesAfterDatePaginated } from "@/api/Matches";
 import Button from "@/components/templates/Button";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "@/components/templates/Skeleton";
 
 const HomePage = () => {
     const [teams, setTeams] = useState<Team[] | null>(null);
@@ -73,11 +74,22 @@ const HomePage = () => {
             </Section>
             <Section title="Teams">
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-                    {teams &&
-                        teams.map((team) => (
-                            <TeamCard team={team} variant="VIDEO" />
-                        ))}
+                    {teams
+                        ? teams.map((team) => {
+                              console.log(teams);
+                              return <TeamCard team={team} variant="VIDEO" />;
+                          })
+                        : Array(9)
+                              .fill(null)
+                              .map((_) => {
+                                  return (
+                                      <div className="aspect-video">
+                                          <Skeleton />
+                                      </div>
+                                  );
+                              })}
                 </div>
+                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"></div>
             </Section>
             <Section title="Latest News">
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4">

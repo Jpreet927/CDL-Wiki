@@ -10,6 +10,7 @@ export const options: RequestInit = {
 };
 
 export async function getTeams() {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     let response = await fetch(BASE_URL + "/api/teams/", options);
     let teams = await response.json();
 

@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
+    "@tanstack/react-query": "^5.37.1",
     "antd": "^5.15.4",
     "extract-colors": "^4.0.2",
     "framer-motion": "^11.1.7",
@@ -21,6 +22,7 @@
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-loading-skeleton": "^3.4.0",
     "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
