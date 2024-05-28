@@ -40,4 +40,4 @@ jobs:
             - name: Delete old container
               run: docker rm -f cdl-backend-container
             - name: Run docker container
-              run: docker run -d -e DB_DATABASE=${{secrets.DB_DATABASE}} -e DB_PORT=${{secrets.DB_PORT}} -e DB_NAME=${{secrets.DB_NAME}} -e DB_USER=${{secrets.DB_USER}} -e DB_PASSWORD=${{secrets.DB_PASSWORD}} -p 8080:8090 --name cdl-backend-container jpreet/cdlwiki-backend
+              run: docker run -e DB_DATABASE=${{secrets.DB_DATABASE}} -e DB_PORT=${{secrets.DB_PORT}} -e DB_NAME=${{secrets.DB_NAME}} -e DB_USER=${{secrets.DB_USER}} -e DB_PASSWORD=${{secrets.DB_PASSWORD}} -p 1234:8090 --name cdl-backend-container jpreet/cdlwiki-backend
