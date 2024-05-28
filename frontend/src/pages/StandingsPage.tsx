@@ -2,15 +2,19 @@ import { getTeamsOrderedByPoints } from "@/api/Teams";
 import TeamStandings from "@/components/TeamStandings";
 import Page from "@/components/templates/Page";
 import Section from "@/components/templates/Section";
+import Skeleton from "@/components/templates/Skeleton";
 import { Team } from "@/ts/types/Team";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const StandingsPage = () => {
-    const [teams, setTeams] = useState<Team[] | null>();
-
-    useEffect(() => {
-        getTeamsOrderedByPoints().then((teams) => setTeams(teams));
-    }, []);
+    const {
+        isPending,
+        error,
+        data: teams,
+    } = useQuery({
+        queryKey: ["teamsStandingsData"],
+        queryFn: getTeamsOrderedByPoints,
+    });
 
     return (
         <Page title={"Standings"}>
@@ -30,7 +34,7 @@ const StandingsPage = () => {
                     </th>
                     <tbody>
                         {teams &&
-                            teams.map((team, idx) => (
+                            teams.map((team: Team, idx: number) => (
                                 <TeamStandings
                                     team={team}
                                     idx={idx}
@@ -38,6 +42,24 @@ const StandingsPage = () => {
                                 />
                             ))}
                     </tbody>
+                    {isPending && (
+                        <div className="flex flex-col gap-2">
+                            {Array(12)
+                                .fill(null)
+                                .map((_, idx) => {
+                                    return (
+                                        <div className="h-[84px]">
+                                            <Skeleton delay={idx * 200} />
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    )}
+                    {error && (
+                        <p className="text-secondary text-center mt-12">
+                            {error.message}
+                        </p>
+                    )}
                 </table>
             </Section>
         </Page>

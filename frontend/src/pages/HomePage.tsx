@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Section from "@/components/templates/Section";
 import Button from "@/components/templates/Button";
@@ -105,7 +104,11 @@ const HomePage = () => {
                                 );
                             })}
                 </div>
-                <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"></div>
+                {teamsError && (
+                    <p className="text-secondary text-center mt-4">
+                        {teamsError.message}
+                    </p>
+                )}
             </Section>
             <Section title="Latest News">
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
