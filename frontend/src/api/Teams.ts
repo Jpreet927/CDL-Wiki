@@ -13,7 +13,7 @@ export async function getTeams() {
     let response = await fetch(BASE_URL + "/api/teams/", options);
 
     if (!response.ok) {
-        throw new Error("No past matches available.");
+        throw new Error("Team data not available.");
     }
 
     let teams = await response.json();
@@ -24,7 +24,7 @@ export async function getTeamsOrderedByPoints() {
     let response = await fetch(BASE_URL + "/api/teams/points", options);
 
     if (!response.ok) {
-        throw new Error("No past matches available.");
+        throw new Error("Team data not available.");
     }
 
     let teams = await response.json();
@@ -35,7 +35,7 @@ export async function getTeamById(id: string) {
     let response = await fetch(BASE_URL + "/api/teams/" + id, options);
 
     if (!response.ok) {
-        throw new Error("No past matches available.");
+        throw new Error("Team data not available.");
     }
 
     let teams = await response.json();

@@ -6,7 +6,7 @@ export async function getPlayersByTeamId(id: string) {
     let response = await fetch(BASE_URL + "/api/players/team/" + id, options);
 
     if (!response.ok) {
-        throw new Error("No past matches available.");
+        throw new Error("Player data not available.");
     }
 
     let players = await response.json();
@@ -17,7 +17,7 @@ export async function getPlayerById(id: string) {
     let response = await fetch(BASE_URL + "/api/players/" + id, options);
 
     if (!response.ok) {
-        throw new Error("No past matches available.");
+        throw new Error("Player data not available.");
     }
 
     let player = await response.json();
