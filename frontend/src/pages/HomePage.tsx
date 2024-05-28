@@ -1,46 +1,51 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Section from "@/components/templates/Section";
+import Button from "@/components/templates/Button";
+import Skeleton from "@/components/templates/Skeleton";
 import Hero from "@/components/home/Hero";
 import ArticleCard from "@/components/ArticleCard";
-import { ARTICLE_DATA } from "@/ts/constants/ArticlesData";
 import TeamCard from "@/components/TeamCard";
 import UpcomingMatch from "@/components/UpcomingMatch";
-import { useEffect, useState } from "react";
-import { Team } from "@/ts/types/Team";
-import { getTeams } from "@/api/Teams";
 import Alert from "@/components/Alert";
-import { Match } from "@/ts/types/Match";
+import { getTeams } from "@/api/Teams";
 import { getMatchesAfterDatePaginated } from "@/api/Matches";
-import Button from "@/components/templates/Button";
-import { useNavigate } from "react-router-dom";
-import Skeleton from "@/components/templates/Skeleton";
+import { Team } from "@/ts/types/Team";
+import { Match } from "@/ts/types/Match";
+import { ARTICLE_DATA } from "@/ts/constants/ArticlesData";
+import { useQuery } from "@tanstack/react-query";
 
 const HomePage = () => {
-    const [teams, setTeams] = useState<Team[] | null>(null);
-    const [upcomingMatches, setUpcomingMatches] = useState<Match[] | null>(
-        null
-    );
-    const [upcomingMatchesError, setUpcomingMatchesError] =
-        useState<string>("");
     const navigate = useNavigate();
-
-    useEffect(() => {
-        getTeams().then((teams) => setTeams(teams));
-        getMatchesAfterDatePaginated(new Date(), 9, 0)
-            .then((matches) => {
-                setUpcomingMatches(matches.content);
-            })
-            .catch((err) => setUpcomingMatchesError(err.message));
-    }, []);
+    const {
+        isPending: teamsPending,
+        error: teamsError,
+        data: teams,
+    } = useQuery({
+        queryKey: ["teamData"],
+        queryFn: getTeams,
+    });
+    const {
+        isPending: upcomingMatchesPending,
+        error: upcomingMatchesError,
+        data: upcomingMatches,
+    } = useQuery({
+        queryKey: ["matchData"],
+        queryFn: () => getMatchesAfterDatePaginated(new Date(), 9, 0),
+    });
 
     return (
         <div>
             <Hero />
             <Section title="Upcoming Matches">
                 {upcomingMatches &&
-                    new Date(Date.now()) > new Date(upcomingMatches[0].date) &&
+                    new Date(Date.now()) >
+                        new Date(upcomingMatches.content[0].date) &&
                     new Date(Date.now()) <
                         new Date(
-                            upcomingMatches[upcomingMatches.length - 1].date
+                            upcomingMatches.content[
+                                upcomingMatches.content.length - 1
+                            ].date
                         ) && (
                         <Alert>
                             <p>
@@ -57,9 +62,20 @@ const HomePage = () => {
                     )}
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
                     {upcomingMatches &&
-                        upcomingMatches.map((match) => (
+                        upcomingMatches.content.map((match: Match) => (
                             <UpcomingMatch match={match} />
                         ))}
+
+                    {upcomingMatchesPending &&
+                        Array(3)
+                            .fill(null)
+                            .map((_, idx) => {
+                                return (
+                                    <div className="h-[88px]">
+                                        <Skeleton delay={idx * 100} />
+                                    </div>
+                                );
+                            })}
                 </div>
                 <div className="w-full flex justify-center items-center">
                     <Button active={true} onClick={() => navigate("/matches")}>
@@ -68,26 +84,26 @@ const HomePage = () => {
                 </div>
                 {upcomingMatchesError && (
                     <p className="text-secondary text-center">
-                        {upcomingMatchesError}
+                        {upcomingMatchesError.message}
                     </p>
                 )}
             </Section>
             <Section title="Teams">
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-                    {teams
-                        ? teams.map((team) => {
-                              console.log(teams);
-                              return <TeamCard team={team} variant="VIDEO" />;
-                          })
-                        : Array(9)
-                              .fill(null)
-                              .map((_) => {
-                                  return (
-                                      <div className="aspect-video">
-                                          <Skeleton />
-                                      </div>
-                                  );
-                              })}
+                    {teams &&
+                        teams.map((team: Team) => {
+                            return <TeamCard team={team} variant="VIDEO" />;
+                        })}
+                    {teamsPending &&
+                        Array(9)
+                            .fill(null)
+                            .map((_, idx) => {
+                                return (
+                                    <div className="aspect-video">
+                                        <Skeleton delay={idx * 100} />
+                                    </div>
+                                );
+                            })}
                 </div>
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4"></div>
             </Section>
