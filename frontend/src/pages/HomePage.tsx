@@ -66,7 +66,7 @@ const HomePage = () => {
                         ))}
 
                     {upcomingMatchesPending &&
-                        Array(3)
+                        Array(9)
                             .fill(null)
                             .map((_, idx) => {
                                 return (
