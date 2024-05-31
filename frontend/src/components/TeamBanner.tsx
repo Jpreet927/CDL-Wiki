@@ -1,5 +1,5 @@
 import { Team } from "@/ts/types/Team";
-import Logo from "./templates/Logo";
+// import Logo from "./templates/Logo";
 import { extractColors } from "extract-colors";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "@/context/ThemeProvider";
