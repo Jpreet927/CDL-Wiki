@@ -7,8 +7,8 @@ const Banner = ({ title }: { title: string }) => {
     const { theme } = useContext(ThemeContext);
 
     return (
-        <div className="h-[33vh] w-full overflow-hidden relative flex items-center justify-center pt-12 px-24 text-center">
-            <h2 className="z-[3]">{title}</h2>
+        <div className="h-[40vh] w-full overflow-hidden relative flex items-center justify-center pt-12 px-24 text-center">
+            <h1 className="z-[3]">{title}</h1>
             <div
                 className={`bg-white aspect-square w-[40%] blur-[150px] rounded-full absolute top-[50%] left-[50%] translate-x-[-50%] z-[2] ${
                     theme === "dark" ? "opacity-20" : "opacity-50"
