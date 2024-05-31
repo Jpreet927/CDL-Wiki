@@ -1,51 +1,67 @@
-import TeamCard from "@/components/TeamCard";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import moment from "moment";
+import Skeleton from "@/components/templates/Skeleton";
 import Page from "@/components/templates/Page";
 import Section from "@/components/templates/Section";
+import TeamCard from "@/components/TeamCard";
 import PlayerCard from "@/components/PlayerCard";
+import UpcomingMatch from "@/components/UpcomingMatch";
 import RecentMatchTable from "@/components/RecentMatchTable";
-import moment from "moment";
-import { Team } from "@/ts/types/Team";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getTeamById } from "@/api/Teams";
 import { Player } from "@/ts/types/Player";
-import { getPlayersByTeamId } from "@/api/Players";
 import { Match } from "@/ts/types/Match";
+import { getTeamById } from "@/api/Teams";
+import { getPlayersByTeamId } from "@/api/Players";
 import {
     getMatchesByTeamAfterDatePaginated,
     getRecentMatchesByTeamId,
 } from "@/api/Matches";
-import UpcomingMatch from "@/components/UpcomingMatch";
 
 const TeamPage = () => {
-    const [team, setTeam] = useState<Team | null>(null);
-    const [players, setPlayers] = useState<Player[]>([]);
-    const [recentMatches, setRecentMatches] = useState<Match[]>([]);
-    const [recemtMatchesError, setRecentMatchesError] = useState<string>("");
-    const [upcomingMatches, setUpcomingMatches] = useState<Match[]>([]);
-    const [upcomingMatchesError, setUpcomingMatchesError] =
-        useState<string>("");
     const { id } = useParams();
 
-    useEffect(() => {
-        if (id) {
-            getTeamById(id).then((team) => setTeam(team));
-            getPlayersByTeamId(id).then((players) => setPlayers(players));
-            getRecentMatchesByTeamId(id, new Date(Date.now()))
-                .then((matches) => setRecentMatches(matches))
-                .catch((err) => setRecentMatchesError(err.message));
+    const {
+        isPending: teamPending,
+        error: teamError,
+        data: team,
+    } = useQuery({
+        queryKey: ["teamData", id],
+        queryFn: () => getTeamById(id!),
+        enabled: !!id,
+    });
+    const {
+        isPending: playersPending,
+        error: playersError,
+        data: players,
+    } = useQuery({
+        queryKey: ["playersData", id],
+        queryFn: () => getPlayersByTeamId(id!),
+        enabled: !!id,
+    });
+    const {
+        isPending: recentMatchesPending,
+        error: recentMatchesError,
+        data: recentMatches,
+    } = useQuery({
+        queryKey: ["recentMatchesData", id],
+        queryFn: () => getRecentMatchesByTeamId(id!, new Date(Date.now())),
+        enabled: !!id,
+    });
+    const {
+        isPending: upcomingMatchesPending,
+        error: upcomingMatchesError,
+        data: upcomingMatches,
+    } = useQuery({
+        queryKey: ["upcomingMatchesData", id],
+        queryFn: () =>
             getMatchesByTeamAfterDatePaginated(
-                id,
+                id!,
                 new Date("2024-01-01 00:00:00"),
                 6,
                 0
-            )
-                .then((matches) => {
-                    setUpcomingMatches(matches.content);
-                })
-                .catch((err) => setUpcomingMatchesError(err.message));
-        }
-    }, [id]);
+            ),
+        enabled: !!id,
+    });
 
     return (
         team && (
@@ -101,11 +117,16 @@ const TeamPage = () => {
                             </div>
                         </div>
                     </div>
+                    {teamError && (
+                        <p className="text-secondary text-center">
+                            {teamError.message}
+                        </p>
+                    )}
                 </Section>
                 <Section title="Roster">
                     <div className="grid lg:grid-cols-4 grid-cols-2 gap-4">
                         {players &&
-                            players.map((player) => {
+                            players.map((player: Player) => {
                                 return (
                                     <div className="flex flex-col gap-4">
                                         <PlayerCard
@@ -123,31 +144,70 @@ const TeamPage = () => {
                                     </div>
                                 );
                             })}
+                        {playersPending &&
+                            Array(4)
+                                .fill(null)
+                                .map((_, idx) => (
+                                    <div className="aspect-square">
+                                        <Skeleton delay={idx * 100} />
+                                    </div>
+                                ))}
+                        {playersError && (
+                            <p className="text-secondary text-center">
+                                {playersError.message}
+                            </p>
+                        )}
                     </div>
                 </Section>
                 <Section title="Upcoming Matches">
-                    {upcomingMatches && (
-                        <>
-                            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
-                                {upcomingMatches.map((match) => (
-                                    <UpcomingMatch match={match} />
-                                ))}
-                            </div>
-                            {upcomingMatchesError && (
-                                <p className="text-secondary text-center">
-                                    {upcomingMatchesError}
-                                </p>
-                            )}
-                        </>
-                    )}
+                    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
+                        {upcomingMatches &&
+                            upcomingMatches.content.map((match: Match) => (
+                                <UpcomingMatch match={match} />
+                            ))}
+
+                        {upcomingMatchesPending &&
+                            Array(9)
+                                .fill(null)
+                                .map((_, idx) => {
+                                    return (
+                                        <div className="h-[88px]">
+                                            <Skeleton delay={idx * 100} />
+                                        </div>
+                                    );
+                                })}
+                        {upcomingMatchesError && (
+                            <p className="text-secondary text-center">
+                                {upcomingMatchesError.message}
+                            </p>
+                        )}
+                    </div>
                 </Section>
                 <Section title="Recent Matches">
                     {recentMatches && (
                         <RecentMatchTable
                             matches={recentMatches}
                             team={team}
-                            errorMessage={recemtMatchesError}
+                            errorMessage={recentMatchesError?.message}
                         />
+                    )}
+                    {recentMatchesPending && (
+                        <div className="flex flex-col gap-2">
+                            {Array(5)
+                                .fill(null)
+                                .map((_, idx) => {
+                                    return (
+                                        <div className="h-[84px]">
+                                            <Skeleton delay={idx * 200} />
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    )}
+                    {recentMatchesError && (
+                        <p className="text-secondary text-center">
+                            {recentMatchesError.message}
+                        </p>
                     )}
                 </Section>
             </Page>

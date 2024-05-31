@@ -20,37 +20,44 @@ const TeamBanner = ({ team }: { team: Team }) => {
     };
 
     return (
-        <div className="h-[33vh] w-full overflow-hidden relative flex items-center justify-center pt-12 px-24 text-center">
-            <div className="flex gap-4 items-center h-[40px] z-[2]">
-                <Logo
-                    srcDark={team.logoLight}
-                    srcLight={team.logoDark}
-                    alt={team.name + " logo"}
-                />
-                <h2>{team.name}</h2>
+        <div
+            className={`h-[40vh] w-full overflow-hidden relative flex items-center justify-center pt-12 px-24 text-center group ${
+                theme === "dark" ? "bg-background-2" : ""
+            }`}
+            style={{
+                backgroundColor: theme === "light" ? `${color}` : "",
+            }}
+        >
+            <div className="flex gap-4 items-center z-[2]">
+                {/* <div className="h-[100px] drop-shadow-xl">
+                    <Logo
+                        srcDark={team.logoLight}
+                        srcLight={team.logoLight}
+                        alt={team.name + " logo"}
+                    />
+                </div> */}
+                <h1 className="text-white drop-shadow-2xl">{team.name}</h1>
             </div>
-            <div className="absolute top-0 left-0 w-full h-[150%] flex justify-end items-end z-[1]">
+            <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-[1] bg-blend-overlay">
                 <div
-                    className={`w-[30%] rounded-full aspect-square blur-3xl bg-white/20 translate-x-44 translate-y-44`}
+                    className={`w-[30%] rounded-full aspect-square blur-[100px] bg-white/35 translate-y-[250px] group-hover:scale-125 transition-transform duration-700`}
                 ></div>
             </div>
             <div
-                className={`absolute top-0 right-0 w-[100%] h-full opacity-100 flex items-end justify-end`}
-                style={{
-                    backgroundImage: `linear-gradient(315deg, ${color} 15%, ${
-                        theme === "dark"
-                            ? "rgb(7, 7, 7) 50%)"
-                            : "rgb(255, 255, 255) 50%)"
-                    }`,
-                }}
-            ></div>
-            <div className="absolute top-0 left-0 w-full h-[200%] flex justify-center items-center">
+                className={`absolute top-0 left-0 w-full h-full opacity-100 flex items-center justify-center group-hover:scale-125 transition-transform duration-700`}
+            >
+                <div
+                    className="aspect-square min-w-[100%] min-h-[100%] rounded-full lg:blur-[200px] lg:translate-y-[250px] md:blur-[150px] md:translate-y-[200px] blur-[80px] translate-y-[150px]"
+                    style={{
+                        backgroundColor: `${color}`,
+                    }}
+                ></div>
+            </div>
+            <div className="absolute top-0 left-0 w-full h-[200%] flex justify-center items-center -translate-y-[10%]">
                 <img
                     src={team.logoDark}
                     alt=""
-                    className={`max-h-[200%] max-w-[200%] grayscale brightness-0 ${
-                        theme === "dark" ? "opacity-[20%]" : "opacity-[10%]"
-                    } z-[1] select-none pointer-events-none`}
+                    className={`min-h-[70%] min-w-[70%] grayscale brightness-0 opacity-[10%] z-[1] select-none pointer-events-none`}
                 />
             </div>
         </div>

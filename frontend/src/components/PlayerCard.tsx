@@ -25,7 +25,7 @@ const PlayerCard = ({ player }: { player: Player }) => {
                 <div className="flex items-end justify-center bg-background-2 relative group overflow-hidden aspect-square">
                     <div className="absolute top-0 left-0 w-full h-[150%] flex justify-center items-end ease-in-out duration-500 z-[2]">
                         <div
-                            className={`w-[100%] aspect-square blur-3xl bg-white/80`}
+                            className={`w-[90%] aspect-square blur-3xl bg-white/50`}
                         ></div>
                     </div>
                     <div className="absolute top-0 left-0 w-full h-[130%] flex justify-center items-end ease-in-out duration-500 z-[1]">

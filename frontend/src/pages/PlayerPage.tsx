@@ -1,37 +1,37 @@
-import { getPlayerById, getPlayersByTeamId } from "@/api/Players";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import moment from "moment";
 import IndividualStatsTable from "@/components/IndividualStatsTable";
 import PlayerCard from "@/components/PlayerCard";
 import TeamCard from "@/components/TeamCard";
 import Page from "@/components/templates/Page";
 import Section from "@/components/templates/Section";
 import Stat from "@/components/templates/Stat";
+import { getPlayerById, getPlayersByTeamId } from "@/api/Players";
 import { Player } from "@/ts/types/Player";
-import moment from "moment";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import Skeleton from "@/components/templates/Skeleton";
 
 const PlayerPage = () => {
-    const [player, setPlayer] = useState<Player | null>(null);
-    const [teammates, setTeammates] = useState<Player[]>([]);
     const { teamid, playerid } = useParams();
 
-    useEffect(() => {
-        if (playerid) {
-            getPlayerById(playerid).then((player) => setPlayer(player));
-        }
-    }, [playerid]);
-
-    useEffect(() => {
-        if (teamid) {
-            getPlayersByTeamId(teamid).then((players: Player[]) => {
-                setTeammates(
-                    players.filter(
-                        (player: Player) => player.id !== Number(playerid)
-                    )
-                );
-            });
-        }
-    }, [teamid]);
+    const {
+        isPending: teammatesPending,
+        error: teammatesError,
+        data: teammates,
+    } = useQuery({
+        queryKey: ["playersData", teamid],
+        queryFn: () => getPlayersByTeamId(teamid!),
+        enabled: !!teamid,
+    });
+    const {
+        isPending: playerPending,
+        error: playerError,
+        data: player,
+    } = useQuery({
+        queryKey: ["playerData", playerid],
+        queryFn: () => getPlayerById(playerid!),
+        enabled: !!playerid,
+    });
 
     return (
         player && (
@@ -128,9 +128,32 @@ const PlayerPage = () => {
                             </div>
                         </div>
                     </div>
+                    {playerError && (
+                        <p className="text-secondary text-center">
+                            {playerError.message}
+                        </p>
+                    )}
                 </Section>
                 <Section title="Last 5 Matches">
                     <IndividualStatsTable />
+                    {/* {recentMatchesPending && (
+                        <div className="flex flex-col gap-2">
+                            {Array(5)
+                                .fill(null)
+                                .map((_, idx) => {
+                                    return (
+                                        <div className="h-[84px]">
+                                            <Skeleton delay={idx * 200} />
+                                        </div>
+                                    );
+                                })}
+                        </div>
+                    )}
+                    {recentMatchesError && (
+                        <p className="text-secondary text-center">
+                            {recentMatchesError.message}
+                        </p>
+                    )} */}
                 </Section>
                 <Section title="Team">
                     <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-2 gap-4">
@@ -140,22 +163,40 @@ const PlayerPage = () => {
                                 <p className="font-bold">{player.team.name}</p>
                             </div>
                         </div>
-                        {teammates.map((teammate) => (
-                            <div className="flex flex-col gap-4">
-                                <PlayerCard
-                                    player={teammate}
-                                    key={teammate.id}
-                                />
-                                <div>
-                                    <p className="font-bold">
-                                        {teammate.alias}
-                                    </p>
-                                    <p className="text-secondary">
-                                        {teammate.name}
-                                    </p>
+                        {teammates
+                            .filter(
+                                (player: Player) =>
+                                    player.id !== Number(playerid)
+                            )
+                            .map((teammate: Player) => (
+                                <div className="flex flex-col gap-4">
+                                    <PlayerCard
+                                        player={teammate}
+                                        key={teammate.id}
+                                    />
+                                    <div>
+                                        <p className="font-bold">
+                                            {teammate.alias}
+                                        </p>
+                                        <p className="text-secondary">
+                                            {teammate.name}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        {teammatesPending &&
+                            Array(4)
+                                .fill(null)
+                                .map((_, idx) => (
+                                    <div className="aspect-square">
+                                        <Skeleton delay={idx * 100} />
+                                    </div>
+                                ))}
+                        {teammatesError && (
+                            <p className="text-secondary text-center">
+                                {teammatesError.message}
+                            </p>
+                        )}
                     </div>
                 </Section>
             </Page>

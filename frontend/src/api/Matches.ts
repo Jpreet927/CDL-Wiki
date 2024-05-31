@@ -10,12 +10,11 @@ export async function getMatchesBeforeDate(date: Date) {
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No past matches available.");
     }
 
+    let matches = await response.json();
     return matches;
 }
 
@@ -34,12 +33,11 @@ export async function getMatchesBeforeDatePaginated(
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No past matches available.");
     }
 
+    let matches = await response.json();
     return { content: matches.content, isLast: matches.last };
 }
 
@@ -50,12 +48,11 @@ export async function getMatchesAfterDate(date: Date) {
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No upcoming matches available.");
     }
 
+    let matches = await response.json();
     return matches;
 }
 
@@ -74,12 +71,11 @@ export async function getMatchesAfterDatePaginated(
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No upcoming matches available.");
     }
 
+    let matches = await response.json();
     return { content: matches.content, isLast: matches.last };
 }
 
@@ -92,12 +88,11 @@ export async function getMatchesByMajorBeforeDate(id: string, date: Date) {
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No past matches available.");
     }
 
+    let matches = await response.json();
     return matches;
 }
 
@@ -117,12 +112,11 @@ export async function getMatchesByMajorBeforeDatePaginated(
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No past matches available.");
     }
 
+    let matches = await response.json();
     return { content: matches.content, isLast: matches.last };
 }
 
@@ -135,12 +129,11 @@ export async function getMatchesByMajorAfterDate(id: string, date: Date) {
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No upcoming matches available.");
     }
 
+    let matches = await response.json();
     return matches;
 }
 
@@ -160,12 +153,11 @@ export async function getMatchesByMajorAfterDatePaginated(
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No past matches available.");
     }
 
+    let matches = await response.json();
     return { content: matches.content, isLast: matches.last };
 }
 
@@ -178,12 +170,11 @@ export async function getRecentMatchesByTeamId(id: string, date: Date) {
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No past matches available.");
     }
 
+    let matches = await response.json();
     return matches;
 }
 
@@ -196,12 +187,11 @@ export async function getUpcomingMatchesByTeamId(id: string, date: Date) {
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No upcoming matches available.");
     }
 
+    let matches = await response.json();
     return matches;
 }
 
@@ -221,12 +211,11 @@ export async function getMatchesByTeamBeforeDatePaginated(
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No past matches available.");
     }
 
+    let matches = await response.json();
     return { content: matches.content, isLast: matches.last };
 }
 
@@ -246,11 +235,10 @@ export async function getMatchesByTeamAfterDatePaginated(
         options
     );
 
-    let matches = await response.json();
-
-    if ("errorMessage" in matches) {
+    if (!response.ok) {
         throw new Error("No past matches available.");
     }
 
+    let matches = await response.json();
     return { content: matches.content, isLast: matches.last };
 }

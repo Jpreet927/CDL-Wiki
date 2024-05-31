@@ -11,21 +11,33 @@ export const options: RequestInit = {
 
 export async function getTeams() {
     let response = await fetch(BASE_URL + "/api/teams/", options);
-    let teams = await response.json();
 
+    if (!response.ok) {
+        throw new Error("Team data not available.");
+    }
+
+    let teams = await response.json();
     return teams;
 }
 
 export async function getTeamsOrderedByPoints() {
     let response = await fetch(BASE_URL + "/api/teams/points", options);
-    let teams = await response.json();
 
+    if (!response.ok) {
+        throw new Error("Team data not available.");
+    }
+
+    let teams = await response.json();
     return teams;
 }
 
 export async function getTeamById(id: string) {
     let response = await fetch(BASE_URL + "/api/teams/" + id, options);
-    let team = await response.json();
 
-    return team;
+    if (!response.ok) {
+        throw new Error("Team data not available.");
+    }
+
+    let teams = await response.json();
+    return teams;
 }
