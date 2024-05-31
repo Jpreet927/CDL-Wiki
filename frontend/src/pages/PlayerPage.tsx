@@ -24,7 +24,7 @@ const PlayerPage = () => {
         enabled: !!teamid,
     });
     const {
-        isPending: playerPending,
+        // isPending: playerPending,
         error: playerError,
         data: player,
     } = useQuery({

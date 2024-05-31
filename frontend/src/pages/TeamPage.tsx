@@ -21,7 +21,7 @@ const TeamPage = () => {
     const { id } = useParams();
 
     const {
-        isPending: teamPending,
+        // isPending: teamPending,
         error: teamError,
         data: team,
     } = useQuery({
