@@ -8,10 +8,10 @@ const Section = ({
     title: string;
 }) => {
     return (
-        <section className="2xl:px-80 xl:px-64 lg:px-24 md:px-24 sm:px-12 px-6 pt-20 flex flex-col gap-4">
-            <h2>{title}</h2>
+        <section className="flex flex-col gap-4 pt-12">
+            <h2 id={title.split(" ").join("")}>{title}</h2>
             {children}
-            <div className="h-[1px] w-full bg-background-2 mt-20"></div>
+            <div className="h-[1px] w-full bg-background-2 mt-12"></div>
         </section>
     );
 };
