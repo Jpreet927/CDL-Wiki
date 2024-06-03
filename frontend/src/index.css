@@ -48,7 +48,7 @@
     }
 
     h2 {
-        @apply font-bold lg:text-5xl sm:text-4xl text-3xl text-primary font-heading;
+        @apply font-bold lg:text-5xl sm:text-4xl text-3xl text-primary font-heading scroll-mt-[120px];
     }
 
     h3 {
