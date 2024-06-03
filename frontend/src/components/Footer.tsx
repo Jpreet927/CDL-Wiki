@@ -14,7 +14,9 @@ const Footer = () => {
             <div className="w-full xl:px-64 lg:px-48 md:px-24 px-12 flex flex-col gap-12">
                 <div className="h-[1px] w-full bg-background-2"></div>
                 <div className="flex justify-between items-center gap-2">
-                    <h2>Call of Duty League</h2>
+                    <p className="font-bold lg:text-5xl sm:text-4xl text-3xl text-primary font-heading">
+                        Call of Duty League
+                    </p>
                     <div className="sm:h-[30px] h-[20px]">
                         <Logo
                             srcDark={cdlLight}

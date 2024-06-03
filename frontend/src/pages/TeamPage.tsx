@@ -65,7 +65,12 @@ const TeamPage = () => {
 
     return (
         team && (
-            <Page title={team.name} bannerType="TEAM" team={team}>
+            <Page
+                title={team.name}
+                bannerType="TEAM"
+                team={team}
+                tocVisible={true}
+            >
                 <Section title="Summary">
                     <div className="flex md:gap-16 gap-6 md:flex-row flex-col md:items-start items-center">
                         <div className="h-full aspect-square">
@@ -73,7 +78,9 @@ const TeamPage = () => {
                         </div>
                         <div className="flex flex-col gap-12 w-full">
                             <div className="flex flex-col gap-2">
-                                <h2>{team.name}</h2>
+                                <p className="font-bold lg:text-5xl sm:text-4xl text-3xl text-primary font-heading">
+                                    {team.name}
+                                </p>
                             </div>
                             <div className="w-full grid grid-cols-2 gap-y-12 gap-x-6">
                                 <div>

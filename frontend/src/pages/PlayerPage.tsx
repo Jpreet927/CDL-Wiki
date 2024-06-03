@@ -39,6 +39,7 @@ const PlayerPage = () => {
                 title={`${player.alias} - ${player.team.name}`}
                 bannerType="TEAM"
                 team={player.team}
+                tocVisible={true}
             >
                 <Section title="Summary">
                     <div className="flex md:gap-16 gap-6 md:flex-row flex-col md:items-start items-center">
