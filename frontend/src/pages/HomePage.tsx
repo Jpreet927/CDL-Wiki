@@ -37,7 +37,7 @@ const HomePage = () => {
     return (
         <div>
             <Hero />
-            <div className="flex 2xl:px-80 xl:px-64 lg:px-24 md:px-24 sm:px-12 px-6  pt-20">
+            <div className="flex 2xl:px-80 xl:px-64 lg:px-24 md:px-24 sm:px-12 px-6 pt-20">
                 <div className="flex flex-col gap-8 ">
                     <Section title="Upcoming Matches">
                         {upcomingMatches &&
