@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import TeamPage from "./pages/TeamPage";
 import PlayerPage from "./pages/PlayerPage";
+import MajorPage from "./pages/MajorPage";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                     element={<PlayerPage />}
                 />
                 <Route path="/matches" element={<MatchesPage />} />
+                <Route path="/majors" element={<MajorPage />} />
                 <Route path="/about" element={<AboutPage />} />
             </Routes>
             <Footer />

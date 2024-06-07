@@ -20,6 +20,10 @@ export const NAV_ITEMS = [
         href: "/matches",
     },
     {
+        title: "Majors",
+        href: "/majors",
+    },
+    {
         title: "About",
         href: "/about",
     },
