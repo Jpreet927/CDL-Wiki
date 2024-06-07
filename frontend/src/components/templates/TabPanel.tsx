@@ -19,12 +19,12 @@ const TabPanel = ({ tabItems, children, activeTab, setActiveTab }: Props) => {
                                 <p
                                     className={`hover:text-primary cursor-pointer transition-colors ease-in-out duration-300
                                             ${
-                                                activeTab === idx
+                                                activeTab === item.id
                                                     ? "text-primary font-bold"
                                                     : "text-secondary"
                                             }
                                         `}
-                                    onClick={() => setActiveTab(idx)}
+                                    onClick={() => setActiveTab(item.id)}
                                 >
                                     {item.title}
                                 </p>
@@ -36,12 +36,12 @@ const TabPanel = ({ tabItems, children, activeTab, setActiveTab }: Props) => {
                             <p
                                 className={`hover:text-primary cursor-pointer transition-colors ease-in-out duration-300
                                         ${
-                                            activeTab === idx
+                                            activeTab === item.id
                                                 ? "text-primary font-bold"
                                                 : "text-secondary"
                                         }
                                     `}
-                                onClick={() => setActiveTab(idx)}
+                                onClick={() => setActiveTab(item.id)}
                             >
                                 {item.title}
                             </p>
