@@ -7,6 +7,7 @@ import TabPanel from "@/components/templates/TabPanel";
 import { Team } from "@/ts/types/Team";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { MAJOR_PRIZES } from "@/ts/constants/MajorData";
 
 const majors = [
     { id: 1, title: "Major 1" },
@@ -26,7 +27,6 @@ const MajorPage = () => {
         queryKey: ["majorId", activeTab],
         queryFn: () => getMajorById(activeTab + ""),
     });
-    console.log(placings);
 
     return (
         <Page title="Majors" bannerType="DEFAULT">
@@ -37,17 +37,16 @@ const MajorPage = () => {
                     setActiveTab={setActiveTab}
                 >
                     <table>
-                        <th className="grid sm:grid-cols-7 grid-cols-5 md:px-12 px-2 pt-8 pb-2 gap-2 w-full items-center [&>*]:font-bold text-left">
+                        <th className="grid grid-cols-5 md:px-12 px-2 pt-8 pb-2 gap-2 w-full items-center [&>*]:font-bold text-left">
                             <p>Rank</p>
-                            <div className="col-start-2 sm:col-end-5 col-end-4 md:pl-12">
+                            <div className="col-start-2 col-end-4 md:pl-12">
                                 <p>Team</p>
                             </div>
                             <div className="sm:hidden block">
                                 <p>W/L</p>
                             </div>
-                            <p className="sm:block hidden">Wins</p>
-                            <p className="sm:block hidden">Losses</p>
-                            <p>Points</p>
+                            <p className="sm:block hidden">Earnings</p>
+                            <p className="sm:block hidden">Points</p>
                         </th>
                         <tbody>
                             {placings &&
@@ -56,6 +55,14 @@ const MajorPage = () => {
                                         team && (
                                             <MajorStandings
                                                 team={team}
+                                                earnings={
+                                                    MAJOR_PRIZES[activeTab][idx]
+                                                        .earnings
+                                                }
+                                                points={
+                                                    MAJOR_PRIZES[activeTab][idx]
+                                                        .points
+                                                }
                                                 idx={idx}
                                                 key={team.id}
                                             />
