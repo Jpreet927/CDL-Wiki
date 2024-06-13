@@ -1,0 +1,21 @@
+export type Major = {
+    id: number;
+    location: string;
+    venue: string;
+    prizePool: number;
+    startDate: Date;
+    endDate: Date;
+    host: Team;
+    first: Team;
+    second: Team;
+    third: Team;
+    fourth: Team;
+    fifth: Team;
+    sixth: Team;
+    seventh: Team;
+    eighth: Team;
+    ninth: Team;
+    tenth: Team;
+    eleventh: Team;
+    twelfth: Team;
+};
