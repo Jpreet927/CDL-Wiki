@@ -1,5 +1,6 @@
 import { Team } from "@/ts/types/Team";
 import { options } from "./Teams";
+import { Major } from "@/ts/types/Major";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -10,7 +11,7 @@ export async function getMajorById(id: string) {
         throw new Error("Major data not available.");
     }
 
-    let major = await response.json();
+    let major: Major = await response.json();
 
     const placings: Team[] = [];
     placings.push(major["first"]);
@@ -26,5 +27,12 @@ export async function getMajorById(id: string) {
     placings.push(major["eleventh"]);
     placings.push(major["twelfth"]);
 
-    return placings;
+    return {
+        prizePool: major.prizePool,
+        venue: major.venue,
+        location: major.location,
+        startDate: major.startDate,
+        endDate: major.endDate,
+        placings,
+    };
 }

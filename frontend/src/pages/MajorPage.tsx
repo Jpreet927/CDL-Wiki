@@ -8,6 +8,7 @@ import { Team } from "@/ts/types/Team";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { MAJOR_PRIZES } from "@/ts/constants/MajorData";
+import moment from "moment";
 
 const majors = [
     { id: 1, title: "Major 1" },
@@ -18,14 +19,17 @@ const majors = [
 ];
 
 const MajorPage = () => {
-    const [activeTab, setActiveTab] = useState(1);
+    const [activeMajor, setActiveMajor] = useState(1);
+    const [activeTab, setActiveTab] = useState<"Placings" | "Bracket">(
+        "Placings"
+    );
     const {
         isPending,
         error,
-        data: placings,
+        data: major,
     } = useQuery({
-        queryKey: ["majorId", activeTab],
-        queryFn: () => getMajorById(activeTab + ""),
+        queryKey: ["majorId", activeMajor],
+        queryFn: () => getMajorById(activeMajor + ""),
     });
 
     return (
@@ -33,10 +37,69 @@ const MajorPage = () => {
             <Section title="Majors">
                 <TabPanel
                     tabItems={majors}
-                    activeTab={activeTab}
-                    setActiveTab={setActiveTab}
+                    activeTab={activeMajor}
+                    setActiveTab={setActiveMajor}
                 >
-                    <table>
+                    {major && (
+                        <div className="grid grid-cols-4 my-8">
+                            <div>
+                                <p className="text-secondary text-sm">
+                                    Location
+                                </p>
+                                <p>{major.location ? major.location : "N/A"}</p>
+                            </div>
+                            <div>
+                                <p className="text-secondary text-sm">Venue</p>
+                                <p>{major.venue ? major.venue : "N/A"}</p>
+                            </div>
+                            <div>
+                                <p className="text-secondary text-sm">
+                                    Prize Pool
+                                </p>
+                                <p>
+                                    {major.prizePool
+                                        ? `$${major.prizePool.toLocaleString()}`
+                                        : "N/A"}
+                                </p>
+                            </div>
+                            <div>
+                                <p className="text-secondary text-sm">Dates</p>
+                                <p>
+                                    {major.startDate && major.endDate
+                                        ? `${moment(major.startDate).format(
+                                              "MM/DD/YYYY"
+                                          )} - ${moment(major.endDate).format(
+                                              "MM/DD/YYYY"
+                                          )}`
+                                        : "N/A"}
+                                </p>
+                            </div>
+                        </div>
+                    )}
+                    <div className="flex gap-4 items-center mt-8">
+                        <button
+                            className={`${
+                                activeTab === "Placings"
+                                    ? "font-bold bg-background-2"
+                                    : "bg-background"
+                            } px-12 py-4 w-[200px] text-center cursor-pointer hover:bg-background-2 rounded-md transition-colors duration-300 ease-in-out`}
+                            onClick={() => setActiveTab("Placings")}
+                        >
+                            <p>Placings</p>
+                        </button>
+                        <div className="w-[1px] h-[50px] bg-background-2"></div>
+                        <button
+                            className={`${
+                                activeTab === "Bracket"
+                                    ? "font-bold bg-background-2"
+                                    : "bg-background"
+                            } px-12 py-4 w-[200px] text-center cursor-pointer hover:bg-background-2 rounded-md transition-colors duration-300 ease-in-out`}
+                            onClick={() => setActiveTab("Bracket")}
+                        >
+                            <p>Bracket</p>
+                        </button>
+                    </div>
+                    <table className="w-full">
                         <th className="grid grid-cols-5 md:px-12 px-2 pt-8 pb-2 gap-2 w-full items-center [&>*]:font-bold text-left">
                             <p>Rank</p>
                             <div className="col-start-2 col-end-4 md:pl-12">
@@ -49,19 +112,21 @@ const MajorPage = () => {
                             <p className="sm:block hidden">Points</p>
                         </th>
                         <tbody>
-                            {placings &&
-                                placings.map(
+                            {major &&
+                                major.placings.map(
                                     (team: Team, idx: number) =>
                                         team && (
                                             <MajorStandings
                                                 team={team}
                                                 earnings={
-                                                    MAJOR_PRIZES[activeTab][idx]
-                                                        .earnings
+                                                    MAJOR_PRIZES[activeMajor][
+                                                        idx
+                                                    ].earnings
                                                 }
                                                 points={
-                                                    MAJOR_PRIZES[activeTab][idx]
-                                                        .points
+                                                    MAJOR_PRIZES[activeMajor][
+                                                        idx
+                                                    ].points
                                                 }
                                                 idx={idx}
                                                 key={team.id}
@@ -70,7 +135,7 @@ const MajorPage = () => {
                                 )}
                         </tbody>
                         {isPending && (
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2 w-full">
                                 {Array(12)
                                     .fill(null)
                                     .map((_, idx) => {
