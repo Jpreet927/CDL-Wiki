@@ -9,6 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { MAJOR_PRIZES } from "@/ts/constants/MajorData";
 import moment from "moment";
+import { getTournamentMatchesByMajor } from "@/api/Matches";
+import Bracket from "@/components/Bracket";
 
 const majors = [
     { id: 1, title: "Major 1" },
@@ -24,12 +26,20 @@ const MajorPage = () => {
         "Placings"
     );
     const {
-        isPending,
-        error,
-        data: major,
+        isPending: majorPending,
+        error: majorError,
+        data: majorData,
     } = useQuery({
         queryKey: ["majorId", activeMajor],
         queryFn: () => getMajorById(activeMajor + ""),
+    });
+    const {
+        isPending: matchesPending,
+        error: matchesError,
+        data: matchesData,
+    } = useQuery({
+        queryKey: ["matches", activeMajor],
+        queryFn: () => getTournamentMatchesByMajor(activeMajor + ""),
     });
 
     return (
@@ -40,37 +50,43 @@ const MajorPage = () => {
                     activeTab={activeMajor}
                     setActiveTab={setActiveMajor}
                 >
-                    {major && (
+                    {majorData && (
                         <div className="grid grid-cols-4 my-8">
                             <div>
                                 <p className="text-secondary text-sm">
                                     Location
                                 </p>
-                                <p>{major.location ? major.location : "N/A"}</p>
+                                <p>
+                                    {majorData.location
+                                        ? majorData.location
+                                        : "N/A"}
+                                </p>
                             </div>
                             <div>
                                 <p className="text-secondary text-sm">Venue</p>
-                                <p>{major.venue ? major.venue : "N/A"}</p>
+                                <p>
+                                    {majorData.venue ? majorData.venue : "N/A"}
+                                </p>
                             </div>
                             <div>
                                 <p className="text-secondary text-sm">
                                     Prize Pool
                                 </p>
                                 <p>
-                                    {major.prizePool
-                                        ? `$${major.prizePool.toLocaleString()}`
+                                    {majorData.prizePool
+                                        ? `$${majorData.prizePool.toLocaleString()}`
                                         : "N/A"}
                                 </p>
                             </div>
                             <div>
                                 <p className="text-secondary text-sm">Dates</p>
                                 <p>
-                                    {major.startDate && major.endDate
-                                        ? `${moment(major.startDate).format(
+                                    {majorData.startDate && majorData.endDate
+                                        ? `${moment(majorData.startDate).format(
                                               "MM/DD/YYYY"
-                                          )} - ${moment(major.endDate).format(
-                                              "MM/DD/YYYY"
-                                          )}`
+                                          )} - ${moment(
+                                              majorData.endDate
+                                          ).format("MM/DD/YYYY")}`
                                         : "N/A"}
                                 </p>
                             </div>
@@ -112,8 +128,8 @@ const MajorPage = () => {
                             <p className="sm:block hidden">Points</p>
                         </th>
                         <tbody>
-                            {major &&
-                                major.placings.map(
+                            {majorData &&
+                                majorData.placings.map(
                                     (team: Team, idx: number) =>
                                         team && (
                                             <MajorStandings
@@ -134,7 +150,7 @@ const MajorPage = () => {
                                         )
                                 )}
                         </tbody>
-                        {isPending && (
+                        {majorPending && (
                             <div className="flex flex-col gap-2 w-full">
                                 {Array(12)
                                     .fill(null)
@@ -147,12 +163,13 @@ const MajorPage = () => {
                                     })}
                             </div>
                         )}
-                        {error && (
+                        {majorError && (
                             <p className="text-secondary text-center mt-12">
-                                {error.message}
+                                {majorError.message}
                             </p>
                         )}
                     </table>
+                    <Bracket matches={matchesData} />
                 </TabPanel>
             </Section>
         </Page>
