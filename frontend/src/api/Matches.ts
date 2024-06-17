@@ -242,3 +242,17 @@ export async function getMatchesByTeamAfterDatePaginated(
     let matches = await response.json();
     return { content: matches.content, isLast: matches.last };
 }
+
+export async function getTournamentMatchesByMajor(id: string) {
+    let response = await fetch(
+        BASE_URL + `/api/match/major/tournament/${id}`,
+        options
+    );
+
+    if (!response.ok) {
+        throw new Error("No matches available.");
+    }
+
+    let matches = await response.json();
+    return matches;
+}
