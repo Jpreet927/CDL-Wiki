@@ -1,5 +1,6 @@
 import { formatDate } from "@/config/FormatDates";
 import { options } from "./Teams";
+import { Match } from "@/ts/types/Match";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -254,5 +255,23 @@ export async function getTournamentMatchesByMajor(id: string) {
     }
 
     let matches = await response.json();
-    return matches;
+
+    let organizedByRound: { [key: string]: Match[] } = {};
+    matches.forEach((match: Match) => {
+        const key = match.round;
+        if (organizedByRound.hasOwnProperty(key) === false) {
+            organizedByRound[key] = [];
+        }
+        organizedByRound[key].push(match);
+    });
+
+    Object.keys(organizedByRound).forEach((key) => {
+        organizedByRound[key].sort((a, b) => {
+            if (a.date < b.date) return -1;
+            if (a.date > b.date) return 1;
+            return 0;
+        });
+    });
+
+    return organizedByRound;
 }
