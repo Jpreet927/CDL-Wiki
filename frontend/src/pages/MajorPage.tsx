@@ -115,61 +115,66 @@ const MajorPage = () => {
                             <p>Bracket</p>
                         </button>
                     </div>
-                    <table className="w-full">
-                        <th className="grid grid-cols-5 md:px-12 px-2 pt-8 pb-2 gap-2 w-full items-center [&>*]:font-bold text-left">
-                            <p>Rank</p>
-                            <div className="col-start-2 col-end-4 md:pl-12">
-                                <p>Team</p>
-                            </div>
-                            <div className="sm:hidden block">
-                                <p>W/L</p>
-                            </div>
-                            <p className="sm:block hidden">Earnings</p>
-                            <p className="sm:block hidden">Points</p>
-                        </th>
-                        <tbody>
-                            {majorData &&
-                                majorData.placings.map(
-                                    (team: Team, idx: number) =>
-                                        team && (
-                                            <MajorStandings
-                                                team={team}
-                                                earnings={
-                                                    MAJOR_PRIZES[activeMajor][
-                                                        idx
-                                                    ].earnings
-                                                }
-                                                points={
-                                                    MAJOR_PRIZES[activeMajor][
-                                                        idx
-                                                    ].points
-                                                }
-                                                idx={idx}
-                                                key={team.id}
-                                            />
-                                        )
-                                )}
-                        </tbody>
-                        {majorPending && (
-                            <div className="flex flex-col gap-2 w-full">
-                                {Array(12)
-                                    .fill(null)
-                                    .map((_, idx) => {
-                                        return (
-                                            <div className="h-[84px]">
-                                                <Skeleton delay={idx * 200} />
-                                            </div>
-                                        );
-                                    })}
-                            </div>
-                        )}
-                        {majorError && (
-                            <p className="text-secondary text-center mt-12">
-                                {majorError.message}
-                            </p>
-                        )}
-                    </table>
-                    <Bracket matches={matchesData} />
+                    {activeTab === "Placings" ? (
+                        <table className="w-full">
+                            <th className="grid grid-cols-5 md:px-12 px-2 pt-8 pb-2 gap-2 w-full items-center [&>*]:font-bold text-left">
+                                <p>Rank</p>
+                                <div className="col-start-2 col-end-4 md:pl-12">
+                                    <p>Team</p>
+                                </div>
+                                <div className="sm:hidden block">
+                                    <p>W/L</p>
+                                </div>
+                                <p className="sm:block hidden">Earnings</p>
+                                <p className="sm:block hidden">Points</p>
+                            </th>
+                            <tbody>
+                                {majorData &&
+                                    majorData.placings.map(
+                                        (team: Team, idx: number) =>
+                                            team && (
+                                                <MajorStandings
+                                                    team={team}
+                                                    earnings={
+                                                        MAJOR_PRIZES[
+                                                            activeMajor
+                                                        ][idx].earnings
+                                                    }
+                                                    points={
+                                                        MAJOR_PRIZES[
+                                                            activeMajor
+                                                        ][idx].points
+                                                    }
+                                                    idx={idx}
+                                                    key={team.id}
+                                                />
+                                            )
+                                    )}
+                            </tbody>
+                            {majorPending && (
+                                <div className="flex flex-col gap-2 w-full">
+                                    {Array(12)
+                                        .fill(null)
+                                        .map((_, idx) => {
+                                            return (
+                                                <div className="h-[84px]">
+                                                    <Skeleton
+                                                        delay={idx * 200}
+                                                    />
+                                                </div>
+                                            );
+                                        })}
+                                </div>
+                            )}
+                            {majorError && (
+                                <p className="text-secondary text-center mt-12">
+                                    {majorError.message}
+                                </p>
+                            )}
+                        </table>
+                    ) : (
+                        matchesData && <Bracket matches={matchesData} />
+                    )}
                 </TabPanel>
             </Section>
         </Page>
