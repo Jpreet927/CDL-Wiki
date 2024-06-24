@@ -51,7 +51,7 @@ const MajorPage = () => {
                     setActiveTab={setActiveMajor}
                 >
                     {majorData && (
-                        <div className="grid grid-cols-4 my-8">
+                        <div className="grid sm:grid-cols-4 grid-cols-2 gap-4 my-8">
                             <div>
                                 <p className="text-secondary text-sm">
                                     Location
