@@ -33,11 +33,7 @@ const MajorPage = () => {
         queryKey: ["majorId", activeMajor],
         queryFn: () => getMajorById(activeMajor + ""),
     });
-    const {
-        // isPending: matchesPending,
-        // error: matchesError,
-        data: matchesData,
-    } = useQuery({
+    const { error: matchesError, data: matchesData } = useQuery({
         queryKey: ["matches", activeMajor],
         queryFn: () => getTournamentMatchesByMajor(activeMajor + ""),
     });
@@ -173,7 +169,14 @@ const MajorPage = () => {
                             )}
                         </table>
                     ) : (
-                        matchesData && <Bracket matches={matchesData} />
+                        <>
+                            {matchesData && <Bracket matches={matchesData} />}
+                            {matchesError && (
+                                <p className="text-secondary text-center mt-12">
+                                    {matchesError.message}
+                                </p>
+                            )}
+                        </>
                     )}
                 </TabPanel>
             </Section>
