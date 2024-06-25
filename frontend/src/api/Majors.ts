@@ -13,6 +13,13 @@ export async function getMajorById(id: string) {
 
     let major: Major = await response.json();
 
+    const isNull: boolean = Object.values(major).some(
+        (value) => value === null
+    );
+    if (isNull) {
+        throw new Error("Major data not available.");
+    }
+
     const placings: Team[] = [];
     placings.push(major["first"]);
     placings.push(major["second"]);
