@@ -1,5 +1,6 @@
 import { formatDate } from "@/config/FormatDates";
 import { options } from "./Teams";
+import { Match } from "@/ts/types/Match";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -241,4 +242,36 @@ export async function getMatchesByTeamAfterDatePaginated(
 
     let matches = await response.json();
     return { content: matches.content, isLast: matches.last };
+}
+
+export async function getTournamentMatchesByMajor(id: string) {
+    let response = await fetch(
+        BASE_URL + `/api/match/major/tournament/${id}`,
+        options
+    );
+
+    if (!response.ok) {
+        throw new Error("No matches available.");
+    }
+
+    let matches = await response.json();
+
+    let organizedByRound: { [key: string]: Match[] } = {};
+    matches.forEach((match: Match) => {
+        const key = match.round;
+        if (organizedByRound.hasOwnProperty(key) === false) {
+            organizedByRound[key] = [];
+        }
+        organizedByRound[key].push(match);
+    });
+
+    Object.keys(organizedByRound).forEach((key) => {
+        organizedByRound[key].sort((a, b) => {
+            if (a.date < b.date) return -1;
+            if (a.date > b.date) return 1;
+            return 0;
+        });
+    });
+
+    return organizedByRound;
 }

@@ -190,6 +190,20 @@ public class MatchService {
         return matchDTOs;
     }
 
+    public List<MatchDTO> getTournamentMatchesByMajor(Integer majorId) throws CDLWikiException {
+        List<Match> matches = matchRepo.findByMajorTournament(majorId);
+
+        if (matches.isEmpty()) throw new CDLWikiException("Matches not found");
+
+        List<MatchDTO> matchDTOs = new ArrayList<>();
+        for (Match m : matches) {
+            MatchDTO mDTO = MatchDTO.mapEntityToDTO(m);
+            matchDTOs.add(mDTO);
+        }
+
+        return matchDTOs;
+    }
+
     public List<MatchDTO> getMatchesByMajorAfterDate(Integer majorId, Date date) throws CDLWikiException {
         List<Match> matches = matchRepo.findByMajorAfterDate(majorId, date);
 

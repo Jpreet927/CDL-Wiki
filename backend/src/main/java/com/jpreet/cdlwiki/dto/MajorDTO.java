@@ -3,10 +3,16 @@ package com.jpreet.cdlwiki.dto;
 import com.jpreet.cdlwiki.model.Major;
 import com.jpreet.cdlwiki.model.Team;
 
+import java.util.Date;
+
 public class MajorDTO {
     private Integer id;
     private Team host;
     private String location;
+    private String venue;
+    private Integer prizePool;
+    private Date startDate;
+    private Date endDate;
     private Team first;
     private Team second;
     private Team third;
@@ -23,10 +29,14 @@ public class MajorDTO {
     public MajorDTO() {
     }
 
-    public MajorDTO(Integer id, Team host, String location, Team first, Team second, Team third, Team fourth, Team fifth, Team sixth, Team seventh, Team eighth, Team ninth, Team tenth, Team eleventh, Team twelfth) {
+    public MajorDTO(Integer id, Team host, String location, String venue, Integer prizePool, Date startDate, Date endDate, Team first, Team second, Team third, Team fourth, Team fifth, Team sixth, Team seventh, Team eighth, Team ninth, Team tenth, Team eleventh, Team twelfth) {
         this.id = id;
         this.host = host;
         this.location = location;
+        this.venue = venue;
+        this.prizePool = prizePool;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.first = first;
         this.second = second;
         this.third = third;
@@ -63,6 +73,38 @@ public class MajorDTO {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public Integer getPrizePool() {
+        return prizePool;
+    }
+
+    public void setPrizePool(Integer prizePool) {
+        this.prizePool = prizePool;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Team getFirst() {
@@ -170,6 +212,10 @@ public class MajorDTO {
         dto.setId(entity.getId());
         dto.setHost(entity.getHost());
         dto.setLocation(entity.getLocation());
+        dto.setVenue(entity.getVenue());
+        dto.setPrizePool(entity.getPrizePool());
+        dto.setStartDate(entity.getStartDate());
+        dto.setEndDate(entity.getEndDate());
         dto.setFirst(entity.getFirst());
         dto.setSecond(entity.getSecond());
         dto.setThird(entity.getThird());

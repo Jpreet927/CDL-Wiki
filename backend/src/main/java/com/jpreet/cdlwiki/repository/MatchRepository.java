@@ -29,6 +29,8 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
 
     @Query("SELECT m FROM Match m WHERE m.majorId = ?1 ORDER BY date ASC")
     public List<Match> findByMajor(Integer majorId);
+    @Query("SELECT m FROM Match m WHERE m.majorId = ?1 AND m.round <> com.jpreet.cdlwiki.enums.RoundName.QUALIFIERS ORDER BY date ASC")
+    public List<Match> findByMajorTournament(Integer majorId);
 
     @Query("SELECT m FROM Match m WHERE m.majorId = ?1 AND m.date >= ?2 ORDER BY date ASC")
     public List<Match> findByMajorAfterDate(Integer majorId, Date date);

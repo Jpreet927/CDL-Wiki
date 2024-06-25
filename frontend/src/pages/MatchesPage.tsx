@@ -22,12 +22,12 @@ import {
 import Button from "@/components/templates/Button";
 
 const majors = [
-    { title: "Season" },
-    { title: "Major 1" },
-    { title: "Major 2" },
-    { title: "Major 3" },
-    { title: "Major 4" },
-    { title: "Champs" },
+    { id: 0, title: "Season" },
+    { id: 1, title: "Major 1" },
+    { id: 2, title: "Major 2" },
+    { id: 3, title: "Major 3" },
+    { id: 4, title: "Major 4" },
+    { id: 5, title: "Champs" },
 ];
 
 const MatchesPage = () => {

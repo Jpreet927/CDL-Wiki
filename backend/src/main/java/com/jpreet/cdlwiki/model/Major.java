@@ -2,6 +2,8 @@ package com.jpreet.cdlwiki.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table
 public class Major {
@@ -12,6 +14,10 @@ public class Major {
     @JoinColumn(name = "host_id")
     private Team host;
     private String location;
+    private String venue;
+    private Integer prizePool;
+    private Date startDate;
+    private Date endDate;
     @ManyToOne
     @JoinColumn(name = "first_id")
     private Team first;
@@ -52,10 +58,14 @@ public class Major {
     public Major() {
     }
 
-    public Major(Integer id, Team host, String location, Team first, Team second, Team third, Team fourth, Team fifth, Team sixth, Team seventh, Team eighth, Team ninth, Team tenth, Team eleventh, Team twelfth) {
+    public Major(Integer id, Team host, String location, String venue, Integer prizePool, Date startDate, Date endDate, Team first, Team second, Team third, Team fourth, Team fifth, Team sixth, Team seventh, Team eighth, Team ninth, Team tenth, Team eleventh, Team twelfth) {
         this.id = id;
         this.host = host;
         this.location = location;
+        this.venue = venue;
+        this.prizePool = prizePool;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.first = first;
         this.second = second;
         this.third = third;
@@ -92,6 +102,38 @@ public class Major {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
+    public Integer getPrizePool() {
+        return prizePool;
+    }
+
+    public void setPrizePool(Integer prizePool) {
+        this.prizePool = prizePool;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Team getFirst() {

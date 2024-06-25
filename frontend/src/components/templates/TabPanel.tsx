@@ -10,25 +10,25 @@ type Props = {
 
 const TabPanel = ({ tabItems, children, activeTab, setActiveTab }: Props) => {
     return (
-        <div>
-            <div className="flex gap-8">
+        <div className="max-w-[100vw]">
+            <div className="flex gap-8 text-nowrap items-center overflow-x-scroll no-scrollbar">
                 {tabItems.map((item, idx) => {
                     if (idx < tabItems.length - 1) {
                         return (
                             <>
                                 <p
-                                    className={`hover:text-primary cursor-pointer transition-colors ease-in-out duration-300
+                                    className={`hover:text-primary cursor-pointer transition-colors ease-in-out duration-300 sm:text-base text-sm
                                             ${
-                                                activeTab === idx
+                                                activeTab === item.id
                                                     ? "text-primary font-bold"
                                                     : "text-secondary"
                                             }
                                         `}
-                                    onClick={() => setActiveTab(idx)}
+                                    onClick={() => setActiveTab(item.id)}
                                 >
                                     {item.title}
                                 </p>
-                                <div className="w-[1px] h-[25px] bg-background-2"></div>
+                                <div className="min-w-[1px] h-[25px] bg-background-2"></div>
                             </>
                         );
                     } else {
@@ -36,12 +36,12 @@ const TabPanel = ({ tabItems, children, activeTab, setActiveTab }: Props) => {
                             <p
                                 className={`hover:text-primary cursor-pointer transition-colors ease-in-out duration-300
                                         ${
-                                            activeTab === idx
+                                            activeTab === item.id
                                                 ? "text-primary font-bold"
                                                 : "text-secondary"
                                         }
                                     `}
-                                onClick={() => setActiveTab(idx)}
+                                onClick={() => setActiveTab(item.id)}
                             >
                                 {item.title}
                             </p>

@@ -127,6 +127,13 @@ public class MatchController {
         return new ResponseEntity<>(matches, HttpStatus.OK);
     }
 
+    @GetMapping("/major/tournament/{majorId}")
+    public ResponseEntity<List<MatchDTO>> getTournamentMatchesByMajor(@PathVariable Integer majorId) throws CDLWikiException {
+        List<MatchDTO> matches;
+        matches = matchService.getTournamentMatchesByMajor(majorId);
+        return new ResponseEntity<>(matches, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/major/{majorId}/past", params = "date")
     public ResponseEntity<List<MatchDTO>> getMatchesByMajorBeforeDate(@PathVariable Integer majorId, @RequestParam("date") @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") Date date) throws CDLWikiException {
         List<MatchDTO> matches;

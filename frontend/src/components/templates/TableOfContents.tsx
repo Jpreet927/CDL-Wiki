@@ -48,9 +48,9 @@ const TableOfContents = () => {
     }, [scrollBarRef, headings, activeIndex]);
 
     return (
-        <nav className="min-w-[22%] h-fit sticky top-24 p-12 flex gap-4">
+        <nav className="w-[275px] h-fit sticky top-24 p-12 flex gap-4">
             <div
-                className="bg-background-2 rounded-xl min-w-[7px] relative"
+                className="bg-background-2 rounded-xl min-w-[7px] relative overflow-hidden"
                 ref={scrollBarRef}
             >
                 <div
@@ -63,7 +63,10 @@ const TableOfContents = () => {
             </div>
             <ul>
                 {headings.map((heading, idx) => (
-                    <li key={`${idx} - ${heading.text}`}>
+                    <li
+                        key={`${idx} - ${heading.text}`}
+                        className="text-nowrap"
+                    >
                         <a
                             className={
                                 activeId === heading.id
