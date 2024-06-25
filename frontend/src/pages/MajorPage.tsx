@@ -34,8 +34,8 @@ const MajorPage = () => {
         queryFn: () => getMajorById(activeMajor + ""),
     });
     const {
-        isPending: matchesPending,
-        error: matchesError,
+        // isPending: matchesPending,
+        // error: matchesError,
         data: matchesData,
     } = useQuery({
         queryKey: ["matches", activeMajor],
