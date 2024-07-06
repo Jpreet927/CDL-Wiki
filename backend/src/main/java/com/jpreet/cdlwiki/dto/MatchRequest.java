@@ -17,18 +17,20 @@ public class MatchRequest {
     @Max(value = 5, message = "Score cannot be greater than 5")
     private Integer team2Score;
     private RoundName round;
+    private Integer roundOrder;
     private Date date;
 
     public MatchRequest() {
     }
 
-    public MatchRequest(Integer majorId, Integer team1Id, Integer team2Id, Integer team1Score, Integer team2Score, RoundName round, Date date) {
+    public MatchRequest(Integer majorId, Integer team1Id, Integer team2Id, Integer team1Score, Integer team2Score, RoundName round, Integer roundOrder, Date date) {
         this.majorId = majorId;
         this.team1Id = team1Id;
         this.team2Id = team2Id;
         this.team1Score = team1Score;
         this.team2Score = team2Score;
         this.round = round;
+        this.roundOrder = roundOrder;
         this.date = date;
     }
 
@@ -78,6 +80,14 @@ public class MatchRequest {
 
     public void setRound(RoundName round) {
         this.round = round;
+    }
+
+    public Integer getRoundOrder() {
+        return roundOrder;
+    }
+
+    public void setRoundOrder(Integer roundOrder) {
+        this.roundOrder = roundOrder;
     }
 
     public Date getDate() {

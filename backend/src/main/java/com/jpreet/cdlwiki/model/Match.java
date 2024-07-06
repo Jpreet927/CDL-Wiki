@@ -22,12 +22,13 @@ public class Match {
     private Integer team1Score;
     private Integer team2Score;
     private RoundName round;
+    private Integer roundOrder;
     private Date date;
 
     public Match() {
     }
 
-    public Match(Integer id, Integer majorId, Team team1, Team team2, Integer team1Score, Integer team2Score, RoundName round, Date date) {
+    public Match(Integer id, Integer majorId, Team team1, Team team2, Integer team1Score, Integer team2Score, RoundName round, Integer roundOrder, Date date) {
         this.id = id;
         this.majorId = majorId;
         this.team1 = team1;
@@ -35,6 +36,7 @@ public class Match {
         this.team1Score = team1Score;
         this.team2Score = team2Score;
         this.round = round;
+        this.roundOrder = roundOrder;
         this.date = date;
     }
 
@@ -92,6 +94,14 @@ public class Match {
 
     public void setRound(RoundName round) {
         this.round = round;
+    }
+
+    public Integer getRoundOrder() {
+        return roundOrder;
+    }
+
+    public void setRoundOrder(Integer roundOrder) {
+        this.roundOrder = roundOrder;
     }
 
     public Date getDate() {
