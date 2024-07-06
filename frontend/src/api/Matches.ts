@@ -265,10 +265,22 @@ export async function getTournamentMatchesByMajor(id: string) {
         organizedByRound[key].push(match);
     });
 
+    // Object.keys(organizedByRound).forEach((key) => {
+    //     organizedByRound[key].sort((a, b) => {
+    //         if (a.date < b.date) {
+    //             return -1;
+    //         } else if (a.date > b.date) {
+    //             return 1;
+    //         } else {
+    //             return a.roundOrder - b.roundOrder;
+    //         }
+    //     });
+    // });
+
     Object.keys(organizedByRound).forEach((key) => {
         organizedByRound[key].sort((a, b) => {
-            if (a.date < b.date) return -1;
-            if (a.date > b.date) return 1;
+            if (a.roundOrder > b.roundOrder) return 1;
+            if (a.roundOrder < b.roundOrder) return -1;
             return 0;
         });
     });
