@@ -8,5 +8,6 @@ export type Match = {
     team1Score: number;
     team2Score: number;
     round: string;
+    roundOrder: number;
     date: Date;
 };

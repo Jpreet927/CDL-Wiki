@@ -44,8 +44,6 @@ const BracketConnector2 = () => {
 };
 
 const Bracket = ({ matches }: Props) => {
-    console.log(matches);
-
     return (
         <div className="w-full overflow-scroll overflow-y-hidden py-12">
             <div className="flex items-center">
