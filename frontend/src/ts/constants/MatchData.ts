@@ -40,6 +40,7 @@ export const MATCH_DATA: Match[] = [
         team1Score: 3,
         team2Score: 1,
         round: "Qualifiers",
+        roundOrder: 0,
         date: new Date("2023-12-06T00:00:00.000+00:00"),
     },
     {
@@ -74,6 +75,7 @@ export const MATCH_DATA: Match[] = [
         team1Score: 5,
         team2Score: 3,
         round: "Winners 1",
+        roundOrder: 0,
         date: new Date("2023-12-12T00:00:00.000+00:00"),
     },
     {
@@ -108,6 +110,7 @@ export const MATCH_DATA: Match[] = [
         team1Score: 5,
         team2Score: 3,
         round: "Losers 2",
+        roundOrder: 0,
         date: new Date("2023-12-12T00:00:00.000+00:00"),
     },
 ];
@@ -145,6 +148,7 @@ export const FUTURE_MATCHES: Match[] = [
         team1Score: 3,
         team2Score: 1,
         round: "Qualifiers",
+        roundOrder: 0,
         date: new Date("2024-04-06T00:00:00.000+00:00"),
     },
     {
@@ -179,6 +183,7 @@ export const FUTURE_MATCHES: Match[] = [
         team1Score: 3,
         team2Score: 1,
         round: "Qualifiers",
+        roundOrder: 0,
         date: new Date("2024-04-06T00:00:00.000+00:00"),
     },
     {
@@ -213,6 +218,7 @@ export const FUTURE_MATCHES: Match[] = [
         team1Score: 3,
         team2Score: 1,
         round: "Qualifiers",
+        roundOrder: 0,
         date: new Date("2024-04-06T00:00:00.000+00:00"),
     },
     {
@@ -247,6 +253,7 @@ export const FUTURE_MATCHES: Match[] = [
         team1Score: 0,
         team2Score: 0,
         round: "Winners 1",
+        roundOrder: 0,
         date: new Date("2024-04-12T00:00:00.000+00:00"),
     },
     {
@@ -281,6 +288,7 @@ export const FUTURE_MATCHES: Match[] = [
         team1Score: 5,
         team2Score: 3,
         round: "Losers 2",
+        roundOrder: 0,
         date: new Date("2023-05-12T00:00:00.000+00:00"),
     },
 ];
